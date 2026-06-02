@@ -69,7 +69,9 @@ Maschinenlesbar in [okh.toml](okh.toml) (`[[part]]`) und [heimeliq.toml](heimeli
 
 ### Eigene Bauteile (Self)
 
-| ID | Bezeichnung | Maße (B × T × H, mm) | Anzahl |
+*Maße als Zuschnitt: **L × B × S** (Länge × Breite × Stärke). Die Stärke (S) steht immer zuletzt – unabhängig von der Einbaulage –, damit gleich starke Bretter vergleichbar bleiben.*
+
+| ID | Bezeichnung | Maße (L × B × S, mm) | Anzahl |
 | --- | --- | --- | --- |
 | S001 | FIXME | FIXME | FIXME |
 | S002 | FIXME | FIXME | FIXME |
@@ -99,16 +101,6 @@ FIXME: Zentrale konstruktive Merkmale, in 3–6 Stichpunkten oder Tabellen.
 | FIXME | FIXME |
 
 Bauanleitung Schritt für Schritt: siehe [docs/de/build-guide.md](docs/de/build-guide.md).
-
----
-
-## Werkzeuge
-
-| Werkzeug | Verwendung |
-| --- | --- |
-| FIXME | FIXME |
-
-Detaillierte Werkzeugliste in [docs/de/build-guide.md](docs/de/build-guide.md).
 
 ---
 
@@ -144,7 +136,7 @@ Siehe [docs/de/care.md](docs/de/care.md).
 ## Versionierung
 
 Aktuelle Version: siehe `version` in [heimeliq.toml](heimeliq.toml).
-Versionshistorie: [changelog.md](changelog.md).
+Versionshistorie: [CHANGELOG.md](changelog.md).
 
 Versionsschritte folgen [Semantic Versioning](https://semver.org/lang/de/):
 
@@ -179,6 +171,6 @@ Dieses Möbel und seine Dokumentation stehen unter [CERN-OHL-S-2.0](LICENSE).
 ## Verwandte Links
 
 - heimeliq-Webseite: <https://heimeliq.de>
-- Reihe FIXME-reihe: <https://heimeliq.de/reihen/FIXME-reihe>
+- Reihe FIXME-reihe: <https://heimeliq.de/reihe/FIXME-reihe>
 - Open Know-How Standard: <https://github.com/iop-alliance/OpenKnowHow>
 - CERN Open Hardware Licence: <https://ohwr.org/cern_ohl_s_v2.txt>

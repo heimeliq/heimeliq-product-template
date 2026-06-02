@@ -4,7 +4,9 @@
 
 ## Eigene Bauteile (Self)
 
-| ID | Bezeichnung | Material | Maße (B × T × H, mm) | Anzahl |
+*Maße als Zuschnitt: **L × B × S** (Länge × Breite × Stärke). Die Stärke (S) steht immer zuletzt – unabhängig davon, ob das Bauteil im Möbel senkrecht oder waagerecht sitzt –, damit gleich starke Bretter direkt vergleichbar sind.*
+
+| ID | Bezeichnung | Material | Maße (L × B × S, mm) | Anzahl |
 | --- | --- | --- | --- | --- |
 | S001 | FIXME | FIXME | FIXME | FIXME |
 
