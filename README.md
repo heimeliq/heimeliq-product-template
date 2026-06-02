@@ -1,14 +1,13 @@
-# heimeliQ Furniture Template
+# heimeliq Furniture Template
 
-Vorlage zur Erstellung neuer Möbel-Repositories für das [heimeliQ](https://heimeliq.de)-Projekt.
+Vorlage zur Erstellung neuer Möbel-Repositories für das [heimeliq](https://heimeliq.de)-Projekt.
 
-Jedes Möbel von heimeliQ lebt in einem eigenen Git-Repository. Diese Vorlage definiert die einheitliche Struktur, die alle Möbel-Repos verwenden, und stellt sicher, dass jedes Repo dem [Open Know-How (OKH) Standard](https://github.com/iop-alliance/OpenKnowHow) entspricht.
+Jedes Möbel von heimeliq lebt in einem eigenen Git-Repository. Diese Vorlage definiert die einheitliche Struktur, die alle Möbel-Repos verwenden, und stellt sicher, dass jedes Repo dem [Open Know-How (OKH) Standard](https://github.com/iop-alliance/OpenKnowHow) entspricht.
 
 ## Versionen
 
 | Komponente | Version |
 | --- | --- |
-| heimeliQ Template | `0.3.0` |
 | OKH-Manifest | `2.4` |
 | Lizenz dieses Templates | `MIT` |
 | Lizenz daraus erzeugter Möbel-Repos | `CERN-OHL-S-2.0` |
@@ -19,7 +18,7 @@ Die Template-Version wird in jedem aus dieser Vorlage erzeugten Möbel-Repo in d
 
 Diese Vorlage trennt bewusst zwei Lizenzen:
 
-- **Das Template selbst** (Struktur, Schemas, Workflow-Dateien, Beispiel-Markdown-Vorlagen) steht unter **MIT**. Andere können daraus eigene Hardware-Doku-Templates ableiten – auch ohne Bezug zu heimeliQ.
+- **Das Template selbst** (Struktur, Schemas, Workflow-Dateien, Beispiel-Markdown-Vorlagen) steht unter **MIT**. Andere können daraus eigene Hardware-Doku-Templates ableiten – auch ohne Bezug zu heimeliq.
 - **Möbel-Repos**, die aus dieser Vorlage erzeugt werden, stehen unter **CERN-OHL-S-2.0** (strongly reciprocal Open Hardware Licence). Wer ein Möbel weiterentwickelt, muss die Weiterentwicklung wieder offen unter derselben Lizenz teilen.
 
 Konkret heißt das im Repo:
@@ -31,11 +30,11 @@ Konkret heißt das im Repo:
 | `README.md` | _entfällt_ | MIT (diese Datei hier) |
 | `README.example.md` | `README.md` | CERN-OHL-S-2.0 |
 
-## Was ist heimeliQ?
+## Was ist heimeliq?
 
-heimeliQ baut Möbel aus regionalen Naturmaterialien – Massivholz, Stahl, Sperrholz – und veröffentlicht jedes Stück vollständig als Open Source: 3D-Modelle, Stücklisten, Bauanleitungen. Diese Vorlage ist Teil der digitalen Infrastruktur dahinter.
+heimeliq baut Möbel aus regionalen Naturmaterialien – Massivholz, Stahl, Sperrholz – und veröffentlicht jedes Stück vollständig als Open Source: 3D-Modelle, Stücklisten, Bauanleitungen. Diese Vorlage ist Teil der digitalen Infrastruktur dahinter.
 
-heimeliQ-Möbel sind organisiert in **Reihen**:
+heimeliq-Möbel sind organisiert in **Reihen**:
 
 - **MassiQ** – Massivmöbel
 - **WorkaholiQ** – Betriebs- und Werkstattmöbel
@@ -50,6 +49,8 @@ Jedes Möbel gehört zu genau einer Reihe.
 3. Repo lokal klonen.
 4. **Lizenz umstellen**: `LICENSE` löschen, `LICENSE.example` zu `LICENSE` umbenennen.
 5. **README umstellen**: `README.md` löschen, `README.example.md` zu `README.md` umbenennen.
+5. **CHANGELOG umstellen**: `CHANGELOG.md` löschen, `changelog.md` zu `CHANGELOG.md` umbenennen.
+5. **MIGRATIONS löschen**: `MIGRATIONS.md` löschen.
 6. Platzhalter ersetzen (siehe nächster Abschnitt).
 7. Erste Inhalte ergänzen, committen, pushen.
 8. Wenn das Möbel auf der Website erscheinen soll: im `heimeliq-website`-Repo den Eintrag in `furniture-repos.json` ergänzen.
@@ -81,7 +82,7 @@ heimeliq-furniture-template/
 ├── MIGRATIONS.md              ← Anleitung zum Migrieren älterer Möbel-Repos
 ├── REUSE.toml                 ← Datei-Lizenzangaben (reuse.software-konform)
 ├── okh.toml                   ← OKH-Manifest (Standard-Metadaten)
-├── heimeliq.toml              ← heimeliQ-spezifische Erweiterungen
+├── heimeliq.toml              ← heimeliq-spezifische Erweiterungen
 ├── heimeliq.schema.json       ← JSON-Schema für heimeliq.toml-Validierung
 ├── changelog.md               ← Versions-Historie des Möbels (klein!)
 ├── docs/de/
@@ -129,7 +130,7 @@ Der Möbel-Typ (z. B. `sideboard`, `werkbank`) ist **kein** Teil der ID, sondern
 
 ## Wald-Konzept
 
-Jedes heimeliQ-Möbel trägt den Namen eines real existierenden Waldes. Der Waldname ist **möbel-eindeutig**: kein zweites Möbel trägt denselben Wald. Damit wird die Marke um eine inhaltliche Schicht erweitert – jedes Möbel verweist auf einen Ort, hat eine kleine Geschichte, und bei bedrohten Wäldern macht heimeliQ deren Situation sichtbar.
+Jedes heimeliq-Möbel trägt den Namen eines real existierenden Waldes. Der Waldname ist **möbel-eindeutig**: kein zweites Möbel trägt denselben Wald. Damit wird die Marke um eine inhaltliche Schicht erweitert – jedes Möbel verweist auf einen Ort, hat eine kleine Geschichte, und bei bedrohten Wäldern macht heimeliq deren Situation sichtbar.
 
 Wald-Metadaten leben in der `[forest]`-Section der `heimeliq.toml`. Der Wald-Bereich auf der Produktseite wird beim Build daraus generiert. Es gibt **kein** separates Forest-Repository.
 
@@ -142,7 +143,7 @@ Die `id` im `[forest]`-Block muss URL-tauglich sein (lowercase, keine Umlaute) u
 
 ## Baugruppen-Konzept
 
-Jedes heimeliQ-Möbel ist als Hierarchie von Baugruppen modelliert:
+Jedes heimeliq-Möbel ist als Hierarchie von Baugruppen modelliert:
 
 - **`A001`** ist konventionell die **Hauptbaugruppe** = das ganze Möbel.
 - Sub-Baugruppen (Schubladen, Türen, Erweiterungen) bekommen `A002`, `A003`, … und referenzieren ihre Eltern-Baugruppe über das Feld `parent`.

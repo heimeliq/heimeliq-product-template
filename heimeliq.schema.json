@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://heimeliq.de/schema/heimeliq.schema.json",
-  "title": "heimeliQ Manifest",
+  "title": "heimeliq Manifest",
   "description": "Projektspezifische Erweiterungen, die das OKH-Manifest ergänzen.",
   "type": "object",
   "additionalProperties": true,
@@ -18,7 +18,7 @@
   ],
   "properties": {
     "heimeliq-template-version": {
-      "description": "SemVer-Version der heimeliQ-Vorlage, auf der dieses Repo basiert.",
+      "description": "SemVer-Version der heimeliq-Vorlage, auf der dieses Repo basiert.",
       "type": "string",
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
     },
@@ -30,12 +30,12 @@
     "slug": {
       "description": "URL-Slug, identisch mit dem Repo-Namen ohne 'heimeliq-' Präfix. Schema: <reihe>-<waldname>.",
       "type": "string",
-      "pattern": "^(massiq|workaholiq|keiliq)-[a-z0-9]+(-[a-z0-9]+)*$"
+      "pattern": "^[a-z][a-z0-9]*-[a-z0-9]+(-[a-z0-9]+)*$"
     },
     "series": {
       "description": "Reihe, zu der dieses Möbel gehört.",
       "type": "string",
-      "enum": ["massiq", "workaholiq", "keiliq"]
+      "pattern": "^[a-z][a-z0-9]*$"
     },
     "type": {
       "description": "Möbel-Typ als Metadatenfeld für Filter/Suche. Kein Teil der ID.",

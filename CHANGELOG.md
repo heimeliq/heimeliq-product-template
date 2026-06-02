@@ -1,4 +1,4 @@
-# Changelog – heimeliQ Furniture Template
+# Changelog – heimeliq Furniture Template
 
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
@@ -6,9 +6,21 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
+## [0.4.1] – Brand name normalization and schema relaxation
+
+**Changed:**
+
+- Brand name unified to lowercase `heimeliq` across all template files (was `heimeliQ`).
+- `heimeliq.schema.json`: `slug` pattern relaxed from a hardcoded series enum to a generic lowercase alphanumeric pattern, allowing new series without schema changes.
+- `heimeliq.schema.json`: `series` changed from a fixed enum (`massiq`, `workaholiq`, `keiliq`) to an open lowercase pattern – new series can be added without a schema update.
+- `README.md`: setup steps now include renaming `CHANGELOG.md` and deleting `MIGRATIONS.md` when initializing a new furniture repo.
+- `README.example.md`: shop URL updated to `/reihe/FIXME-slug`; removed managed-shop note.
+
+**Migration:** see `MIGRATIONS.md` for the steps 0.4.0 → 0.4.1.
+
 ## [0.4.0] – Instruction-Version
 
-Jedes heimeliQ-Möbel trägt jetzt eine Referenz auf den Instructions-Stand, mit dem es produziert wurde. Das Feld `heimeliq-instruction-version` wird in Phase 2 automatisch vom Bot gesetzt und bleibt im Template leer.
+Jedes heimeliq-Möbel trägt jetzt eine Referenz auf den Instructions-Stand, mit dem es produziert wurde. Das Feld `heimeliq-instruction-version` wird in Phase 2 automatisch vom Bot gesetzt und bleibt im Template leer.
 
 **Neu:**
 
@@ -18,7 +30,7 @@ Jedes heimeliQ-Möbel trägt jetzt eine Referenz auf den Instructions-Stand, mit
 
 ## [0.3.0] – Baugruppen-Hierarchie und qualifizierte Bauteil-IDs
 
-heimeliQ-Möbel sind jetzt als Hierarchie von Baugruppen modelliert. `A001` ist konventionell die Hauptbaugruppe (= das Möbel), Sub-Baugruppen wie Schubladen oder Türen bekommen `A002`, `A003`, … Bauteil-IDs sind voll qualifiziert mit Assembly-Präfix (`A001.S001`, `A002.E001` usw.). Damit lassen sich optionale Erweiterungen sauber abbilden, und der spätere Shop kann sie als konfigurierbare Varianten mit Aufpreis anbieten.
+heimeliq-Möbel sind jetzt als Hierarchie von Baugruppen modelliert. `A001` ist konventionell die Hauptbaugruppe (= das Möbel), Sub-Baugruppen wie Schubladen oder Türen bekommen `A002`, `A003`, … Bauteil-IDs sind voll qualifiziert mit Assembly-Präfix (`A001.S001`, `A002.E001` usw.). Damit lassen sich optionale Erweiterungen sauber abbilden, und der spätere Shop kann sie als konfigurierbare Varianten mit Aufpreis anbieten.
 
 **Neu:**
 
@@ -33,7 +45,7 @@ heimeliQ-Möbel sind jetzt als Hierarchie von Baugruppen modelliert. `A001` ist 
 
 ## [0.2.0] – Wald-Namensgeber, schlankeres ID-Schema
 
-Jedes heimeliQ-Möbel trägt den Namen eines real existierenden Waldes. Der Waldname ist möbel-eindeutig: kein zweites Möbel trägt denselben Wald. Damit wird die Marke um eine inhaltliche Schicht erweitert – jedes Möbel verweist auf einen Ort und macht bei bedrohten Wäldern deren Situation sichtbar. Da der Waldname allein eindeutig ist, entfällt das `<typ>`-Segment in der ID.
+Jedes heimeliq-Möbel trägt den Namen eines real existierenden Waldes. Der Waldname ist möbel-eindeutig: kein zweites Möbel trägt denselben Wald. Damit wird die Marke um eine inhaltliche Schicht erweitert – jedes Möbel verweist auf einen Ort und macht bei bedrohten Wäldern deren Situation sichtbar. Da der Waldname allein eindeutig ist, entfällt das `<typ>`-Segment in der ID.
 
 **Neu:**
 

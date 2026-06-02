@@ -15,6 +15,16 @@ Bestehende Repos werden nicht automatisch migriert – Stabilität geht vor.
 
 ---
 
+## 0.4.0 → 0.4.1
+
+This is a PATCH release. No structural changes are required.
+
+1. **`heimeliq-template-version`** in `heimeliq.toml` erhöhen auf `"0.4.1"`.
+
+That's it — schema, `heimeliq.toml` structure, and directory layout are unchanged.
+
+---
+
 ## 0.3.x → 0.4.0
 
 Diese Version führt das Pflichtfeld **`heimeliq-instruction-version`** ein.

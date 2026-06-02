@@ -3,7 +3,7 @@
 > FIXME ein- bis zweisätzige Beschreibung – was ist es, was macht es besonders.
 
 [![Lizenz: CERN-OHL-S-2.0](https://img.shields.io/badge/Lizenz-CERN--OHL--S--2.0-blue)](LICENSE)
-[![heimeliQ](https://img.shields.io/badge/heimeliQ-FIXME--reihe-green)](https://heimeliq.de/reihen/FIXME-reihe)
+[![heimeliq](https://img.shields.io/badge/heimeliq-FIXME--reihe-green)](https://heimeliq.de/reihen/FIXME-reihe)
 [![Status](https://img.shields.io/badge/Status-FIXME--status-orange)](#)
 
 ![Hauptbild](media/hero.jpg)
@@ -114,7 +114,7 @@ Detaillierte Werkzeugliste in [docs/de/build-guide.md](docs/de/build-guide.md).
 
 ## Aufbau zu Hause
 
-Wenn du das Möbel von heimeliQ in fertiger Form bekommst, hilft dir [docs/de/assembly.md](docs/de/assembly.md) bei der Montage.
+Wenn du das Möbel von heimeliq in fertiger Form bekommst, hilft dir [docs/de/assembly.md](docs/de/assembly.md) bei der Montage.
 
 ---
 
@@ -156,9 +156,7 @@ Versionsschritte folgen [Semantic Versioning](https://semver.org/lang/de/):
 
 ## Kaufen
 
-Dieses Möbel kann auch fertig gebaut bei heimeliQ bestellt werden: <https://heimeliq.de/moebel/FIXME-slug>
-
-Preis, Lieferzeit und Versandbedingungen werden im Shop verwaltet, nicht in diesem Repository.
+Dieses Möbel kann auch fertig gebaut bei heimeliq bestellt werden: <https://heimeliq.de/reihe/FIXME-slug>
 
 ---
 
@@ -180,7 +178,7 @@ Dieses Möbel und seine Dokumentation stehen unter [CERN-OHL-S-2.0](LICENSE).
 
 ## Verwandte Links
 
-- heimeliQ-Webseite: <https://heimeliq.de>
+- heimeliq-Webseite: <https://heimeliq.de>
 - Reihe FIXME-reihe: <https://heimeliq.de/reihen/FIXME-reihe>
 - Open Know-How Standard: <https://github.com/iop-alliance/OpenKnowHow>
 - CERN Open Hardware Licence: <https://ohwr.org/cern_ohl_s_v2.txt>

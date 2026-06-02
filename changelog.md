@@ -8,5 +8,5 @@ Versionierung dieses Möbels folgt [Semantic Versioning](https://semver.org/lang
 
 ## [0.1.0] – initial
 
-- Initiales Repo, angelegt aus heimeliQ Furniture Template `FIXME-version`.
+- Initiales Repo, angelegt aus heimeliq Furniture Template `FIXME-version`.
 - FIXME: Was ist bereits dokumentiert? Was steht noch aus?

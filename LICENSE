@@ -24,7 +24,7 @@ SOFTWARE.
 
 SPDX-License-Identifier: MIT
 
-Hinweis: Diese MIT-Lizenz gilt fuer das heimeliQ Furniture Template selbst
+Hinweis: Diese MIT-Lizenz gilt fuer das heimeliq Furniture Template selbst
 (Struktur, Schemas, Workflow-Dateien, Beispiel-Markdown-Vorlagen). Sie gilt
 NICHT fuer Moebel-Repositories, die aus dieser Vorlage erzeugt werden - diese
 stehen unter CERN-OHL-S-2.0 (siehe LICENSE.example). Beim Anlegen eines neuen
