@@ -15,6 +15,16 @@ Bestehende Repos werden nicht automatisch migriert – Stabilität geht vor.
 
 ---
 
+## 0.4.1 → 0.4.2
+
+This is a PATCH release. No structural, schema, or directory changes are required.
+
+1. **`heimeliq-template-version`** in `heimeliq.toml` erhöhen auf `"0.4.2"`.
+
+Optional (empfohlen für Konsistenz, nicht erzwungen): bestehende `docs/de/bom.md` und `README.md` auf die Zuschnitt-Notation `L × B × S` umstellen (Materialstärke immer zuletzt) und – bei gehriq-Möbeln – den Abschnitt „Hinweis zur Holzauswahl" ergänzen. Bestehende Repos validieren und funktionieren auch ohne diese Anpassung unverändert weiter.
+
+---
+
 ## 0.4.0 → 0.4.1
 
 This is a PATCH release. No structural changes are required.

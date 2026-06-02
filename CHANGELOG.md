@@ -6,6 +6,19 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
+## [0.4.2] – Bill-of-materials notation and wood-selection guidance
+
+**Changed:**
+
+- Bill-of-materials part dimensions now use a cut-list notation `L × B × S` (length × width × thickness) instead of `B × T × H`. Thickness is always last, independent of how the part sits in the furniture, so equally thick boards stay comparable. Affects `README.example.md` (Stückliste) and `docs/de/bom.md`.
+- `README.example.md`: removed the redundant `Werkzeuge` section (tools are covered in the build guide), and fixed the changelog link and the series URL.
+
+**Added:**
+
+- `docs/de/bom.md`: new `Hinweis zur Holzauswahl` section covering the gehriq continuous-grain principle (both side panels and the lid cut from one board), the minimum board length in grain direction (`2 × Außenhöhe + Außenbreite + saw allowance`, board width ≥ depth, rounded up to the next 100 mm), and a plate-size comparison table with waste.
+
+**Migration:** see `MIGRATIONS.md` for the steps 0.4.1 → 0.4.2.
+
 ## [0.4.1] – Brand name normalization and schema relaxation
 
 **Changed:**

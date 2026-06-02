@@ -16,7 +16,7 @@
 
 # Version dieser Vorlage, auf der das Möbel-Repo basiert.
 # Wird bei jedem Template-Upgrade aktualisiert (siehe MIGRATIONS.md).
-heimeliq-template-version = "0.4.1"
+heimeliq-template-version = "0.4.2"
 
 # Version dieses Möbels (SemVer).
 # Erhöhen bei: PATCH = Doku-Fixes, MINOR = neue Optionen, MAJOR = Konstruktionsänderung.
