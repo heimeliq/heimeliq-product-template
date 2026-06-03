@@ -23,7 +23,7 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 **Changed:**
 
-- Brand name unified to lowercase `heimeliq` across all template files (was `heimeliQ`).
+- Brand name unified to lowercase `heimeliq` across all template files (was `heimeliq`).
 - `heimeliq.schema.json`: `slug` pattern relaxed from a hardcoded series enum to a generic lowercase alphanumeric pattern, allowing new series without schema changes.
 - `heimeliq.schema.json`: `series` changed from a fixed enum (`massiq`, `workaholiq`, `keiliq`) to an open lowercase pattern – new series can be added without a schema update.
 - `README.md`: setup steps now include renaming `CHANGELOG.md` and deleting `MIGRATIONS.md` when initializing a new furniture repo.

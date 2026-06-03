@@ -26,9 +26,9 @@ version = "0.1.0"
 # produziert wurde. Wird in Phase 2 vom Bot gesetzt.
 heimeliq-instruction-version = ""
 
-# Slug für URLs auf der Website. Identisch mit dem Repo-Namen ohne "heimeliq-"
-# Präfix. Schema: <reihe>-<waldname>.
-slug = "FIXME-reihe-waldname"          # z. B. "massiq-hambach"
+# Slug für URLs auf der Website.
+# Präfix. Schema: <waldname>.
+slug = "FIXME-waldname"          # z. B. "hambach"
 
 # Reihe, zu der dieses Möbel gehört. Pflicht.
 # Erlaubte Werte: "massiq", "workaholiq", "keiliq".
