@@ -24,7 +24,7 @@ okhv = "2.4"
 
 # --- Identität ---
 name = "FIXME Möbelname"
-repo = "https://github.com/heimeliq/FIXME-heimeliq-<reihe>-<waldname>"
+repo = "https://github.com/heimeliq/FIXME-heimeliq-<type>-<family>"
 
 # --- Lizenz ---
 license = "CERN-OHL-S-2.0"

@@ -56,6 +56,11 @@ jobs:
               sys.exit(1)
           PY
 
+      # TODO(offener Punkt 0.5.x): type und theme gegen vocabulary/typen.toml im
+      # Instructions-Repo pruefen (theme muss in der themen-Liste des gewaehlten
+      # type stehen). Braucht Lesezugriff auf das Instructions-Repo; bis dahin
+      # nicht umgesetzt.
+
       - name: Determine repo kind (template vs. furniture)
         id: kind
         run: |
@@ -95,38 +100,38 @@ jobs:
       - name: Check for FIXME placeholders (only if published)
         if: steps.kind.outputs.kind == 'furniture'
         run: |
-          STATUS=$(python -c "import tomli; d=tomli.load(open('heimeliq.toml','rb')); print(d.get('status',''))")
-          if [ "$STATUS" = "published" ]; then
+          PUBLISHED=$(python -c "import tomli; d=tomli.load(open('heimeliq.toml','rb')); print('published' in d.get('tags',{}).get('status',[]))")
+          if [ "$PUBLISHED" = "True" ]; then
             if grep -RIn "FIXME" --include="*.md" --include="*.toml" --include="*.json" --include="LICENSE" .; then
-              echo "FIXME-Platzhalter gefunden, obwohl status=published. Bitte ersetzen."
+              echo "FIXME-Platzhalter gefunden, obwohl tags.status 'published' enthaelt. Bitte ersetzen."
               exit 1
             fi
             echo "Keine FIXME-Platzhalter – OK."
           else
-            echo "status=$STATUS (nicht 'published'), FIXME-Check uebersprungen."
+            echo "tags.status ohne 'published', FIXME-Check uebersprungen."
           fi
 
       - name: Check heimeliq-instruction-version is set (only if published)
         if: steps.kind.outputs.kind == 'furniture'
         run: |
-          STATUS=$(python -c "import tomli; d=tomli.load(open('heimeliq.toml','rb')); print(d.get('status',''))")
-          if [ "$STATUS" = "published" ]; then
+          PUBLISHED=$(python -c "import tomli; d=tomli.load(open('heimeliq.toml','rb')); print('published' in d.get('tags',{}).get('status',[]))")
+          if [ "$PUBLISHED" = "True" ]; then
             IV=$(python -c "import tomli; d=tomli.load(open('heimeliq.toml','rb')); print(d.get('heimeliq-instruction-version',''))")
             if [ -z "$IV" ]; then
-              echo "status=published, aber heimeliq-instruction-version ist leer. Wird in Phase 2 vom Bot gesetzt."
+              echo "tags.status enthaelt 'published', aber heimeliq-instruction-version ist leer. Wird in Phase 2 vom Bot gesetzt."
               exit 1
             fi
             echo "heimeliq-instruction-version=$IV – OK."
           else
-            echo "status=$STATUS (nicht 'published'), heimeliq-instruction-version-Check uebersprungen."
+            echo "tags.status ohne 'published', heimeliq-instruction-version-Check uebersprungen."
           fi
 
       - name: Check required media files (only if published)
         if: steps.kind.outputs.kind == 'furniture'
         run: |
-          STATUS=$(python -c "import tomli; d=tomli.load(open('heimeliq.toml','rb')); print(d.get('status',''))")
-          if [ "$STATUS" = "published" ] && [ ! -f "media/hero.jpg" ]; then
-            echo "status=published, aber media/hero.jpg fehlt."
+          PUBLISHED=$(python -c "import tomli; d=tomli.load(open('heimeliq.toml','rb')); print('published' in d.get('tags',{}).get('status',[]))")
+          if [ "$PUBLISHED" = "True" ] && [ ! -f "media/hero.jpg" ]; then
+            echo "tags.status enthaelt 'published', aber media/hero.jpg fehlt."
             exit 1
           fi
           if [ ! -f "media/hero.jpg" ] && [ ! -f "media/hero.jpg.placeholder" ]; then

@@ -34,18 +34,12 @@ Konkret heißt das im Repo:
 
 heimeliq baut Möbel aus regionalen Naturmaterialien – Massivholz, Stahl, Sperrholz – und veröffentlicht jedes Stück vollständig als Open Source: 3D-Modelle, Stücklisten, Bauanleitungen. Diese Vorlage ist Teil der digitalen Infrastruktur dahinter.
 
-heimeliq-Möbel sind organisiert in **Reihen**:
-
-- **MassiQ** – Massivmöbel
-- **WorkaholiQ** – Betriebs- und Werkstattmöbel
-- **KeiliQ** – French Cleat und Keilsysteme
-
-Jedes Möbel gehört zu genau einer Reihe.
+Jedes Produkt hat einen **Typ** (was es ist – `sideboard`, `tablett`, `werkbank`) und gehört zu einer **Familie** (eine Formensprache, die einen Vornamen trägt). Typ und Familie bilden zusammen die Repo-ID. Details im Abschnitt [Familien-Konzept](#familien-konzept).
 
 ## Ein neues Möbel-Repo aus dieser Vorlage erzeugen
 
 1. Auf GitHub den Knopf **„Use this template"** → **„Create a new repository"** klicken.
-2. Repo-Name nach Schema: `heimeliq-<reihe>-<waldname>`, zum Beispiel `heimeliq-massiq-hambach`.
+2. Repo-Name nach Schema: `heimeliq-<type>-<family>`, zum Beispiel `heimeliq-sideboard-wieke`.
 3. Repo lokal klonen.
 4. **Lizenz umstellen**: `LICENSE` löschen, `LICENSE.example` zu `LICENSE` umbenennen.
 5. **README umstellen**: `README.md` löschen, `README.example.md` zu `README.md` umbenennen.
@@ -59,12 +53,12 @@ Jedes Möbel gehört zu genau einer Reihe.
 
 ## Platzhalter ersetzen
 
-Alle Stellen, die noch ausgefüllt werden müssen, sind mit `FIXME` markiert. Die GitHub-Action `validate.yml` bricht ab, solange noch ein `FIXME` im Repo ist UND der Status auf `published` steht – damit kann kein halbfertiges Repo unbemerkt veröffentlicht werden.
+Alle Stellen, die noch ausgefüllt werden müssen, sind mit `FIXME` markiert. Die GitHub-Action `validate.yml` bricht ab, solange noch ein `FIXME` im Repo ist UND die Tag-Achse `status` den Wert `published` enthält – damit kann kein halbfertiges Repo unbemerkt veröffentlicht werden.
 
 Mindestens zu ersetzen:
 
 - In `okh.toml`: `name`, `repo`, `function`, `licensor`, `image`-Pfade.
-- In `heimeliq.toml`: `series`, `type`, `slug`.
+- In `heimeliq.toml`: `type`, `theme`, `slug`, `[family]`, `[variants]`.
 - In `LICENSE` (nach Umbenennung aus `LICENSE.example`): Copyright-Zeile.
 - In `README.md` (nach Umbenennung aus `README.example.md`): alle FIXMEs.
 - `media/hero.jpg.placeholder` → eine echte `media/hero.jpg` legen.
@@ -117,7 +111,7 @@ Faustregel: **Außenwirkungs-Bilder zentral in `media/`, Doku-Bilder lokal neben
 
 | Ebene | Schema | Beispiel |
 | --- | --- | --- |
-| Möbel-Repo | `heimeliq-<reihe>-<waldname>` | `heimeliq-massiq-hambach` |
+| Möbel-Repo | `heimeliq-<type>-<family>` | `heimeliq-sideboard-wieke` |
 | Hauptbaugruppe | `A001` | `A001` |
 | Sub-Baugruppe | `A002`, `A003`, … | `A002` (z. B. Schublade) |
 | Eigenes Bauteil (Self) | `<Baugruppe>.S###` | `A001.S001`, `A002.S001` |
@@ -126,20 +120,17 @@ Faustregel: **Außenwirkungs-Bilder zentral in `media/`, Doku-Bilder lokal neben
 
 Bauteil-IDs sind innerhalb des jeweiligen Möbel-Repos eindeutig und immer voll qualifiziert mit Assembly-Präfix. Außerhalb adressiert man sie als `<repo>/<part-id>`.
 
-Der Möbel-Typ (z. B. `sideboard`, `werkbank`) ist **kein** Teil der ID, sondern ein Metadatenfeld (`type`) in `heimeliq.toml`. Gleiches gilt für zusätzliche `tags`. Damit bleibt die ID schlank und die Klassifizierung filterbar.
+Die ID besteht aus **Typ** und **Familie**. Der Typ (`type`, z. B. `sideboard`, `werkbank`) sagt, was das Möbel ist; die Familie (`family.id`, z. B. `wieke`) sagt, welcher Formensprache es folgt. Beide Segmente sind lowercase und ASCII. Zusätzliche `[tags]` bleiben Metadaten für Filter und Suche und sind **kein** Teil der ID.
 
-## Wald-Konzept
+## Familien-Konzept
 
-Jedes heimeliq-Möbel trägt den Namen eines real existierenden Waldes. Der Waldname ist **möbel-eindeutig**: kein zweites Möbel trägt denselben Wald. Damit wird die Marke um eine inhaltliche Schicht erweitert – jedes Möbel verweist auf einen Ort, hat eine kleine Geschichte, und bei bedrohten Wäldern macht heimeliq deren Situation sichtbar.
+Jedes Produkt gehört zu genau einer **Familie**. Eine Familie trägt einen Vornamen und bezeichnet eine Formensprache: alle Produkte derselben Familie teilen Fasen, Radien, Verbindungsprinzip und Materialstärken-Logik. Der Familienname ist zugleich der Produktname (`heimeliq-sideboard-wieke` → „Wieke").
 
-Wald-Metadaten leben in der `[forest]`-Section der `heimeliq.toml`. Der Wald-Bereich auf der Produktseite wird beim Build daraus generiert. Es gibt **kein** separates Forest-Repository.
+Die konstruktiven Werte einer Familie liegen zentral in `families/<id>/` im Instructions-Repo, **nicht** im Möbel-Repo. Das Möbel-Repo nennt in `heimeliq.toml` nur `family.id` (lowercase, ASCII) und `family.label` (Anzeigeform).
 
-Beispiele für Waldnamen:
-- Deutschland/DACH: `hambach`, `hainich`, `spessart`, `bayerischer-wald`, `pfaelzerwald`
-- Europa: `bialowieza`, `sherwood`, `broceliande`
-- Welt: `tongass`, `daintree`, `yakushima`, `atewa`
+Der **Typ** kommt aus dem zentralen Vokabular `vocabulary/typen.toml` im Instructions-Repo. Jeder Typ ist genau einem primären **Thema** zugeordnet (`theme`, z. B. `kueche`, `bad`, `wohnen`, `buero`, `werkstatt`); der in `heimeliq.toml` gesetzte `theme`-Wert muss in der `themen`-Liste des gewählten Typs stehen. Auch dieses Vokabular wird nicht ins Möbel-Repo kopiert, sondern nur referenziert.
 
-Die `id` im `[forest]`-Block muss URL-tauglich sein (lowercase, keine Umlaute) und mit dem letzten Segment des Repo-Namens übereinstimmen.
+Marken-Vokabular wie MassiQ, gehriq oder KeiliQ beschreibt Bauart und Formensprache auf der Website, ist aber **kein** Feld in `heimeliq.toml` – es wäre redundant zu den Tag-Achsen `joint` und `material`.
 
 ## Baugruppen-Konzept
 

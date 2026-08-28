@@ -10,10 +10,9 @@
     "heimeliq-instruction-version",
     "version",
     "slug",
-    "series",
     "type",
-    "status",
-    "forest",
+    "theme",
+    "family",
     "assemblies"
   ],
   "properties": {
@@ -28,76 +27,55 @@
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
     },
     "slug": {
-      "description": "URL-Slug. Schema: <waldname>.",
+      "description": "URL-Slug. Schema: <type>-<family>.",
       "type": "string",
-      "pattern": "^[a-z][a-z0-9]*-[a-z0-9]+(-[a-z0-9]+)*$"
-    },
-    "series": {
-      "description": "Reihe, zu der dieses Möbel gehört.",
-      "type": "string",
-      "pattern": "^[a-z][a-z0-9]*$"
+      "pattern": "^[a-z]+-[a-z]+$"
     },
     "type": {
-      "description": "Möbel-Typ als Metadatenfeld für Filter/Suche. Kein Teil der ID.",
+      "description": "Möbel-Typ. Slug aus vocabulary/typen.toml im Instructions-Repo. Bildet mit der Familie die Repo-ID.",
       "type": "string",
-      "pattern": "^[a-z][a-z0-9-]*$"
+      "pattern": "^[a-z]+$"
     },
-    "tags": {
-      "description": "Weitere Schlagworte für Filter und Suche.",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "pattern": "^[a-z][a-z0-9-]*$"
-      },
-      "uniqueItems": true
-    },
-    "status": {
-      "description": "Veröffentlichungsstatus.",
+    "theme": {
+      "description": "Primäres Thema des Möbels. Muss in der themen-Liste des gewählten type stehen (vocabulary/typen.toml).",
       "type": "string",
-      "enum": ["draft", "published", "archived"]
+      "pattern": "^[a-z]+$"
     },
-    "forest": {
-      "description": "Wald-Namensgeber dieses Möbels.",
+    "family": {
+      "description": "Familie (= Formensprache und Produktname). Werte liegen zentral in families/<id>/ im Instructions-Repo.",
       "type": "object",
-      "required": ["id", "name", "region", "country"],
+      "required": ["id", "label"],
+      "additionalProperties": false,
       "properties": {
         "id": {
+          "description": "Familien-Kennung, lowercase, ASCII.",
           "type": "string",
-          "pattern": "^[a-z][a-z0-9-]*$"
+          "pattern": "^[a-z]+$"
         },
-        "name": { "type": "string", "minLength": 2 },
-        "region": { "type": "string" },
-        "country": {
+        "label": {
+          "description": "Anzeigeform der Familie mit Großschreibung.",
           "type": "string",
-          "pattern": "^[A-Z]{2}$"
-        },
-        "forest_type": { "type": "string" },
-        "age_estimate_years": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "status": {
-          "type": "string",
-          "enum": ["protected", "partially-protected", "endangered", "critically-endangered", "stable", "unknown"]
-        },
-        "themes": {
-          "type": "array",
-          "items": { "type": "string" }
-        },
-        "links": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": ["label", "url"],
-            "properties": {
-              "label": { "type": "string" },
-              "url": { "type": "string", "format": "uri" }
-            }
-          }
-        },
-        "note": { "type": "string" }
+          "minLength": 2
+        }
       }
     },
+    "tags": {
+      "description": "Sieben geschlossene Tag-Achsen. Die Achsen sind fix, die Werte je Achse offen.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "joint": { "$ref": "#/$defs/tagAxis" },
+        "species": { "$ref": "#/$defs/tagAxis" },
+        "material": { "$ref": "#/$defs/tagAxis" },
+        "tooling": { "$ref": "#/$defs/tagAxis" },
+        "effort": { "$ref": "#/$defs/tagAxis" },
+        "property": { "$ref": "#/$defs/tagAxis" },
+        "status": { "$ref": "#/$defs/tagAxis" }
+      }
+    },
+    "forest": false,
+    "series": false,
+    "status": false,
     "assemblies": {
       "description": "Baugruppen des Möbels. Mindestens die Hauptbaugruppe A001 (= das Möbel selbst) ist Pflicht. Sub-Baugruppen referenzieren ihre Eltern-Baugruppe über 'parent'.",
       "type": "array",
@@ -188,6 +166,17 @@
         "wood_source": { "type": "string" },
         "co2_documented": { "type": "boolean" }
       }
+    }
+  },
+  "$defs": {
+    "tagAxis": {
+      "description": "Werte einer Tag-Achse: Slugs, lowercase, ASCII. Leeres Array zulässig.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9-]*$"
+      },
+      "uniqueItems": true
     }
   }
 }
