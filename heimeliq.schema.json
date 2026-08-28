@@ -13,6 +13,7 @@
     "type",
     "theme",
     "family",
+    "variants",
     "assemblies"
   ],
   "properties": {
@@ -71,6 +72,45 @@
         "effort": { "$ref": "#/$defs/tagAxis" },
         "property": { "$ref": "#/$defs/tagAxis" },
         "status": { "$ref": "#/$defs/tagAxis" }
+      }
+    },
+    "variants": {
+      "description": "Größenvarianten des Produkts: gleiche Bauweise, identische Teileliste, andere Zahlen. Mindestens eine Option ist Pflicht; ohne Größenauswahl genau eine (n = 1).",
+      "type": "object",
+      "required": ["reference", "option"],
+      "additionalProperties": false,
+      "properties": {
+        "reference": {
+          "description": "id der Option, die im Repo ausgerechnet vorliegt. Muss einer option.id entsprechen.",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "option": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "label", "parameter"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "description": "Sprechender Kurzname, lowercase, ASCII.",
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]*$"
+              },
+              "label": {
+                "description": "Maßangabe zur Anzeige, z. B. '50 × 40 cm'.",
+                "type": "string",
+                "minLength": 1
+              },
+              "parameter": {
+                "description": "Alias-Name der FreeCAD-Spreadsheet-Zelle -> Wert in mm.",
+                "type": "object",
+                "additionalProperties": { "type": "number" }
+              }
+            }
+          }
+        }
       }
     },
     "forest": false,

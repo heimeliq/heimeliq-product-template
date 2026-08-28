@@ -30,6 +30,8 @@ Maschinenlesbar in [heimeliq.toml](heimeliq.toml) unter `type`, `theme` und `[fa
 
 ## Gesamtmaße
 
+*Maße der Referenzvariante (`[variants]` → `reference` in [heimeliq.toml](heimeliq.toml)). Baut das Produkt in mehreren Größen, sind die weiteren Varianten dort unter `[[variants.option]]` gelistet.*
+
 | Eigenschaft | Maß |
 | --- | --- |
 | Breite | FIXME mm |

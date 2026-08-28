@@ -61,6 +61,20 @@ jobs:
       # type stehen). Braucht Lesezugriff auf das Instructions-Repo; bis dahin
       # nicht umgesetzt.
 
+      - name: Validate variants.reference points to an existing option
+        run: |
+          python <<'PY'
+          import tomli, sys
+          d = tomli.load(open("heimeliq.toml", "rb"))
+          v = d.get("variants", {})
+          ref = v.get("reference")
+          ids = [o.get("id") for o in v.get("option", [])]
+          if ref not in ids:
+              print(f"variants: FAIL\nreference={ref!r} ist keine der Options-IDs {ids}")
+              sys.exit(1)
+          print(f"variants.reference={ref!r}: OK")
+          PY
+
       - name: Determine repo kind (template vs. furniture)
         id: kind
         run: |

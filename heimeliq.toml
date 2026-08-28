@@ -73,6 +73,38 @@ property = []                          # Eigenschaften, z. B. "stapelbar"
 status = []                            # "draft" | "published" | "archived"
 
 # ============================================================================
+# VARIANTEN
+# ============================================================================
+# Ein Produkt kann in mehreren Größen gebaut werden – gleiche Bauweise,
+# identische Teileliste, nur andere Zahlen. Das sind Varianten. Sie bekommen
+# kein eigenes Repo, sondern sind Daten hier. Sobald ein Teil dazukommt,
+# wegfällt oder sich eine Verbindungsart ändert, ist es ein eigenes Produkt.
+#
+# `reference` verweist auf die `id` einer Option und bestimmt, welche Variante
+# im Repo ausgerechnet und committet vorliegt (docs/de/build-guide.md,
+# docs/de/bom.md) und welche die okh.toml unter `outer-dimensions` beschreibt.
+# Nicht implizit die erste Option.
+#
+# Die Schlüssel in `parameter` sind IDENTISCH mit den Alias-Namen der Zellen
+# im FreeCAD-Spreadsheet. Das ist die Kopplung zwischen CAD und Doku: derselbe
+# Name adressiert dieselbe Größe in beiden Welten. Werte sind Zahlen in mm.
+#
+# Ein Produkt ohne Größenauswahl hat genau eine Option, die zugleich
+# `reference` ist (n = 1). Das ist kein Sonderfall und braucht keine eigene
+# Syntax.
+
+[variants]
+reference = "FIXME"                    # id einer der folgenden Optionen
+
+[[variants.option]]
+id = "FIXME"                           # sprechender Kurzname, lowercase, ohne Umlaute; z. B. "klein"
+label = "FIXME"                        # Maßangabe, z. B. "40 × 30 cm"
+parameter = { }                        # Alias-Name = Zahl (mm), z. B. { length = 400, width = 300 }
+
+# Weitere Optionen bei Bedarf ergänzen. Bei einem Produkt ohne Größenauswahl
+# bleibt es bei dieser einen Option, und `reference` zeigt auf ihre `id`.
+
+# ============================================================================
 # BAUGRUPPEN
 # ============================================================================
 # A001 ist konventionell die Hauptbaugruppe = das ganze Möbel.

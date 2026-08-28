@@ -60,6 +60,10 @@ readme = "README.md"
 # ============================================================================
 
 # --- Äußere Abmessungen des Möbels (in mm) ---
+# Beschreibt ausschließlich die Referenzvariante (heimeliq.toml -> [variants]
+# -> reference). OKH kennt keine Sortimente; der Standard wird dafür bewusst
+# nicht gedehnt. Weitere Größen stehen nur in heimeliq.toml unter [variants]
+# und werden später als Release-Artefakt ausgerechnet.
 [outer-dimensions]
 width = 0    # FIXME
 depth = 0    # FIXME
@@ -89,6 +93,9 @@ depicts = "FIXME: kurze Beschreibung des Hauptbildes"
 #
 # Externe Drittteile (Schrauben, Beschläge) stehen NICHT hier, sondern in
 # heimeliq.toml unter [[external_parts]].
+#
+# `outer-dimensions` je Bauteil bezieht sich – wie die Möbel-Außenmaße oben –
+# ausschließlich auf die Referenzvariante.
 
 [[part]]
 name = "FIXME Bauteilname (z. B. Korpus-Seitenwand links)"
