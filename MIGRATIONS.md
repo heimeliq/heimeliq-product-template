@@ -15,6 +15,55 @@ Bestehende Repos werden nicht automatisch migriert – Stabilität geht vor.
 
 ---
 
+## 0.4.2 → 0.5.0
+
+Zwei Breaking Changes: das Namensschema (`series`/`forest` → `type`/`theme`/`family`) und die neue Pflicht-Section `[variants]`. Es gibt genau ein bestehendes Möbel-Repo; es wird von Hand nachgezogen. Kein Migrationsskript, keine Rückwärtskompatibilität.
+
+### 1. Repo umbenennen
+
+`heimeliq-<series>-<forest>` → `heimeliq-<type>-<family>`, z. B. `heimeliq-massiq-hambach` → `heimeliq-sideboard-wieke`. Auf GitHub in den Settings; die alte URL bleibt eine Weile als Redirect.
+
+### 2. `heimeliq.toml` – Feld für Feld
+
+| bisher | künftig |
+| --- | --- |
+| `series = "…"` | entfällt ersatzlos |
+| `[forest]` inkl. `[[forest.links]]` | entfällt ersatzlos |
+| `type = "…"` | bleibt, ist jetzt Teil der ID; Wert ist ein Slug aus `vocabulary/typen.toml` |
+| – | `theme = "…"` neu (Pflicht); muss in der `themen`-Liste des `type` stehen |
+| – | `[family]` neu (Pflicht): `id` (lowercase, ASCII), `label` (Anzeigeform) |
+| `tags = ["a", "b"]` | `[tags]` mit sieben Achsen: `joint`, `species`, `material`, `tooling`, `effort`, `property`, `status`. Alte Werte auf die passende Achse verteilen, Rest verwerfen. |
+| `status = "published"` | als Wert in die Achse `tags.status` (`status = ["published"]`) |
+| `slug = "<series>-<forest>"` | `slug = "<type>-<family>"` |
+| – | `[variants]` neu (Pflicht): `reference` + mindestens eine `[[variants.option]]` mit `id`, `label`, `parameter`. Ohne Größenauswahl genau eine Option, deren `id` gleich `reference` ist. |
+| `heimeliq-template-version = "0.4.2"` | `"0.5.0"` |
+
+Die `parameter`-Schlüssel jeder Option müssen den Alias-Namen der FreeCAD-Spreadsheet-Zellen entsprechen.
+
+### 3. `okh.toml`
+
+- `repo` auf das neue Namensschema setzen.
+- Keine weiteren Pflichtänderungen. Die `outer-dimensions` beschreiben ab jetzt ausdrücklich die Referenzvariante (Kommentar in der Datei).
+
+### 4. Ordnerstruktur
+
+- `media/variants/<id>/` je Varianten-ID anlegen (mindestens für die Referenzvariante), oder leer lassen – Fallback ist `media/gallery/`.
+- `docs/de/parametrisch/` mit `build-guide.tpl.md` und `bom.tpl.md` aus dieser Vorlage übernehmen und an das Möbel anpassen.
+- `docs/de/build-guide.md` und `docs/de/bom.md` mit dem Kopfhinweis versehen; sie enthalten die ausgerechnete Referenzvariante.
+
+### 5. Validierung und Website
+
+- Lokal `validate.yml` nachvollziehen. Häufige Fehler: fehlendes `theme`, `[family]` oder `[variants]`; `tags.status` statt Top-Level `status`; `variants.reference` zeigt auf keine Options-`id`.
+- Im Website-Repo `furniture-repos.json`: die alte URL gegen die neue tauschen.
+- `changelog.md` des Möbels (klein) ergänzen.
+
+### Offene Punkte
+
+- `vocabulary/typen.toml` im Instructions-Repo hat noch deutsche Schlüssel und wird separat nachgezogen.
+- `validate.yml` prüft `type`/`theme` noch nicht gegen das Vokabular (braucht Lesezugriff auf das Instructions-Repo).
+
+---
+
 ## 0.4.1 → 0.4.2
 
 This is a PATCH release. No structural, schema, or directory changes are required.

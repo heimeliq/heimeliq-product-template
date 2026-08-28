@@ -6,6 +6,66 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
+## [0.5.0] – Type, theme, family and mandatory variants
+
+Two breaking changes in one release.
+
+**BREAKING:**
+
+- `series` and the entire `[forest]` section are removed from `heimeliq.toml`
+  with no compatibility alias. A product now has a `type` (what it is) and a
+  `[family]` (a shape language carrying a first name). Repo and slug schema
+  change from `heimeliq-<series>-<forest>` to `heimeliq-<type>-<family>`
+  (regex `^heimeliq-[a-z]+-[a-z]+$`).
+- New required top-level field `theme`. Its value must be one of the themes
+  the chosen `type` is associated with in `vocabulary/typen.toml`
+  (instructions repo).
+- The flat `tags` array becomes a `[tags]` table with seven fixed axes:
+  `joint`, `species`, `material`, `tooling`, `effort`, `property`, `status`.
+  The axes are closed, the values per axis are open.
+- The top-level `status` field is removed; publication status moves into the
+  `tags.status` axis. The `validate.yml` publish gate now reads
+  `"published" in tags.status`.
+- New required `[variants]` section with `reference` and at least one
+  `[[variants.option]]` (`id`, `label`, `parameter`). A product without a
+  size choice has exactly one option, which is also the reference (n = 1).
+  The `parameter` keys are the FreeCAD spreadsheet cell alias names verbatim.
+
+**Added:**
+
+- `docs/de/parametrisch/build-guide.tpl.md` and `bom.tpl.md`: parametric
+  sources with `{{ name }}` placeholders and no logic. The rendered
+  `docs/de/build-guide.md` and `docs/de/bom.md` describe the reference
+  variant and carry a header stating they are generated and must not be
+  edited by hand.
+- `media/variants/<id>/` for variant-specific images, with a fallback to
+  `media/gallery/`. Every media directory now has a `README.md`.
+- README section explaining the three documentation stages and the
+  reference-variant rule.
+- `validate.yml` step checking that `variants.reference` matches an existing
+  option id.
+
+**Changed:**
+
+- `okh.toml`: comments on `[outer-dimensions]` and per-part
+  `outer-dimensions` clarifying they describe the reference variant only.
+  OKH knows no ranges and is deliberately not stretched. Otherwise
+  untouched.
+
+**Open points (not addressed in this release):**
+
+- `vocabulary/typen.toml` in the instructions repo still uses German keys
+  (`thema`, `typ`, `gattung`, `themen`, `reihenfolge`); to be aligned
+  separately.
+- `validate.yml` does not yet check `type`/`theme` against
+  `vocabulary/typen.toml` (needs read access to the instructions repo).
+- The template's own `heimeliq.toml` does not validate against its own
+  schema because the `FIXME` placeholders violate the field patterns. This
+  predates 0.5.0. Whether to make placeholders schema-conformant or to skip
+  schema validation inside the template is a separate decision.
+
+**Migration:** see `MIGRATIONS.md` for the steps 0.4.2 → 0.5.0.
+
 ## [0.4.2] – Bill-of-materials notation and wood-selection guidance
 
 **Changed:**

@@ -139,6 +139,24 @@ Der **Typ** kommt aus dem zentralen Vokabular `vocabulary/typen.toml` im Instruc
 
 Marken-Vokabular wie MassiQ, gehriq oder KeiliQ beschreibt Bauart und Formensprache auf der Website, ist aber **kein** Feld in `heimeliq.toml` – es wäre redundant zu den Tag-Achsen `joint` und `material`.
 
+## Varianten
+
+Ein Produkt kann in mehreren Größen gebaut werden – bei identischer Bauweise und **identischer Teileliste**. Das sind Varianten. Sie bekommen **kein eigenes Repo**, sondern sind Daten in `heimeliq.toml`.
+
+Abgrenzung: gleiche Teileliste, nur andere Zahlen = Variante. Sobald ein Teil dazukommt, wegfällt oder sich eine Verbindungsart ändert = eigenes Produkt.
+
+Daraus folgt eine dreistufige Dokumentation:
+
+1. **Parametrische Quelle** – `docs/de/parametrisch/*.tpl.md`. Benannte Werte statt Zahlen, gilt für alle Varianten. Die Vorlagen enthalten keine Logik; abgeleitete Maße werden als fertiger benannter Wert eingesetzt, nicht im Template gerechnet.
+2. **Referenzvariante** – genau **eine** Variante, ausgerechnet und committet unter `docs/de/build-guide.md` und `docs/de/bom.md`. Sie hält das Repo auch ohne Generator lesbar. `heimeliq.toml` → `[variants]` → `reference` benennt sie explizit (nicht implizit die erste Option). `okh.toml` → `outer-dimensions` und alle Zahlen in den `docs/de/*.md` beziehen sich auf sie.
+3. **Weitere Varianten** – später als Release-Artefakt aus der parametrischen Quelle erzeugt. Nicht Teil des Repos.
+
+Ein Produkt ohne Größenauswahl hat genau eine `[[variants.option]]`, die zugleich `reference` ist (n = 1). Kein Sonderfall.
+
+Die Schlüssel in `[[variants.option]].parameter` sind **identisch mit den Alias-Namen der Zellen im FreeCAD-Spreadsheet**. Derselbe Name adressiert dieselbe Größe in CAD und Doku.
+
+Einen Generator gibt es noch nicht. Bis dahin werden die Referenzvarianten-Dateien von Hand gepflegt; ihr Kopfhinweis („nicht von Hand ändern") gilt für die Zeit danach.
+
 ## Baugruppen-Konzept
 
 Jedes heimeliq-Möbel ist als Hierarchie von Baugruppen modelliert:
