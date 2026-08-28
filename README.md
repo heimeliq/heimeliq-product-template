@@ -81,10 +81,11 @@ heimeliq-furniture-template/
 ├── changelog.md               ← Versions-Historie des Möbels (klein!)
 ├── docs/de/
 │   ├── story.md               ← Hintergrund, Inspiration, Material
-│   ├── build-guide.md         ← Werkstatt-Bauanleitung (für Tischler)
+│   ├── build-guide.md         ← Werkstatt-Bauanleitung (Referenzvariante, erzeugt)
 │   ├── assembly.md            ← Endkunden-Montage (für Käufer)
-│   ├── bom.md                 ← Lesbare Stückliste
+│   ├── bom.md                 ← Lesbare Stückliste (Referenzvariante, erzeugt)
 │   ├── care.md                ← Pflegehinweise
+│   ├── parametrisch/          ← Vorlagen mit {{ … }}, aus denen build-guide.md und bom.md entstehen
 │   └── *.images/              ← Bilder, die zur jeweiligen .md gehören
 ├── cad/
 │   ├── source/                ← FreeCAD-Originaldateien (.FCStd)
@@ -93,6 +94,7 @@ heimeliq-furniture-template/
 ├── media/
 │   ├── hero.jpg               ← Hauptbild (Pflicht)
 │   ├── gallery/               ← weitere Bilder für Außenwirkung
+│   ├── variants/<id>/         ← variantenspezifische Bilder, Fallback auf gallery/
 │   └── process/               ← Bautagebuch, Prozessdokumentation
 └── .github/workflows/
     └── validate.yml           ← Validiert okh.toml und heimeliq.toml bei jedem Push
@@ -101,11 +103,16 @@ heimeliq-furniture-template/
 ## Welches Bild gehört wohin?
 
 - `media/hero.jpg` – das eine Hauptbild für Shop und Suchergebnisse.
-- `media/gallery/*` – weitere Außenwirkungs-Bilder (Studio-Fotos, Detailaufnahmen für Marketing).
+- `media/gallery/*` – weitere Außenwirkungs-Bilder (Studio-Fotos, Detailaufnahmen für Marketing); zugleich Fallback für Varianten.
+- `media/variants/<id>/*` – Bilder, die nur für eine Größenvariante gelten. Fehlt ein Bild hier, gilt das entsprechende aus `media/gallery/`.
 - `media/process/*` – Bautagebuch: Fotos vom Baum, von der Werkstatt, vom Bauprozess.
 - `docs/de/*.images/*` – Bilder, die direkt in einer Markdown-Datei eingebettet werden (z. B. Schrittfotos einer Verbindung).
 
+Dateinamen in allen Medienordnern: laufende Nummer als Präfix, danach ein sprechender Name in kebab-case, ohne Umlaute – `01-front.jpg`. Jeder Medienordner hat eine `README.md` mit der Konvention.
+
 Faustregel: **Außenwirkungs-Bilder zentral in `media/`, Doku-Bilder lokal neben ihrer Markdown-Datei.**
+
+Shop-Bilder in voller Auflösung gehören **nicht** ins Git – siehe die READMEs in den Medienordnern.
 
 ## ID-Konvention
 
