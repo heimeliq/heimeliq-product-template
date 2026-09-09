@@ -37,14 +37,6 @@ Bretter direkt vergleichbar sind.*
 
 ## Hinweis zur Holzauswahl
 
-### Durchgehende Maserung (gehriq-Prinzip)
-
-Bei gehriq-Möbeln sollen mindestens die **beiden Seitenteile und der Deckel**
-aus **einem** Brett kommen. Die drei Teile werden in Reihe – Seitenteil links
-→ Deckel → Seitenteil rechts – aus einem langen Brett gesägt und an den
-Gehrungs-Ecken (45°) gestoßen. So läuft die Maserung über die Ecken durch.
-Der Boden (und optional die Rückwand) darf aus separatem Material kommen.
-
 ### Mindestkantenlänge (in Faserrichtung)
 
 Das Brett muss in Faserrichtung mindestens so lang sein wie die abgewickelte
