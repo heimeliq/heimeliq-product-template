@@ -21,7 +21,7 @@ Zwei Breaking Changes: das Namensschema (`series`/`forest` → `type`/`theme`/`f
 
 ### 1. Repo umbenennen
 
-`heimeliq-<series>-<forest>` → `heimeliq-<type>-<family>`, z. B. `heimeliq-massiq-hambach` → `heimeliq-sideboard-wieke`. Auf GitHub in den Settings; die alte URL bleibt eine Weile als Redirect.
+`heimeliq-<series>-<forest>` → `<family>-<type>`, z. B. `heimeliq-massiq-hambach` → `wieke-sideboard`. Das `heimeliq-`-Präfix entfällt. Auf GitHub in den Settings; die alte URL bleibt eine Weile als Redirect.
 
 ### 2. `heimeliq.toml` – Feld für Feld
 
@@ -34,7 +34,7 @@ Zwei Breaking Changes: das Namensschema (`series`/`forest` → `type`/`theme`/`f
 | – | `[family]` neu (Pflicht): `id` (lowercase, ASCII), `label` (Anzeigeform) |
 | `tags = ["a", "b"]` | `[tags]` mit sieben Achsen: `joint`, `species`, `material`, `tooling`, `effort`, `property`, `status`. Alte Werte auf die passende Achse verteilen, Rest verwerfen. |
 | `status = "published"` | als Wert in die Achse `tags.status` (`status = ["published"]`) |
-| `slug = "<series>-<forest>"` | `slug = "<type>-<family>"` |
+| `slug = "<series>-<forest>"` | `slug = "<family>-<type>"` |
 | – | `[variants]` neu (Pflicht): `reference` + mindestens eine `[[variants.option]]` mit `id`, `label`, `parameter`. Ohne Größenauswahl genau eine Option, deren `id` gleich `reference` ist. |
 | `heimeliq-template-version = "0.4.2"` | `"0.5.0"` |
 

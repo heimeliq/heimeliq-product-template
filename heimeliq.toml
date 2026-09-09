@@ -27,8 +27,8 @@ version = "0.1.0"
 heimeliq-instruction-version = ""
 
 # Slug für URLs auf der Website.
-# Schema: <type>-<family>.
-slug = "FIXME-type-family"             # z. B. "sideboard-wieke"
+# Schema: <family>-<type>.
+slug = "FIXME"             # z. B. "wieke-sideboard"
 
 # Möbel-Typ. Pflicht. Bildet zusammen mit der Familie die Repo-ID und den Slug.
 # Der Wert ist ein Slug aus dem zentralen Vokabular vocabulary/typen.toml im

@@ -15,8 +15,8 @@ Two breaking changes in one release.
 - `series` and the entire `[forest]` section are removed from `heimeliq.toml`
   with no compatibility alias. A product now has a `type` (what it is) and a
   `[family]` (a shape language carrying a first name). Repo and slug schema
-  change from `heimeliq-<series>-<forest>` to `heimeliq-<type>-<family>`
-  (regex `^heimeliq-[a-z]+-[a-z]+$`).
+  change from `heimeliq-<series>-<forest>` to `<family>-<type>`
+  (regex `^[a-z]+-[a-z]+$`), without the `heimeliq-` prefix.
 - New required top-level field `theme`. Its value must be one of the themes
   the chosen `type` is associated with in `vocabulary/typen.toml`
   (instructions repo).

@@ -34,12 +34,12 @@ Konkret heißt das im Repo:
 
 heimeliq baut Holz-Möbel oder -Accessoires aus regionalen Naturmaterialien – Massivholz, Stahl, Sperrholz – und veröffentlicht jedes Stück vollständig als Open Source: 3D-Modelle, Stücklisten, Bauanleitungen. Diese Vorlage ist Teil der digitalen Infrastruktur dahinter.
 
-Jedes Produkt hat einen **Typ** (was es ist – `sideboard`, `tablett`, `werkbank`) und gehört zu einer **Familie** (eine Formensprache, die einen Vornamen trägt). Typ und Familie bilden zusammen die Repo-ID. Details im Abschnitt [Familien-Konzept](#familien-konzept).
+Jedes Produkt gehört zu einer **Familie** (eine Formensprache, die einen Vornamen trägt) und hat einen **Typ** (was es ist – `sideboard`, `tablett`, `werkbank`). Familie und Typ bilden in dieser Reihenfolge die Repo-ID. Details im Abschnitt [Familien-Konzept](#familien-konzept).
 
 ## Ein neues Produkt-Repo aus dieser Vorlage erzeugen
 
 1. Auf GitHub den Knopf **„Use this template"** → **„Create a new repository"** klicken.
-2. Repo-Name nach Schema: `heimeliq-<type>-<family>`, zum Beispiel `heimeliq-sideboard-wieke`.
+2. Repo-Name nach Schema: `<family>-<type>`, zum Beispiel `wieke-sideboard`.
 3. Repo lokal klonen.
 4. **Lizenz umstellen**: `LICENSE` löschen, `LICENSE.example` zu `LICENSE` umbenennen.
 5. **README umstellen**: `README.md` löschen, `README.example.md` zu `README.md` umbenennen.
@@ -116,7 +116,7 @@ Faustregel: **Außenwirkungs-Bilder zentral in `media/`, Doku-Bilder lokal neben
 
 | Ebene | Schema | Beispiel |
 | --- | --- | --- |
-| Produkt-Repo | `heimeliq-<type>-<family>` | `heimeliq-sideboard-wieke` |
+| Produkt-Repo | `<family>-<type>` | `wieke-sideboard` |
 | Hauptbaugruppe | `A001` | `A001` |
 | Sub-Baugruppe | `A002`, `A003`, … | `A002` (z. B. Schublade) |
 | Eigenes Bauteil (Self) | `<Baugruppe>.S###` | `A001.S001`, `A002.S001` |
@@ -125,11 +125,11 @@ Faustregel: **Außenwirkungs-Bilder zentral in `media/`, Doku-Bilder lokal neben
 
 Bauteil-IDs sind innerhalb des jeweiligen Produkt-Repos eindeutig und immer voll qualifiziert mit Assembly-Präfix. Außerhalb adressiert man sie als `<repo>/<part-id>`.
 
-Die ID besteht aus **Typ** und **Familie**. Der Typ (`type`, z. B. `sideboard`, `werkbank`) sagt, was das Möbel ist; die Familie (`family.id`, z. B. `wieke`) sagt, welcher Formensprache es folgt. Beide Segmente sind lowercase und ASCII. Zusätzliche `[tags]` bleiben Metadaten für Filter und Suche und sind **kein** Teil der ID.
+Die ID besteht aus **Familie** und **Typ**. Die Familie (`family.id`, z. B. `wieke`) sagt, welcher Formensprache es folgt; der Typ (`type`, z. B. `sideboard`, `werkbank`) sagt, was das Möbel ist. Beide Segmente sind lowercase und ASCII. Zusätzliche `[tags]` bleiben Metadaten für Filter und Suche und sind **kein** Teil der ID.
 
 ## Familien-Konzept
 
-Jedes Produkt gehört zu genau einer **Familie**. Eine Familie trägt einen Vornamen und bezeichnet eine Formensprache: alle Produkte derselben Familie teilen Fasen, Radien und Verbindungsprinzip. Der Familienname ist zugleich der Produktname (`heimeliq-sideboard-wieke` → „Wieke").
+Jedes Produkt gehört zu genau einer **Familie**. Eine Familie trägt einen Vornamen und bezeichnet eine Formensprache: alle Produkte derselben Familie teilen Fasen, Radien und Verbindungsprinzip. Der Familienname ist zugleich der Produktname (`wieke-sideboard` → „Wieke").
 
 Die konstruktiven Werte einer Familie liegen zentral in `families/<id>/` im Instructions-Repo, **nicht** im Produkt-Repo. Das Produkt-Repo nennt in `heimeliq.toml` nur `family.id` (lowercase, ASCII) und `family.label` (Anzeigeform).
 
