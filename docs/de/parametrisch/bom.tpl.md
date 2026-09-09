@@ -44,7 +44,7 @@ Außenkante über diese drei Teile:
 
 > **L_min = 2 × Außenhöhe + Außenbreite + Sägezugabe**
 
-- **Brettbreite (quer zur Faser)** muss mindestens der **Möbeltiefe**
+- **Brettbreite (quer zur Faser)** muss mindestens der **Produkttiefe**
   entsprechen.
 - **Aufrunden:** L_min und B_min für den Einkauf auf das nächste 100-mm-Maß.
 

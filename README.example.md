@@ -1,4 +1,4 @@
-# FIXME Möbelname
+# FIXME Produktname
 
 > FIXME ein- bis zweisätzige Beschreibung – was ist es, was macht es besonders.
 
@@ -20,7 +20,7 @@ Vollständige Hintergrundgeschichte und Materialherkunft: siehe [docs/de/story.m
 
 ## Typ und Familie
 
-Dieses Möbel ist ein **FIXME Typ** und gehört zur Familie **FIXME Familie**.
+Dieses Produkt ist ein **FIXME Typ** und gehört zur Familie **FIXME Familie**.
 
 FIXME 2–4 Sätze zur Familie: welche Formensprache, welches Verbindungsprinzip, was die Produkte dieser Familie verbindet.
 
@@ -104,7 +104,7 @@ Bauanleitung Schritt für Schritt: siehe [docs/de/build-guide.md](docs/de/build-
 
 ## Aufbau zu Hause
 
-Wenn du das Möbel von heimeliq in fertiger Form bekommst, hilft dir [docs/de/assembly.md](docs/de/assembly.md) bei der Montage.
+Wenn du das Produkt von heimeliq in fertiger Form bekommst, hilft dir [docs/de/assembly.md](docs/de/assembly.md) bei der Montage.
 
 ---
 
@@ -146,21 +146,21 @@ Versionsschritte folgen [Semantic Versioning](https://semver.org/lang/de/):
 
 ## Kaufen
 
-Dieses Möbel kann auch fertig gebaut bei heimeliq bestellt werden: <https://heimeliq.de/produkte/FIXME-slug>
+Dieses Produkt kann auch fertig gebaut bei heimeliq bestellt werden: <https://heimeliq.de/produkte/FIXME-slug>
 
 ---
 
 ## Open Source / Selber bauen
 
-Du darfst dieses Möbel nach den Plänen in diesem Repository **selbst bauen oder bauen lassen**, **modifizieren** und **weitergeben**. Die einzige Auflage: Wenn du Änderungen weitergibst, müssen sie wieder unter derselben Lizenz (CERN-OHL-S-2.0) verfügbar sein. Damit bleibt das Wissen frei.
+Du darfst dieses Produkt nach den Plänen in diesem Repository **selbst bauen oder bauen lassen**, **modifizieren** und **weitergeben**. Die einzige Auflage: Wenn du Änderungen weitergibst, müssen sie wieder unter derselben Lizenz (CERN-OHL-S-2.0) verfügbar sein. Damit bleibt das Wissen frei.
 
-Wenn du dieses Möbel gebaut hast – ob nach Original oder mit Änderungen – freue ich mich über ein Foto und eine Rückmeldung: FIXME@heimeliq.de.
+Wenn du dieses Produkt gebaut hast – ob nach Original oder mit Änderungen – freue ich mich über ein Foto und eine Rückmeldung: FIXME@heimeliq.de.
 
 ---
 
 ## Lizenz
 
-Dieses Möbel und seine Dokumentation stehen unter [CERN-OHL-S-2.0](LICENSE).
+Dieses Produkt und seine Dokumentation stehen unter [CERN-OHL-S-2.0](LICENSE).
 
 **Keine Gewährleistung für die Richtigkeit der Maße – vor dem Zuschnitt bitte nachmessen.**
 

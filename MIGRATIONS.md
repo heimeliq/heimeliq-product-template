@@ -48,14 +48,14 @@ Die `parameter`-Schlüssel jeder Option müssen den Alias-Namen der FreeCAD-Spre
 ### 4. Ordnerstruktur
 
 - `media/variants/<id>/` je Varianten-ID anlegen (mindestens für die Referenzvariante), oder leer lassen – Fallback ist `media/gallery/`.
-- `docs/de/parametrisch/` mit `build-guide.tpl.md` und `bom.tpl.md` aus dieser Vorlage übernehmen und an das Möbel anpassen.
+- `docs/de/parametrisch/` mit `build-guide.tpl.md` und `bom.tpl.md` aus dieser Vorlage übernehmen und an das Produkt anpassen.
 - `docs/de/build-guide.md` und `docs/de/bom.md` mit dem Kopfhinweis versehen; sie enthalten die ausgerechnete Referenzvariante.
 
 ### 5. Validierung und Website
 
 - Lokal `validate.yml` nachvollziehen. Häufige Fehler: fehlendes `theme`, `[family]` oder `[variants]`; `tags.status` statt Top-Level `status`; `variants.reference` zeigt auf keine Options-`id`.
 - Im Website-Repo `product-repos.json`: die alte URL gegen die neue tauschen.
-- `changelog.md` des Möbels (klein) ergänzen.
+- `changelog.md` des Produkts (klein) ergänzen.
 
 ### Offene Punkte
 
@@ -70,7 +70,7 @@ This is a PATCH release. No structural, schema, or directory changes are require
 
 1. **`heimeliq-template-version`** in `heimeliq.toml` erhöhen auf `"0.4.2"`.
 
-Optional (empfohlen für Konsistenz, nicht erzwungen): bestehende `docs/de/bom.md` und `README.md` auf die Zuschnitt-Notation `L × B × S` umstellen (Materialstärke immer zuletzt) und – bei gehriq-Möbeln – den Abschnitt „Hinweis zur Holzauswahl" ergänzen. Bestehende Repos validieren und funktionieren auch ohne diese Anpassung unverändert weiter.
+Optional (empfohlen für Konsistenz, nicht erzwungen): bestehende `docs/de/bom.md` und `README.md` auf die Zuschnitt-Notation `L × B × S` umstellen (Materialstärke immer zuletzt) und – bei gehriq-Produkten – den Abschnitt „Hinweis zur Holzauswahl" ergänzen. Bestehende Repos validieren und funktionieren auch ohne diese Anpassung unverändert weiter.
 
 ---
 
@@ -106,7 +106,7 @@ Diese Version führt das Pflichtfeld **`heimeliq-instruction-version`** ein.
 
 Diese Version führt das **Baugruppen-Konzept** ein. Bauteil-IDs werden voll qualifiziert mit Assembly-Präfix.
 
-1. **Assemblies in `heimeliq.toml` ergänzen**: Mindestens die Hauptbaugruppe `A001` als `[[assemblies]]`-Eintrag eintragen, mit `source` auf die FreeCAD-Datei und `optional = false`. Falls das Möbel Erweiterungen hat (z. B. eine Schublade), für jede Erweiterung eine eigene Sub-Baugruppe `A002`, `A003`, … mit `parent = "A001"` und `optional = true` ergänzen.
+1. **Assemblies in `heimeliq.toml` ergänzen**: Mindestens die Hauptbaugruppe `A001` als `[[assemblies]]`-Eintrag eintragen, mit `source` auf die FreeCAD-Datei und `optional = false`. Falls das Produkt Erweiterungen hat (z. B. eine Schublade), für jede Erweiterung eine eigene Sub-Baugruppe `A002`, `A003`, … mit `parent = "A001"` und `optional = true` ergänzen.
 
 2. **FreeCAD-Dateien umbenennen** nach Schema `A001-<Name>.FCStd`, `A002-<Name>.FCStd`. Optional: pro Baugruppe einen eigenen Unterordner in `cad/exports/` anlegen.
 
@@ -126,7 +126,7 @@ Diese Version führt das **Baugruppen-Konzept** ein. Bauteil-IDs werden voll qua
 
 ## 0.1.x → 0.2.0
 
-Diese Version führt das **Wald-Namensgeber-Konzept** ein und verschlankt das ID-Schema. Bestehende Produkt-Repos (typischerweise das v0.1.x-Pilotmöbel) sollten so migriert werden:
+Diese Version führt das **Wald-Namensgeber-Konzept** ein und verschlankt das ID-Schema. Bestehende Produkt-Repos (typischerweise das v0.1.x-Pilotprodukt) sollten so migriert werden:
 
 1. **Repo umbenennen** auf das neue Schema `heimeliq-<reihe>-<waldname>`. Beispiel: `heimeliq-massiq-sideboard-001` → `heimeliq-massiq-hambach`. Auf GitHub geht das in den Settings; die alte URL bleibt eine Weile als Redirect bestehen.
 
@@ -143,7 +143,7 @@ Diese Version führt das **Wald-Namensgeber-Konzept** ein und verschlankt das ID
 
 5. **`product-repos.json` im Website-Repo aktualisieren**: Die alte URL gegen die neue tauschen.
 
-6. **CHANGELOG.md des Möbels** (klein, im Produkt-Repo) ergänzen mit einem Eintrag wie:
+6. **CHANGELOG.md des Produkts** (klein, im Produkt-Repo) ergänzen mit einem Eintrag wie:
 
    ```
    ## [0.2.0] – Wald-Namensgeber ergänzt, Repo umbenannt
