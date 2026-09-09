@@ -1,8 +1,8 @@
 # heimeliq Furniture Template
 
-Vorlage zur Erstellung neuer Möbel-Repositories für das [heimeliq](https://heimeliq.de)-Projekt.
+Vorlage zur Erstellung neuer Produkt-Repositories für das [heimeliq](https://heimeliq.de)-Projekt.
 
-Jedes Möbel von heimeliq lebt in einem eigenen Git-Repository. Diese Vorlage definiert die einheitliche Struktur, die alle Möbel-Repos verwenden, und stellt sicher, dass jedes Repo dem [Open Know-How (OKH) Standard](https://github.com/iop-alliance/OpenKnowHow) entspricht.
+Jedes Holz-Möbel oder -Accessoire von heimeliq lebt in einem eigenen Git-Repository. Diese Vorlage definiert die einheitliche Struktur, die alle Produkt-Repos verwenden, und stellt sicher, dass jedes Repo dem [Open Know-How (OKH) Standard](https://github.com/iop-alliance/OpenKnowHow) entspricht.
 
 ## Versionen
 
@@ -10,20 +10,20 @@ Jedes Möbel von heimeliq lebt in einem eigenen Git-Repository. Diese Vorlage de
 | --- | --- |
 | OKH-Manifest | `2.4` |
 | Lizenz dieses Templates | `MIT` |
-| Lizenz daraus erzeugter Möbel-Repos | `CERN-OHL-S-2.0` |
+| Lizenz daraus erzeugter Produkt-Repos | `CERN-OHL-S-2.0` |
 
-Die Template-Version wird in jedem aus dieser Vorlage erzeugten Möbel-Repo in der `heimeliq.toml` festgehalten (`heimeliq-template-version`). Damit ist nachvollziehbar, auf welchem Vorlagen-Stand das Möbel-Repo basiert.
+Die Template-Version wird in jedem aus dieser Vorlage erzeugten Produkt-Repo in der `heimeliq.toml` festgehalten (`heimeliq-template-version`). Damit ist nachvollziehbar, auf welchem Vorlagen-Stand das Produkt-Repo basiert.
 
 ## Zwei Lizenzen, zwei Welten
 
 Diese Vorlage trennt bewusst zwei Lizenzen:
 
 - **Das Template selbst** (Struktur, Schemas, Workflow-Dateien, Beispiel-Markdown-Vorlagen) steht unter **MIT**. Andere können daraus eigene Hardware-Doku-Templates ableiten – auch ohne Bezug zu heimeliq.
-- **Möbel-Repos**, die aus dieser Vorlage erzeugt werden, stehen unter **CERN-OHL-S-2.0** (strongly reciprocal Open Hardware Licence). Wer ein Möbel weiterentwickelt, muss die Weiterentwicklung wieder offen unter derselben Lizenz teilen.
+- **Produkt-Repos**, die aus dieser Vorlage erzeugt werden, stehen unter **CERN-OHL-S-2.0** (strongly reciprocal Open Hardware Licence). Wer ein Möbel weiterentwickelt, muss die Weiterentwicklung wieder offen unter derselben Lizenz teilen.
 
 Konkret heißt das im Repo:
 
-| Datei im Template | Wird im Möbel-Repo zu | Lizenz |
+| Datei im Template | Wird im Produkt-Repo zu | Lizenz |
 | --- | --- | --- |
 | `LICENSE` | _entfällt_ | MIT (gilt nur fürs Template) |
 | `LICENSE.example` | `LICENSE` | CERN-OHL-S-2.0 |
@@ -32,11 +32,11 @@ Konkret heißt das im Repo:
 
 ## Was ist heimeliq?
 
-heimeliq baut Möbel aus regionalen Naturmaterialien – Massivholz, Stahl, Sperrholz – und veröffentlicht jedes Stück vollständig als Open Source: 3D-Modelle, Stücklisten, Bauanleitungen. Diese Vorlage ist Teil der digitalen Infrastruktur dahinter.
+heimeliq baut Holz-Möbel oder -Accessoires aus regionalen Naturmaterialien – Massivholz, Stahl, Sperrholz – und veröffentlicht jedes Stück vollständig als Open Source: 3D-Modelle, Stücklisten, Bauanleitungen. Diese Vorlage ist Teil der digitalen Infrastruktur dahinter.
 
 Jedes Produkt hat einen **Typ** (was es ist – `sideboard`, `tablett`, `werkbank`) und gehört zu einer **Familie** (eine Formensprache, die einen Vornamen trägt). Typ und Familie bilden zusammen die Repo-ID. Details im Abschnitt [Familien-Konzept](#familien-konzept).
 
-## Ein neues Möbel-Repo aus dieser Vorlage erzeugen
+## Ein neues Produkt-Repo aus dieser Vorlage erzeugen
 
 1. Auf GitHub den Knopf **„Use this template"** → **„Create a new repository"** klicken.
 2. Repo-Name nach Schema: `heimeliq-<type>-<family>`, zum Beispiel `heimeliq-sideboard-wieke`.
@@ -69,11 +69,11 @@ Mindestens zu ersetzen:
 ```
 heimeliq-furniture-template/
 ├── README.md                  ← diese Datei (erklärt das Template, MIT)
-├── README.example.md          ← wird im Möbel-Repo zu README.md (CERN-OHL-S)
+├── README.example.md          ← wird im Produkt-Repo zu README.md (CERN-OHL-S)
 ├── LICENSE                    ← MIT (für das Template)
-├── LICENSE.example            ← wird im Möbel-Repo zu LICENSE (CERN-OHL-S-2.0)
+├── LICENSE.example            ← wird im Produkt-Repo zu LICENSE (CERN-OHL-S-2.0)
 ├── CHANGELOG.md               ← Versions-Historie dieser Vorlage
-├── MIGRATIONS.md              ← Anleitung zum Migrieren älterer Möbel-Repos
+├── MIGRATIONS.md              ← Anleitung zum Migrieren älterer Produkt-Repos
 ├── REUSE.toml                 ← Datei-Lizenzangaben (reuse.software-konform)
 ├── okh.toml                   ← OKH-Manifest (Standard-Metadaten)
 ├── heimeliq.toml              ← heimeliq-spezifische Erweiterungen
@@ -112,36 +112,34 @@ Dateinamen in allen Medienordnern: laufende Nummer als Präfix, danach ein sprec
 
 Faustregel: **Außenwirkungs-Bilder zentral in `media/`, Doku-Bilder lokal neben ihrer Markdown-Datei.**
 
-Shop-Bilder in voller Auflösung gehören **nicht** ins Git – siehe die READMEs in den Medienordnern.
-
 ## ID-Konvention
 
 | Ebene | Schema | Beispiel |
 | --- | --- | --- |
-| Möbel-Repo | `heimeliq-<type>-<family>` | `heimeliq-sideboard-wieke` |
+| Produkt-Repo | `heimeliq-<type>-<family>` | `heimeliq-sideboard-wieke` |
 | Hauptbaugruppe | `A001` | `A001` |
 | Sub-Baugruppe | `A002`, `A003`, … | `A002` (z. B. Schublade) |
 | Eigenes Bauteil (Self) | `<Baugruppe>.S###` | `A001.S001`, `A002.S001` |
 | Externes Bauteil | `<Baugruppe>.E###` | `A001.E001`, `A002.E001` |
 | Möbel-Version | SemVer | `1.2.0` |
 
-Bauteil-IDs sind innerhalb des jeweiligen Möbel-Repos eindeutig und immer voll qualifiziert mit Assembly-Präfix. Außerhalb adressiert man sie als `<repo>/<part-id>`.
+Bauteil-IDs sind innerhalb des jeweiligen Produkt-Repos eindeutig und immer voll qualifiziert mit Assembly-Präfix. Außerhalb adressiert man sie als `<repo>/<part-id>`.
 
 Die ID besteht aus **Typ** und **Familie**. Der Typ (`type`, z. B. `sideboard`, `werkbank`) sagt, was das Möbel ist; die Familie (`family.id`, z. B. `wieke`) sagt, welcher Formensprache es folgt. Beide Segmente sind lowercase und ASCII. Zusätzliche `[tags]` bleiben Metadaten für Filter und Suche und sind **kein** Teil der ID.
 
 ## Familien-Konzept
 
-Jedes Produkt gehört zu genau einer **Familie**. Eine Familie trägt einen Vornamen und bezeichnet eine Formensprache: alle Produkte derselben Familie teilen Fasen, Radien, Verbindungsprinzip und Materialstärken-Logik. Der Familienname ist zugleich der Produktname (`heimeliq-sideboard-wieke` → „Wieke").
+Jedes Produkt gehört zu genau einer **Familie**. Eine Familie trägt einen Vornamen und bezeichnet eine Formensprache: alle Produkte derselben Familie teilen Fasen, Radien und Verbindungsprinzip. Der Familienname ist zugleich der Produktname (`heimeliq-sideboard-wieke` → „Wieke").
 
-Die konstruktiven Werte einer Familie liegen zentral in `families/<id>/` im Instructions-Repo, **nicht** im Möbel-Repo. Das Möbel-Repo nennt in `heimeliq.toml` nur `family.id` (lowercase, ASCII) und `family.label` (Anzeigeform).
+Die konstruktiven Werte einer Familie liegen zentral in `families/<id>/` im Instructions-Repo, **nicht** im Produkt-Repo. Das Produkt-Repo nennt in `heimeliq.toml` nur `family.id` (lowercase, ASCII) und `family.label` (Anzeigeform).
 
-Der **Typ** kommt aus dem zentralen Vokabular `vocabulary/typen.toml` im Instructions-Repo. Jeder Typ ist genau einem primären **Thema** zugeordnet (`theme`, z. B. `kueche`, `bad`, `wohnen`, `buero`, `werkstatt`); der in `heimeliq.toml` gesetzte `theme`-Wert muss in der `themen`-Liste des gewählten Typs stehen. Auch dieses Vokabular wird nicht ins Möbel-Repo kopiert, sondern nur referenziert.
+Der **Typ** kommt aus dem zentralen Vokabular `vocabulary/typen.toml` im Instructions-Repo. Jeder Typ ist genau einem primären **Thema** zugeordnet (`theme`, z. B. `kueche`, `bad`, `wohnen`, `buero`, `werkstatt`); der in `heimeliq.toml` gesetzte `theme`-Wert muss in der `themen`-Liste des gewählten Typs stehen. Auch dieses Vokabular wird nicht ins Produkt-Repo kopiert, sondern nur referenziert.
 
-Marken-Vokabular wie MassiQ, gehriq oder KeiliQ beschreibt Bauart und Formensprache auf der Website, ist aber **kein** Feld in `heimeliq.toml` – es wäre redundant zu den Tag-Achsen `joint` und `material`.
+Marken-Vokabular wie massiq, gehriq oder keiliq beschreibt Bauart und Formensprache auf der Website, ist aber **kein** Feld in `heimeliq.toml` – es wäre redundant zu den Tag-Achsen `joint` und `material`.
 
 ## Varianten
 
-Ein Produkt kann in mehreren Größen gebaut werden – bei identischer Bauweise und **identischer Teileliste**. Das sind Varianten. Sie bekommen **kein eigenes Repo**, sondern sind Daten in `heimeliq.toml`.
+Ein Produkt kann in mehreren Größen oder anderen Holzarten gebaut werden – bei identischer Bauweise und **identischer Teileliste**. Das sind Varianten. Sie bekommen **kein eigenes Repo**, sondern sind Daten in `heimeliq.toml`.
 
 Abgrenzung: gleiche Teileliste, nur andere Zahlen = Variante. Sobald ein Teil dazukommt, wegfällt oder sich eine Verbindungsart ändert = eigenes Produkt.
 
@@ -180,8 +178,8 @@ In der Praxis sind zwei Hierarchie-Ebenen (Möbel + direkte Erweiterungen) der N
 
 ## Mitwirken
 
-Verbesserungsvorschläge an diesem Template sind willkommen. Issues und Pull Requests direkt am Template-Repo. Änderungen am Template laufen über Versionierung (siehe `CHANGELOG.md`); bestehende Möbel-Repos werden dadurch nicht automatisch migriert.
+Verbesserungsvorschläge an diesem Template sind willkommen. Issues und Pull Requests direkt am Template-Repo. Änderungen am Template laufen über Versionierung (siehe `CHANGELOG.md`); bestehende Produkt-Repos werden dadurch nicht automatisch migriert.
 
 ## Lizenz
 
-Dieses Template steht unter [MIT](LICENSE). Daraus erzeugte Möbel-Repos stehen unter [CERN-OHL-S-2.0](LICENSE.example).
+Dieses Template steht unter [MIT](LICENSE). Daraus erzeugte Produkt-Repos stehen unter [CERN-OHL-S-2.0](LICENSE.example).

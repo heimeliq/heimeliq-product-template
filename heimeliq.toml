@@ -14,7 +14,7 @@
 
 "$schema" = "./heimeliq.schema.json"
 
-# Version dieser Vorlage, auf der das Möbel-Repo basiert.
+# Version dieser Vorlage, auf der das Produkt-Repo basiert.
 # Wird bei jedem Template-Upgrade aktualisiert (siehe MIGRATIONS.md).
 heimeliq-template-version = "0.5.0"
 
@@ -45,8 +45,8 @@ theme = "FIXME"                        # z. B. "kueche", "bad", "wohnen", "buero
 
 # --- Familie ---
 # Die Familie trägt einen Vornamen und bezeichnet eine Formensprache: alle
-# Produkte derselben Familie teilen Fasen, Radien, Verbindungsprinzip und
-# Materialstärken-Logik. Die konkreten Werte liegen zentral in families/<id>/
+# Produkte derselben Familie teilen Fasen, Radien, Verbindungsprinzip.
+# Die konkreten Werte liegen zentral in families/<id>/
 # im Instructions-Repo, nicht in diesem Repo. Der Familienname ist zugleich
 # der Produktname.
 

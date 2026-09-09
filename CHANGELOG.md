@@ -2,7 +2,7 @@
 
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
-- **MAJOR** (`x.0.0`): Breaking Change. Bestehende Möbel-Repos brauchen Migration.
+- **MAJOR** (`x.0.0`): Breaking Change. Bestehende Produkt-Repos brauchen Migration.
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
@@ -130,7 +130,7 @@ Jedes heimeliq-Möbel trägt den Namen eines real existierenden Waldes. Der Wald
 - README erklärt das Wald-Konzept und die Typ/Tags-Logik.
 - `README.example.md` enthält einen prominenten Wald-Namensgeber-Bereich.
 
-**Migration für bestehende Möbel-Repos (z. B. das v0.1.x-Pilotmöbel):**
+**Migration für bestehende Produkt-Repos (z. B. das v0.1.x-Pilotmöbel):**
 
 1. Repo umbenennen auf `heimeliq-<reihe>-<waldname>`.
 2. In `heimeliq.toml`: `slug` anpassen, `[forest]`-Section ergänzen, ggf. `tags` setzen.
@@ -151,7 +151,7 @@ Behebt einen latenten Bug in der Beispiel-`okh.toml`: Einige Top-Level-Felder (`
 
 - Erste Version des Templates.
 - OKH 2.4 als Standard für Möbel-Metadaten.
-- **Lizenz-Trennung**: Template selbst unter MIT, daraus erzeugte Möbel-Repos unter CERN-OHL-S-2.0.
+- **Lizenz-Trennung**: Template selbst unter MIT, daraus erzeugte Produkt-Repos unter CERN-OHL-S-2.0.
 - `LICENSE.example` und `README.example.md` als Vorlagen.
 - Doku-Struktur unter `docs/de/` mit co-located `.images/`-Ordnern.
 - `heimeliq.toml` für projektspezifische Erweiterungen.
