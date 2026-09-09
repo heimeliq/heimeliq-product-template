@@ -75,22 +75,22 @@ jobs:
           print(f"variants.reference={ref!r}: OK")
           PY
 
-      - name: Determine repo kind (template vs. furniture)
+      - name: Determine repo kind (template vs. product)
         id: kind
         run: |
           # Wenn LICENSE.example UND README.example.md noch existieren, ist dies das
           # Template-Repo selbst. Wenn beide fehlen und stattdessen LICENSE/README.md
-          # die Moebel-Variante sind, ist es ein Moebel-Repo.
+          # die Produkt-Variante sind, ist es ein Produkt-Repo.
           if [ -f "LICENSE.example" ] && [ -f "README.example.md" ]; then
             echo "kind=template" >> $GITHUB_OUTPUT
             echo "Erkannt als Template-Repo."
           else
-            echo "kind=furniture" >> $GITHUB_OUTPUT
-            echo "Erkannt als Moebel-Repo."
+            echo "kind=product" >> $GITHUB_OUTPUT
+            echo "Erkannt als Produkt-Repo."
           fi
 
-      - name: Furniture-Repo – Example files must be renamed
-        if: steps.kind.outputs.kind == 'furniture'
+      - name: Produkt-Repo – Example files must be renamed
+        if: steps.kind.outputs.kind == 'product'
         run: |
           FAIL=0
           if [ -f "LICENSE.example" ]; then
@@ -112,7 +112,7 @@ jobs:
           exit $FAIL
 
       - name: Check for FIXME placeholders (only if published)
-        if: steps.kind.outputs.kind == 'furniture'
+        if: steps.kind.outputs.kind == 'product'
         run: |
           PUBLISHED=$(python -c "import tomli; d=tomli.load(open('heimeliq.toml','rb')); print('published' in d.get('tags',{}).get('status',[]))")
           if [ "$PUBLISHED" = "True" ]; then
@@ -126,7 +126,7 @@ jobs:
           fi
 
       - name: Check heimeliq-instruction-version is set (only if published)
-        if: steps.kind.outputs.kind == 'furniture'
+        if: steps.kind.outputs.kind == 'product'
         run: |
           PUBLISHED=$(python -c "import tomli; d=tomli.load(open('heimeliq.toml','rb')); print('published' in d.get('tags',{}).get('status',[]))")
           if [ "$PUBLISHED" = "True" ]; then
@@ -141,7 +141,7 @@ jobs:
           fi
 
       - name: Check required media files (only if published)
-        if: steps.kind.outputs.kind == 'furniture'
+        if: steps.kind.outputs.kind == 'product'
         run: |
           PUBLISHED=$(python -c "import tomli; d=tomli.load(open('heimeliq.toml','rb')); print('published' in d.get('tags',{}).get('status',[]))")
           if [ "$PUBLISHED" = "True" ] && [ ! -f "media/hero.jpg" ]; then

@@ -1,4 +1,4 @@
-# heimeliq Furniture Template
+# heimeliq Product Template
 
 Vorlage zur Erstellung neuer Produkt-Repositories für das [heimeliq](https://heimeliq.de)-Projekt.
 
@@ -67,7 +67,7 @@ Mindestens zu ersetzen:
 ## Struktur
 
 ```
-heimeliq-furniture-template/
+heimeliq-product-template/
 ├── README.md                  ← diese Datei (erklärt das Template, MIT)
 ├── README.example.md          ← wird im Produkt-Repo zu README.md (CERN-OHL-S)
 ├── LICENSE                    ← MIT (für das Template)
