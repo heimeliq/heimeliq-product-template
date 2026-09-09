@@ -51,7 +51,8 @@ existing product repo is migrated by hand.
   furniture, and the docs speak of *products* throughout. GitHub keeps the old
   URL as a redirect; update any `git clone` URL or "Use this template"
   bookmark. The generated product repos are unaffected – they were never
-  named after the template.
+  named after the template. The website list file `furniture-repos.json`
+  is renamed to `product-repos.json` to match.
 - `okh.toml`: comments on `[outer-dimensions]` and per-part
   `outer-dimensions` clarifying they describe the reference variant only.
   OKH knows no ranges and is deliberately not stretched; otherwise untouched.

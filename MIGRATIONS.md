@@ -54,7 +54,7 @@ Die `parameter`-Schlüssel jeder Option müssen den Alias-Namen der FreeCAD-Spre
 ### 5. Validierung und Website
 
 - Lokal `validate.yml` nachvollziehen. Häufige Fehler: fehlendes `theme`, `[family]` oder `[variants]`; `tags.status` statt Top-Level `status`; `variants.reference` zeigt auf keine Options-`id`.
-- Im Website-Repo `furniture-repos.json`: die alte URL gegen die neue tauschen.
+- Im Website-Repo `product-repos.json`: die alte URL gegen die neue tauschen.
 - `changelog.md` des Möbels (klein) ergänzen.
 
 ### Offene Punkte
@@ -141,7 +141,7 @@ Diese Version führt das **Wald-Namensgeber-Konzept** ein und verschlankt das ID
 
 4. **Validate-Action lokal oder via Push prüfen**: Schlägt die Validierung an, fehlt vermutlich ein Pflichtfeld in `[forest]` oder der `slug` passt nicht zum neuen Pattern.
 
-5. **`furniture-repos.json` im Website-Repo aktualisieren**: Die alte URL gegen die neue tauschen.
+5. **`product-repos.json` im Website-Repo aktualisieren**: Die alte URL gegen die neue tauschen.
 
 6. **CHANGELOG.md des Möbels** (klein, im Produkt-Repo) ergänzen mit einem Eintrag wie:
 

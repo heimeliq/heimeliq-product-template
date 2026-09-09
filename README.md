@@ -47,7 +47,7 @@ Jedes Produkt gehört zu einer **Familie** (eine Formensprache, die einen Vornam
 5. **MIGRATIONS löschen**: `MIGRATIONS.md` löschen.
 6. Platzhalter ersetzen (siehe nächster Abschnitt).
 7. Erste Inhalte ergänzen, committen, pushen.
-8. Wenn das Möbel auf der Website erscheinen soll: im `heimeliq-website`-Repo den Eintrag in `furniture-repos.json` ergänzen.
+8. Wenn das Produkt auf der Website erscheinen soll: im `heimeliq-website`-Repo den Eintrag in `product-repos.json` ergänzen.
 
 > Tipp: Die Schritte 4–6 werden später vom angedachten `heimeliq-cli` automatisiert (`heimeliq init`). Bis dahin manuell.
 
