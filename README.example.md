@@ -3,7 +3,7 @@
 > FIXME ein- bis zweisätzige Beschreibung – was ist es, was macht es besonders.
 
 [![Lizenz: CERN-OHL-S-2.0](https://img.shields.io/badge/Lizenz-CERN--OHL--S--2.0-blue)](LICENSE)
-[![heimeliq](https://img.shields.io/badge/heimeliq-FIXME--familie-green)](https://heimeliq.de/familien/FIXME-familie)
+[![heimeliq](https://img.shields.io/badge/heimeliq-FIXME--familie-green)](https://heimeliq.de/produkte/FIXME-familie)
 [![Status](https://img.shields.io/badge/Status-FIXME--status-orange)](#)
 
 ![Hauptbild](media/hero.jpg)
@@ -146,7 +146,7 @@ Versionsschritte folgen [Semantic Versioning](https://semver.org/lang/de/):
 
 ## Kaufen
 
-Dieses Möbel kann auch fertig gebaut bei heimeliq bestellt werden: <https://heimeliq.de/moebel/FIXME-slug>
+Dieses Möbel kann auch fertig gebaut bei heimeliq bestellt werden: <https://heimeliq.de/produkte/FIXME-slug>
 
 ---
 
@@ -169,6 +169,6 @@ Dieses Möbel und seine Dokumentation stehen unter [CERN-OHL-S-2.0](LICENSE).
 ## Verwandte Links
 
 - heimeliq-Webseite: <https://heimeliq.de>
-- Familie FIXME-familie: <https://heimeliq.de/familien/FIXME-familie>
+- Familie FIXME-familie: <https://heimeliq.de/produkte/FIXME-familie>
 - Open Know-How Standard: <https://github.com/iop-alliance/OpenKnowHow>
 - CERN Open Hardware Licence: <https://ohwr.org/cern_ohl_s_v2.txt>
