@@ -5,7 +5,7 @@
   Zahlen setzt der Generator aus den Variantenparametern ein.
   Solange keine Referenzvariante ausgerechnet ist, stehen hier FIXME.
 -->
-# Bauanleitung – FIXME Möbelname
+# Bauanleitung – FIXME Produktname
 
 *Referenzvariante: FIXME. Diese Anleitung richtet sich an einen Tischler oder
 eine Tischlerin mit Werkstatt-Erfahrung. Sie geht davon aus, dass übliche

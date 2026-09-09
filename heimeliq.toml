@@ -18,11 +18,11 @@
 # Wird bei jedem Template-Upgrade aktualisiert (siehe MIGRATIONS.md).
 heimeliq-template-version = "0.5.0"
 
-# Version dieses Möbels (SemVer).
+# Version dieses Produkts (SemVer).
 # Erhöhen bei: PATCH = Doku-Fixes, MINOR = neue Optionen, MAJOR = Konstruktionsänderung.
 version = "0.1.0"
 
-# Verweis auf den instructions-Stand, mit dem dieses Möbel
+# Verweis auf den instructions-Stand, mit dem dieses Produkt
 # produziert wurde. Wird in Phase 2 vom Bot gesetzt.
 heimeliq-instruction-version = ""
 
@@ -30,12 +30,12 @@ heimeliq-instruction-version = ""
 # Schema: <family>-<type>.
 slug = "FIXME"             # z. B. "wieke-sideboard"
 
-# Möbel-Typ. Pflicht. Bildet zusammen mit der Familie die Repo-ID und den Slug.
+# Produkt-Typ. Pflicht. Bildet zusammen mit der Familie die Repo-ID und den Slug.
 # Der Wert ist ein Slug aus dem zentralen Vokabular vocabulary/typen.toml im
 # Instructions-Repo – hier nur referenziert, nicht dupliziert.
 type = "FIXME"                         # z. B. "sideboard", "tablett", "werkbank"
 
-# Primäres Thema des Möbels. Pflicht.
+# Primäres Thema des Produkts. Pflicht.
 # Muss in der themen-Liste des gewählten type stehen (vocabulary/typen.toml).
 theme = "FIXME"                        # z. B. "kueche", "bad", "wohnen", "buero", "werkstatt"
 
@@ -107,7 +107,7 @@ parameter = { }                        # Alias-Name = Zahl (mm), z. B. { length 
 # ============================================================================
 # BAUGRUPPEN
 # ============================================================================
-# A001 ist konventionell die Hauptbaugruppe = das ganze Möbel.
+# A001 ist konventionell die Hauptbaugruppe = das ganze Produkt.
 # Sub-Baugruppen (Schubladen, Türen, Erweiterungen) bekommen A002, A003, ...
 # und referenzieren ihre Eltern-Baugruppe über `parent`.
 # `optional = true` markiert eine Baugruppe als Erweiterung (= später im Shop
@@ -118,15 +118,15 @@ parameter = { }                        # Alias-Name = Zahl (mm), z. B. { length 
 #   cad/source/A002-<Name>.FCStd
 #   ...
 
-# Hauptbaugruppe (= das Möbel selbst). Pflicht.
+# Hauptbaugruppe (= das Produkt selbst). Pflicht.
 [[assemblies]]
 heimeliq-assembly-id = "A001"
-name = "FIXME Möbelname (Hauptbaugruppe)"
+name = "FIXME Produktname (Hauptbaugruppe)"
 source = "cad/source/A001-FIXME-name.FCStd"
 optional = false
 
 # Beispiel für eine optionale Sub-Baugruppe (z. B. Schublade).
-# Kann gelöscht werden, falls das Möbel nur aus der Hauptbaugruppe besteht.
+# Kann gelöscht werden, falls das Produkt nur aus der Hauptbaugruppe besteht.
 [[assemblies]]
 heimeliq-assembly-id = "A002"
 name = "FIXME Sub-Baugruppe (z. B. Schublade)"

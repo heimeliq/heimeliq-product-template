@@ -1,4 +1,4 @@
-# Aufbauanleitung – FIXME Möbelname
+# Aufbauanleitung – FIXME Produktname
 
 *Diese Anleitung richtet sich an den Endkunden. Sie geht davon aus, dass keine Werkstatt vorhanden ist und nur einfache Haushaltswerkzeuge zur Verfügung stehen.*
 
@@ -11,7 +11,7 @@
 ## Was du brauchst
 
 - FIXME: Liste der nötigen Werkzeuge (z. B. Inbusschlüssel, Schraubendreher)
-- FIXME: Eine zweite Person, falls das Möbel schwer ist
+- FIXME: Eine zweite Person, falls das Produkt schwer ist
 - FIXME: Filz, Decke o. ä. zum Unterlegen während der Montage
 
 ## Lieferumfang prüfen

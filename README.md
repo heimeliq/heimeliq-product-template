@@ -2,7 +2,7 @@
 
 Vorlage zur Erstellung neuer Produkt-Repositories für das [heimeliq](https://heimeliq.de)-Projekt.
 
-Jedes Holz-Möbel oder -Accessoire von heimeliq lebt in einem eigenen Git-Repository. Diese Vorlage definiert die einheitliche Struktur, die alle Produkt-Repos verwenden, und stellt sicher, dass jedes Repo dem [Open Know-How (OKH) Standard](https://github.com/iop-alliance/OpenKnowHow) entspricht.
+Jedes Holz-Produkt oder -Accessoire von heimeliq lebt in einem eigenen Git-Repository. Diese Vorlage definiert die einheitliche Struktur, die alle Produkt-Repos verwenden, und stellt sicher, dass jedes Repo dem [Open Know-How (OKH) Standard](https://github.com/iop-alliance/OpenKnowHow) entspricht.
 
 ## Versionen
 
@@ -19,7 +19,7 @@ Die Template-Version wird in jedem aus dieser Vorlage erzeugten Produkt-Repo in 
 Diese Vorlage trennt bewusst zwei Lizenzen:
 
 - **Das Template selbst** (Struktur, Schemas, Workflow-Dateien, Beispiel-Markdown-Vorlagen) steht unter **MIT**. Andere können daraus eigene Hardware-Doku-Templates ableiten – auch ohne Bezug zu heimeliq.
-- **Produkt-Repos**, die aus dieser Vorlage erzeugt werden, stehen unter **CERN-OHL-S-2.0** (strongly reciprocal Open Hardware Licence). Wer ein Möbel weiterentwickelt, muss die Weiterentwicklung wieder offen unter derselben Lizenz teilen.
+- **Produkt-Repos**, die aus dieser Vorlage erzeugt werden, stehen unter **CERN-OHL-S-2.0** (strongly reciprocal Open Hardware Licence). Wer ein Produkt weiterentwickelt, muss die Weiterentwicklung wieder offen unter derselben Lizenz teilen.
 
 Konkret heißt das im Repo:
 
@@ -32,7 +32,7 @@ Konkret heißt das im Repo:
 
 ## Was ist heimeliq?
 
-heimeliq baut Holz-Möbel oder -Accessoires aus regionalen Naturmaterialien – Massivholz, Stahl, Sperrholz – und veröffentlicht jedes Stück vollständig als Open Source: 3D-Modelle, Stücklisten, Bauanleitungen. Diese Vorlage ist Teil der digitalen Infrastruktur dahinter.
+heimeliq baut Holz-Produkte oder -Accessoires aus regionalen Naturmaterialien – Massivholz, Stahl, Sperrholz – und veröffentlicht jedes Stück vollständig als Open Source: 3D-Modelle, Stücklisten, Bauanleitungen. Diese Vorlage ist Teil der digitalen Infrastruktur dahinter.
 
 Jedes Produkt gehört zu einer **Familie** (eine Formensprache, die einen Vornamen trägt) und hat einen **Typ** (was es ist – `sideboard`, `tablett`, `werkbank`). Familie und Typ bilden in dieser Reihenfolge die Repo-ID. Details im Abschnitt [Familien-Konzept](#familien-konzept).
 
@@ -78,7 +78,7 @@ heimeliq-product-template/
 ├── okh.toml                   ← OKH-Manifest (Standard-Metadaten)
 ├── heimeliq.toml              ← heimeliq-spezifische Erweiterungen
 ├── heimeliq.schema.json       ← JSON-Schema für heimeliq.toml-Validierung
-├── changelog.md               ← Versions-Historie des Möbels (klein!)
+├── changelog.md               ← Versions-Historie des Produkts (klein!)
 ├── docs/de/
 │   ├── story.md               ← Hintergrund, Inspiration, Material
 │   ├── build-guide.md         ← Werkstatt-Bauanleitung (Referenzvariante, erzeugt)
@@ -121,11 +121,11 @@ Faustregel: **Außenwirkungs-Bilder zentral in `media/`, Doku-Bilder lokal neben
 | Sub-Baugruppe | `A002`, `A003`, … | `A002` (z. B. Schublade) |
 | Eigenes Bauteil (Self) | `<Baugruppe>.S###` | `A001.S001`, `A002.S001` |
 | Externes Bauteil | `<Baugruppe>.E###` | `A001.E001`, `A002.E001` |
-| Möbel-Version | SemVer | `1.2.0` |
+| Produkt-Version | SemVer | `1.2.0` |
 
 Bauteil-IDs sind innerhalb des jeweiligen Produkt-Repos eindeutig und immer voll qualifiziert mit Assembly-Präfix. Außerhalb adressiert man sie als `<repo>/<part-id>`.
 
-Die ID besteht aus **Familie** und **Typ**. Die Familie (`family.id`, z. B. `wieke`) sagt, welcher Formensprache es folgt; der Typ (`type`, z. B. `sideboard`, `werkbank`) sagt, was das Möbel ist. Beide Segmente sind lowercase und ASCII. Zusätzliche `[tags]` bleiben Metadaten für Filter und Suche und sind **kein** Teil der ID.
+Die ID besteht aus **Familie** und **Typ**. Die Familie (`family.id`, z. B. `wieke`) sagt, welcher Formensprache es folgt; der Typ (`type`, z. B. `sideboard`, `werkbank`) sagt, was das Produkt ist. Beide Segmente sind lowercase und ASCII. Zusätzliche `[tags]` bleiben Metadaten für Filter und Suche und sind **kein** Teil der ID.
 
 ## Familien-Konzept
 
@@ -157,9 +157,9 @@ Einen Generator gibt es noch nicht. Bis dahin werden die Referenzvarianten-Datei
 
 ## Baugruppen-Konzept
 
-Jedes heimeliq-Möbel ist als Hierarchie von Baugruppen modelliert:
+Jedes heimeliq-Produkt ist als Hierarchie von Baugruppen modelliert:
 
-- **`A001`** ist konventionell die **Hauptbaugruppe** = das ganze Möbel.
+- **`A001`** ist konventionell die **Hauptbaugruppe** = das ganze Produkt.
 - Sub-Baugruppen (Schubladen, Türen, Erweiterungen) bekommen `A002`, `A003`, … und referenzieren ihre Eltern-Baugruppe über das Feld `parent`.
 - Jedes Bauteil gehört zu genau einer Baugruppe und trägt deren Präfix in der ID (`A001.S001`, `A002.E001` usw.).
 - `optional = true` markiert eine Baugruppe als Erweiterung. Solche Baugruppen werden später im Shop zu konfigurierbaren Varianten mit Aufpreis.
@@ -174,7 +174,7 @@ cad/source/
 
 Im OKH-`[[part]]`-Array zeigt das `source`-Feld jedes Bauteils auf die Assembly-Datei, in der das Bauteil definiert ist. Zusätzlich verlinkt das Feld `heimeliq-assembly` die Baugruppe explizit.
 
-In der Praxis sind zwei Hierarchie-Ebenen (Möbel + direkte Erweiterungen) der Normalfall. Tieferes Nesting (z. B. `A002.A003.S001`) ist technisch erlaubt, aber selten nötig.
+In der Praxis sind zwei Hierarchie-Ebenen (Produkt + direkte Erweiterungen) der Normalfall. Tieferes Nesting (z. B. `A002.A003.S001`) ist technisch erlaubt, aber selten nötig.
 
 ## Mitwirken
 

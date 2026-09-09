@@ -1,8 +1,8 @@
-# Pflegehinweise – FIXME Möbelname
+# Pflegehinweise – FIXME Produktname
 
 ## Tägliche Pflege
 
-FIXME: Wie wird das Möbel im Alltag gereinigt? Trocken abstauben, feucht abwischen?
+FIXME: Wie wird das Produkt im Alltag gereinigt? Trocken abstauben, feucht abwischen?
 
 ## Auffrischen der Oberfläche
 
@@ -18,4 +18,4 @@ FIXME: Wie behandelt man Kratzer, Druckstellen, Flecken? Welche Mittel helfen?
 
 ## Lebensdauer
 
-FIXME: Was kann man von diesem Möbel erwarten? Bei guter Pflege … Jahre/Jahrzehnte.
+FIXME: Was kann man von diesem Produkt erwarten? Bei guter Pflege … Jahre/Jahrzehnte.

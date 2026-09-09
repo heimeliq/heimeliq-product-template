@@ -5,7 +5,7 @@
   Zahlen setzt der Generator aus den Variantenparametern ein.
   Solange keine Referenzvariante ausgerechnet ist, stehen hier FIXME.
 -->
-# Stückliste – FIXME Möbelname
+# Stückliste – FIXME Produktname
 
 *Variante: FIXME. Lesbare Stückliste für Menschen. Die maschinenlesbare
 Variante ergibt sich aus den `[[part]]`-Einträgen in `okh.toml` (eigene
@@ -37,7 +37,7 @@ Außenkante über diese drei Teile:
 
 > **L_min = 2 × Außenhöhe + Außenbreite + Sägezugabe**
 
-- **Brettbreite (quer zur Faser)** muss mindestens der **Möbeltiefe**
+- **Brettbreite (quer zur Faser)** muss mindestens der **Produkttiefe**
   entsprechen: B_min = Tiefe + Besäumung.
 - **Aufrunden:** L_min und B_min für den Einkauf auf das nächste
   100-mm-Maß aufrunden.
