@@ -15,6 +15,18 @@ Bestehende Repos werden nicht automatisch migriert – Stabilität geht vor.
 
 ---
 
+## 0.5.0 → 0.5.1
+
+This is a PATCH release. No structural, schema, or directory changes are required.
+
+1. **`heimeliq-template-version`** in `heimeliq.toml` erhöhen auf `"0.5.1"`.
+
+Nur Terminologie: „Möbel" heißt in Vorlage und Doku jetzt durchgängig „Produkt".
+Bestehende Repos validieren und funktionieren auch ohne diese Anpassung
+unverändert weiter; die Übernahme der neuen Wortwahl in eigene Texte ist optional.
+
+---
+
 ## 0.4.2 → 0.5.0
 
 Zwei Breaking Changes: das Namensschema (`series`/`forest` → `type`/`theme`/`family`) und die neue Pflicht-Section `[variants]`. Es gibt genau ein bestehendes Produkt-Repo; es wird von Hand nachgezogen. Kein Migrationsskript, keine Rückwärtskompatibilität.

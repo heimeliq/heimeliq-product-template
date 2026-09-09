@@ -6,6 +6,21 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
+## [0.5.1] – 2026-09-09 – Terminology: "Möbel" → "Produkt"
+
+PATCH release. Documentation and code comments now consistently say *Produkt*
+instead of *Möbel*, matching the `heimeliq-product-template` rename in 0.5.0.
+No schema, structure, or directory changes.
+
+**Changed:**
+
+- README, MIGRATIONS, `changelog.md`, `docs/de/*` templates, `heimeliq.schema.json`
+  and `heimeliq.toml` comments: "Möbel" replaced with "Produkt" throughout,
+  including inflected forms and the historical CHANGELOG entries.
+- Grammatical artifacts from an earlier bulk replacement are fixed.
+
+**Migration:** see `MIGRATIONS.md` for the steps 0.5.0 → 0.5.1.
+
 ## [0.5.0] – 2026-09-09 – Repository rename, type/theme/family and mandatory variants
 
 The template repository is renamed to `heimeliq-product-template`, plus two
