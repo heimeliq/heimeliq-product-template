@@ -12,6 +12,9 @@ Thumbs.db
 *.FCStd1
 *.FCBak
 
+# Instructions
+instructions/
+
 # Python (für Validierung lokal)
 __pycache__/
 *.pyc
