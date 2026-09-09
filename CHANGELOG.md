@@ -98,7 +98,7 @@ existing product repo is migrated by hand.
 
 ## [0.4.0] – Instruction-Version
 
-Jedes heimeliq-Möbel trägt jetzt eine Referenz auf den Instructions-Stand, mit dem es produziert wurde. Das Feld `heimeliq-instruction-version` wird in Phase 2 automatisch vom Bot gesetzt und bleibt im Template leer.
+Jedes heimeliq-Produkt trägt jetzt eine Referenz auf den Instructions-Stand, mit dem es produziert wurde. Das Feld `heimeliq-instruction-version` wird in Phase 2 automatisch vom Bot gesetzt und bleibt im Template leer.
 
 **Neu:**
 
@@ -108,7 +108,7 @@ Jedes heimeliq-Möbel trägt jetzt eine Referenz auf den Instructions-Stand, mit
 
 ## [0.3.0] – Baugruppen-Hierarchie und qualifizierte Bauteil-IDs
 
-heimeliq-Möbel sind jetzt als Hierarchie von Baugruppen modelliert. `A001` ist konventionell die Hauptbaugruppe (= das Möbel), Sub-Baugruppen wie Schubladen oder Türen bekommen `A002`, `A003`, … Bauteil-IDs sind voll qualifiziert mit Assembly-Präfix (`A001.S001`, `A002.E001` usw.). Damit lassen sich optionale Erweiterungen sauber abbilden, und der spätere Shop kann sie als konfigurierbare Varianten mit Aufpreis anbieten.
+heimeliq-Produkte sind jetzt als Hierarchie von Baugruppen modelliert. `A001` ist konventionell die Hauptbaugruppe (= das Produkt), Sub-Baugruppen wie Schubladen oder Türen bekommen `A002`, `A003`, … Bauteil-IDs sind voll qualifiziert mit Assembly-Präfix (`A001.S001`, `A002.E001` usw.). Damit lassen sich optionale Erweiterungen sauber abbilden, und der spätere Shop kann sie als konfigurierbare Varianten mit Aufpreis anbieten.
 
 **Neu:**
 
@@ -123,7 +123,7 @@ heimeliq-Möbel sind jetzt als Hierarchie von Baugruppen modelliert. `A001` ist 
 
 ## [0.2.0] – Wald-Namensgeber, schlankeres ID-Schema
 
-Jedes heimeliq-Möbel trägt den Namen eines real existierenden Waldes. Der Waldname ist möbel-eindeutig: kein zweites Möbel trägt denselben Wald. Damit wird die Marke um eine inhaltliche Schicht erweitert – jedes Möbel verweist auf einen Ort und macht bei bedrohten Wäldern deren Situation sichtbar. Da der Waldname allein eindeutig ist, entfällt das `<typ>`-Segment in der ID.
+Jedes heimeliq-Produkt trägt den Namen eines real existierenden Waldes. Der Waldname ist produkteindeutig: kein zweites Produkt trägt denselben Wald. Damit wird die Marke um eine inhaltliche Schicht erweitert – jedes Produkt verweist auf einen Ort und macht bei bedrohten Wäldern deren Situation sichtbar. Da der Waldname allein eindeutig ist, entfällt das `<typ>`-Segment in der ID.
 
 **Neu:**
 
@@ -135,7 +135,7 @@ Jedes heimeliq-Möbel trägt den Namen eines real existierenden Waldes. Der Wald
 - README erklärt das Wald-Konzept und die Typ/Tags-Logik.
 - `README.example.md` enthält einen prominenten Wald-Namensgeber-Bereich.
 
-**Migration für bestehende Produkt-Repos (z. B. das v0.1.x-Pilotmöbel):**
+**Migration für bestehende Produkt-Repos (z. B. das v0.1.x-Pilotprodukt):**
 
 1. Repo umbenennen auf `heimeliq-<reihe>-<waldname>`.
 2. In `heimeliq.toml`: `slug` anpassen, `[forest]`-Section ergänzen, ggf. `tags` setzen.
@@ -155,7 +155,7 @@ Behebt einen latenten Bug in der Beispiel-`okh.toml`: Einige Top-Level-Felder (`
 ## [0.1.0] – initial
 
 - Erste Version des Templates.
-- OKH 2.4 als Standard für Möbel-Metadaten.
+- OKH 2.4 als Standard für Produkt-Metadaten.
 - **Lizenz-Trennung**: Template selbst unter MIT, daraus erzeugte Produkt-Repos unter CERN-OHL-S-2.0.
 - `LICENSE.example` und `README.example.md` als Vorlagen.
 - Doku-Struktur unter `docs/de/` mit co-located `.images/`-Ordnern.

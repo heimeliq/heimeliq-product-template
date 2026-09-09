@@ -1,6 +1,6 @@
-# Changelog – FIXME Möbelname
+# Changelog – FIXME Produktname
 
-Versionierung dieses Möbels folgt [Semantic Versioning](https://semver.org/lang/de/).
+Versionierung dieses Produkts folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 - **MAJOR** (`x.0.0`): Konstruktion grundlegend geändert. Alte Pläne nicht 1:1 übertragbar.
 - **MINOR** (`0.x.0`): Neue Holzart-Option, zusätzliche Detailzeichnung, neue Variante.
