@@ -6,9 +6,10 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
-## [0.5.0] – 2026-09-09 – Type, theme, family and mandatory variants
+## [0.5.0] – 2026-09-09 – Repository rename, type/theme/family and mandatory variants
 
-Two breaking changes in one release: a new naming schema and a mandatory
+The template repository is renamed to `heimeliq-product-template`, plus two
+breaking changes to `heimeliq.toml`: a new naming schema and a mandatory
 `[variants]` section. No compatibility alias, no migration script – the one
 existing product repo is migrated by hand.
 
