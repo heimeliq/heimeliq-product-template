@@ -1,10 +1,74 @@
-# Changelog – heimeliq Furniture Template
+# Changelog – heimeliq Product Template
 
 Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
-- **MAJOR** (`x.0.0`): Breaking Change. Bestehende Möbel-Repos brauchen Migration.
+- **MAJOR** (`x.0.0`): Breaking Change. Bestehende Produkt-Repos brauchen Migration.
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
+
+## [0.5.0] – 2026-09-09 – Type, theme, family and mandatory variants
+
+Two breaking changes in one release: a new naming schema and a mandatory
+`[variants]` section. No compatibility alias, no migration script – the one
+existing product repo is migrated by hand.
+
+**BREAKING:**
+
+- `series` and the whole `[forest]` section are gone. A product now has a
+  `type` (what it is) and a `[family]` (a shape language carrying a first
+  name). Repo and `slug` change from `heimeliq-<series>-<forest>` to
+  `<family>-<type>` (regex `^[a-z]+-[a-z]+$`), dropping the `heimeliq-`
+  prefix.
+- New required top-level field `theme`, restricted to the themes the chosen
+  `type` allows in `vocabulary/typen.toml` (instructions repo).
+- The flat `tags` array becomes a `[tags]` table with seven closed axes
+  (`joint`, `species`, `material`, `tooling`, `effort`, `property`,
+  `status`) and open values per axis.
+- The top-level `status` field moves into the `tags.status` axis; the
+  `validate.yml` publish gate now reads `"published" in tags.status`.
+- New required `[variants]` section: `reference` plus at least one
+  `[[variants.option]]` (`id`, `label`, `parameter`). A product without a
+  size choice has one option that is also the reference. `parameter` keys
+  are the FreeCAD spreadsheet cell alias names verbatim.
+
+**Added:**
+
+- `docs/de/parametrisch/build-guide.tpl.md` and `bom.tpl.md`: logic-free
+  parametric sources with `{{ name }}` placeholders. The rendered
+  `docs/de/build-guide.md` and `docs/de/bom.md` describe the reference
+  variant and carry a "generated, do not edit" header.
+- `media/variants/<id>/` for variant-specific images, falling back to
+  `media/gallery/`. Every media directory now has a `README.md`.
+- README section on the three documentation stages and the reference-variant
+  rule.
+- `validate.yml` step checking that `variants.reference` points to an
+  existing option id.
+
+**Changed:**
+
+- The template repository is renamed from `heimeliq-furniture-template` to
+  `heimeliq-product-template`. heimeliq now covers accessories as well as
+  furniture, and the docs speak of *products* throughout. GitHub keeps the old
+  URL as a redirect; update any `git clone` URL or "Use this template"
+  bookmark. The generated product repos are unaffected – they were never
+  named after the template. The website list file `furniture-repos.json`
+  is renamed to `product-repos.json` to match.
+- `okh.toml`: comments on `[outer-dimensions]` and per-part
+  `outer-dimensions` clarifying they describe the reference variant only.
+  OKH knows no ranges and is deliberately not stretched; otherwise untouched.
+
+**Open points (not addressed in this release):**
+
+- `vocabulary/typen.toml` in the instructions repo still uses German keys
+  (`thema`, `typ`, `gattung`, `themen`, `reihenfolge`); to be aligned
+  separately.
+- `validate.yml` does not yet check `type`/`theme` against
+  `vocabulary/typen.toml` (needs read access to the instructions repo).
+- The template's own `heimeliq.toml` does not validate against its own schema
+  because the `FIXME` placeholders violate the field patterns. This predates
+  0.5.0.
+
+**Migration:** see `MIGRATIONS.md` for the steps 0.4.2 → 0.5.0.
 
 ## [0.4.2] – Bill-of-materials notation and wood-selection guidance
 
@@ -70,7 +134,7 @@ Jedes heimeliq-Möbel trägt den Namen eines real existierenden Waldes. Der Wald
 - README erklärt das Wald-Konzept und die Typ/Tags-Logik.
 - `README.example.md` enthält einen prominenten Wald-Namensgeber-Bereich.
 
-**Migration für bestehende Möbel-Repos (z. B. das v0.1.x-Pilotmöbel):**
+**Migration für bestehende Produkt-Repos (z. B. das v0.1.x-Pilotmöbel):**
 
 1. Repo umbenennen auf `heimeliq-<reihe>-<waldname>`.
 2. In `heimeliq.toml`: `slug` anpassen, `[forest]`-Section ergänzen, ggf. `tags` setzen.
@@ -91,7 +155,7 @@ Behebt einen latenten Bug in der Beispiel-`okh.toml`: Einige Top-Level-Felder (`
 
 - Erste Version des Templates.
 - OKH 2.4 als Standard für Möbel-Metadaten.
-- **Lizenz-Trennung**: Template selbst unter MIT, daraus erzeugte Möbel-Repos unter CERN-OHL-S-2.0.
+- **Lizenz-Trennung**: Template selbst unter MIT, daraus erzeugte Produkt-Repos unter CERN-OHL-S-2.0.
 - `LICENSE.example` und `README.example.md` als Vorlagen.
 - Doku-Struktur unter `docs/de/` mit co-located `.images/`-Ordnern.
 - `heimeliq.toml` für projektspezifische Erweiterungen.

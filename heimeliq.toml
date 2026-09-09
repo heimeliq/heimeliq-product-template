@@ -1,7 +1,7 @@
 # heimeliq-Erweiterungen
 # Diese Datei ergänzt das OKH-Manifest um heimeliq-spezifische Felder, die
-# der allgemeine OKH-Standard nicht abbildet (Reihen-Zugehörigkeit, Wald-
-# Namensgeber, Baugruppen, externe Drittteile, Versionsbezüge etc.).
+# der allgemeine OKH-Standard nicht abbildet (Typ, Thema, Familien-Zugehörigkeit,
+# Baugruppen, externe Drittteile, Varianten, Versionsbezüge etc.).
 #
 # Gegen heimeliq.schema.json validierbar.
 #
@@ -14,9 +14,9 @@
 
 "$schema" = "./heimeliq.schema.json"
 
-# Version dieser Vorlage, auf der das Möbel-Repo basiert.
+# Version dieser Vorlage, auf der das Produkt-Repo basiert.
 # Wird bei jedem Template-Upgrade aktualisiert (siehe MIGRATIONS.md).
-heimeliq-template-version = "0.4.2"
+heimeliq-template-version = "0.5.0"
 
 # Version dieses Möbels (SemVer).
 # Erhöhen bei: PATCH = Doku-Fixes, MINOR = neue Optionen, MAJOR = Konstruktionsänderung.
@@ -27,49 +27,82 @@ version = "0.1.0"
 heimeliq-instruction-version = ""
 
 # Slug für URLs auf der Website.
-# Präfix. Schema: <waldname>.
-slug = "FIXME-waldname"          # z. B. "hambach"
+# Schema: <family>-<type>.
+slug = "FIXME"             # z. B. "wieke-sideboard"
 
-# Reihe, zu der dieses Möbel gehört. Pflicht.
-# Erlaubte Werte: "massiq", "workaholiq", "keiliq".
-series = "FIXME"
+# Möbel-Typ. Pflicht. Bildet zusammen mit der Familie die Repo-ID und den Slug.
+# Der Wert ist ein Slug aus dem zentralen Vokabular vocabulary/typen.toml im
+# Instructions-Repo – hier nur referenziert, nicht dupliziert.
+type = "FIXME"                         # z. B. "sideboard", "tablett", "werkbank"
 
-# Möbel-Typ als Metadatenfeld für Filter/Suche. KEIN Teil der ID.
-type = "FIXME"                         # z. B. "sideboard", "werkbank", "werkzeughalter"
-
-# Weitere Schlagworte für Filter und Suche. Optional.
-tags = []                              # z. B. ["wohnzimmer", "stauraum", "massiv"]
-
-# Status: "draft" | "published" | "archived"
-status = "draft"
+# Primäres Thema des Möbels. Pflicht.
+# Muss in der themen-Liste des gewählten type stehen (vocabulary/typen.toml).
+theme = "FIXME"                        # z. B. "kueche", "bad", "wohnen", "buero", "werkstatt"
 
 # ============================================================================
 # SECTIONS
 # ============================================================================
 
-# --- Wald-Namensgeber ---
-# Jedes Möbel trägt den Namen eines real existierenden Waldes.
-# Der Waldname ist möbel-eindeutig: kein zweites heimeliq-Möbel darf
-# denselben Wald tragen. Die forest.id entspricht dem letzten Segment
-# des Repo-Namens und des Slugs.
+# --- Familie ---
+# Die Familie trägt einen Vornamen und bezeichnet eine Formensprache: alle
+# Produkte derselben Familie teilen Fasen, Radien, Verbindungsprinzip.
+# Die konkreten Werte liegen zentral in families/<id>/
+# im Instructions-Repo, nicht in diesem Repo. Der Familienname ist zugleich
+# der Produktname.
 
-[forest]
-id = "FIXME-waldname"                  # z. B. "hambach", "bialowieza", "tongass"
-name = "FIXME Vollständiger Name"      # z. B. "Hambacher Forst"
-region = "FIXME"                       # z. B. "Nordrhein-Westfalen"
-country = "FIXME"                      # ISO-3166-1-alpha-2, z. B. "DE", "PL", "US"
-forest_type = "FIXME"                  # z. B. "Mischwald", "Urwald", "Regenwald"
-age_estimate_years = 0                 # FIXME, optional
-status = "FIXME"                       # protected | partially-protected | endangered |
-                                       # critically-endangered | stable | unknown
-themes = ["FIXME"]                     # Stichworte, z. B. ["braunkohle", "biodiversität"]
-note = """
-FIXME: Optionaler Satz, warum genau dieser Wald für genau dieses Möbel?
-"""
+[family]
+id = "FIXME"                           # lowercase, ASCII, z. B. "wieke"
+label = "FIXME"                        # Anzeigeform mit Großschreibung, z. B. "Wieke"
 
-[[forest.links]]
-label = "FIXME Link-Beschriftung"
-url = "https://FIXME.example.org"
+# --- Tags ---
+# Sieben geschlossene Achsen: welche Achsen es gibt, ist fix; welche Werte je
+# Achse zulässig sind, ist offen (Slugs, lowercase, ASCII). Leere Arrays sind
+# zulässig. Die Achse "status" trägt den Veröffentlichungsstatus – der Wert
+# "published" schaltet in validate.yml die Vollständigkeits-Checks scharf.
+#
+# Marken-Vokabular wie massiq/gehriq/keiliq ist bewusst KEINE Achse: es wäre
+# redundant zu "joint" bzw. "material" und bleibt der Website vorbehalten.
+
+[tags]
+joint = []                             # Verbindungsart, z. B. "gehrung", "duebel"
+species = []                           # Holzart, z. B. "eiche", "esche"
+material = []                          # weitere Materialien, z. B. "stahl", "sperrholz"
+tooling = []                           # benötigtes Werkzeug, z. B. "oberfraese"
+effort = []                            # Aufwand, z. B. "wochenende"
+property = []                          # Eigenschaften, z. B. "stapelbar"
+status = []                            # "draft" | "published" | "archived"
+
+# ============================================================================
+# VARIANTEN
+# ============================================================================
+# Ein Produkt kann in mehreren Größen gebaut werden – gleiche Bauweise,
+# identische Teileliste, nur andere Zahlen. Das sind Varianten. Sie bekommen
+# kein eigenes Repo, sondern sind Daten hier. Sobald ein Teil dazukommt,
+# wegfällt oder sich eine Verbindungsart ändert, ist es ein eigenes Produkt.
+#
+# `reference` verweist auf die `id` einer Option und bestimmt, welche Variante
+# im Repo ausgerechnet und committet vorliegt (docs/de/build-guide.md,
+# docs/de/bom.md) und welche die okh.toml unter `outer-dimensions` beschreibt.
+# Nicht implizit die erste Option.
+#
+# Die Schlüssel in `parameter` sind IDENTISCH mit den Alias-Namen der Zellen
+# im FreeCAD-Spreadsheet. Das ist die Kopplung zwischen CAD und Doku: derselbe
+# Name adressiert dieselbe Größe in beiden Welten. Werte sind Zahlen in mm.
+#
+# Ein Produkt ohne Größenauswahl hat genau eine Option, die zugleich
+# `reference` ist (n = 1). Das ist kein Sonderfall und braucht keine eigene
+# Syntax.
+
+[variants]
+reference = "FIXME"                    # id einer der folgenden Optionen
+
+[[variants.option]]
+id = "FIXME"                           # sprechender Kurzname, lowercase, ohne Umlaute; z. B. "klein"
+label = "FIXME"                        # Maßangabe, z. B. "40 × 30 cm"
+parameter = { }                        # Alias-Name = Zahl (mm), z. B. { length = 400, width = 300 }
+
+# Weitere Optionen bei Bedarf ergänzen. Bei einem Produkt ohne Größenauswahl
+# bleibt es bei dieser einen Option, und `reference` zeigt auf ihre `id`.
 
 # ============================================================================
 # BAUGRUPPEN

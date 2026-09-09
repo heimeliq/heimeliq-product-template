@@ -3,7 +3,7 @@
 > FIXME ein- bis zweisätzige Beschreibung – was ist es, was macht es besonders.
 
 [![Lizenz: CERN-OHL-S-2.0](https://img.shields.io/badge/Lizenz-CERN--OHL--S--2.0-blue)](LICENSE)
-[![heimeliq](https://img.shields.io/badge/heimeliq-FIXME--reihe-green)](https://heimeliq.de/reihen/FIXME-reihe)
+[![heimeliq](https://img.shields.io/badge/heimeliq-FIXME--familie-green)](https://heimeliq.de/produkte/FIXME-familie)
 [![Status](https://img.shields.io/badge/Status-FIXME--status-orange)](#)
 
 ![Hauptbild](media/hero.jpg)
@@ -12,27 +12,25 @@
 
 ## Überblick
 
-FIXME 2–4 Sätze: Zu welcher Reihe gehört das Möbel? Welche Konstruktion? Welches Material? Für wen ist es gedacht?
+FIXME 2–4 Sätze: Welcher Typ, welche Familie? Welche Konstruktion? Welches Material? Für wen ist es gedacht?
 
 Vollständige Hintergrundgeschichte und Materialherkunft: siehe [docs/de/story.md](docs/de/story.md).
 
 ---
 
-## Wald-Namensgeber
+## Typ und Familie
 
-Dieses Möbel trägt den Namen **FIXME Vollständiger Waldname** – FIXME Region, FIXME Land.
+Dieses Möbel ist ein **FIXME Typ** und gehört zur Familie **FIXME Familie**.
 
-FIXME 2–4 Sätze über den Wald: Geschichte, Besonderheiten, aktueller Zustand. Bei bedrohten Wäldern: Hinweis auf Schutzbemühungen und ggf. Organisationen, die sich für den Erhalt einsetzen.
+FIXME 2–4 Sätze zur Familie: welche Formensprache, welches Verbindungsprinzip, was die Produkte dieser Familie verbindet.
 
-Weiterführende Links:
-
-- [FIXME Wikipedia / Schutzorganisation](https://FIXME.example.org)
-
-Maschinenlesbar in [heimeliq.toml](heimeliq.toml) unter `[forest]`.
+Maschinenlesbar in [heimeliq.toml](heimeliq.toml) unter `type`, `theme` und `[family]`. Die konstruktiven Werte der Familie liegen zentral im Instructions-Repo unter `families/FIXME-familie/`.
 
 ---
 
 ## Gesamtmaße
+
+*Maße der Referenzvariante (`[variants]` → `reference` in [heimeliq.toml](heimeliq.toml)). Baut das Produkt in mehreren Größen, sind die weiteren Varianten dort unter `[[variants.option]]` gelistet.*
 
 | Eigenschaft | Maß |
 | --- | --- |
@@ -148,7 +146,7 @@ Versionsschritte folgen [Semantic Versioning](https://semver.org/lang/de/):
 
 ## Kaufen
 
-Dieses Möbel kann auch fertig gebaut bei heimeliq bestellt werden: <https://heimeliq.de/reihe/FIXME-slug>
+Dieses Möbel kann auch fertig gebaut bei heimeliq bestellt werden: <https://heimeliq.de/produkte/FIXME-slug>
 
 ---
 
@@ -171,6 +169,6 @@ Dieses Möbel und seine Dokumentation stehen unter [CERN-OHL-S-2.0](LICENSE).
 ## Verwandte Links
 
 - heimeliq-Webseite: <https://heimeliq.de>
-- Reihe FIXME-reihe: <https://heimeliq.de/reihe/FIXME-reihe>
+- Familie FIXME-familie: <https://heimeliq.de/produkte/FIXME-familie>
 - Open Know-How Standard: <https://github.com/iop-alliance/OpenKnowHow>
 - CERN Open Hardware Licence: <https://ohwr.org/cern_ohl_s_v2.txt>
