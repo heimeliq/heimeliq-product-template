@@ -15,6 +15,87 @@ Bestehende Repos werden nicht automatisch migriert – Stabilität geht vor.
 
 ---
 
+## 0.5.1 → 0.6.0
+
+Breaking Change am Namensschema und am Varianten-Modell. Die Familie wird zur **Serie**
+und trägt ab jetzt das Markenvokabular; Varianten dürfen sich in der Innenaufteilung und
+der Bauteilauswahl unterscheiden.
+
+### 1. Repo umbenennen
+
+`<family>-<type>` → `<series>-<type>`, z. B. `wieke-sideboard` → `gehriq-sideboard`. Auf
+GitHub in den Settings; die alte URL bleibt eine Weile als Redirect. Anschließend im
+`heimeliq-website`-Repo den Eintrag in `product-repos.json` nachziehen.
+
+Ein **drittes Segment** (`<series>-<type>-<zusatz>`) ist ab jetzt erlaubt, aber die
+Ausnahme: nur wenn zwei eigenständige Konstruktionen derselben Serie denselben Typ
+hätten. Es ist frei benannt und keine Laufnummer.
+
+### 2. `heimeliq.toml` – Feld für Feld
+
+| bisher | künftig |
+| --- | --- |
+| `[family]` mit `id`, `label` | `[series]` mit denselben Feldern; `id` ist der Serien-Slug aus dem Markenvokabular (`gehriq` statt `wieke`) |
+| `slug = "<family>-<type>"` | `slug = "<series>-<type>"`, optional mit drittem Segment |
+| `[[variants.option]]` mit `id`, `label`, `parameter` | zusätzlich `parts` (Pflicht): Liste der Bauteil-IDs dieser Variante |
+| `[[variants.option]].id` musste mit einem Buchstaben beginnen | beliebiger Name, auch `1200x800` oder `3x4x3`; muss innerhalb des Produkts eindeutig sein |
+| – | `[[assemblies]].bauform` neu (optional): benennt eine geteilte parametrische Quelle |
+| `heimeliq-template-version = "0.5.1"` | `"0.6.0"` |
+
+### 3. Varianten prüfen
+
+Zwei Regeln gelten ab jetzt und werden von `validate.yml` erzwungen:
+
+- **Alle Optionen haben denselben Satz von `parameter`-Schlüsseln.** Nur die Werte dürfen
+  sich unterscheiden. Hat eine Option einen Schlüssel mehr, ist es kein Variante, sondern
+  ein eigenes Produkt – dann ein eigenes Repo anlegen.
+- **Options-IDs sind eindeutig** innerhalb des Produkts.
+
+Im Gegenzug entfällt die alte Regel „identische Teileliste". Ändert sich die Anzahl
+gleichartiger Innenteile zwischen zwei Größen, ist das jetzt eine Variante: die Anzahl
+wird als Parameter geführt (`FaecherMitte = 4`), damit bleibt der Schlüsselsatz gleich
+und die Teileliste darf länger werden.
+
+Bauteilmaße und Stückzahlen gehören **nicht** in `parameter` – dort stehen nur die freien
+Eingangswerte, alles Abgeleitete rechnet der Generator.
+
+### 4. Tag-Achsen
+
+Die Achsen in `[tags]` heißen jetzt genauso wie im zentralen Vokabular. Bisher
+trugen nur `material` und `status` denselben Namen auf beiden Seiten:
+
+| `heimeliq.toml` (unverändert) | `vocabulary/tags.toml` bisher |
+| --- | --- |
+| `joint` | `verbindung` |
+| `species` | `holzart` |
+| `tooling` | `werkzeug` |
+| `effort` | `aufwand` |
+| `property` | `eigenschaft` |
+
+In der `heimeliq.toml` ändert sich dadurch **nichts** – die Schlüssel hießen dort
+schon immer so. Wer Werte aus dem Vokabular übernommen hat, prüft nur, ob sie
+unter der richtigen Achse stehen.
+
+Die Achse `bauart` ist ersatzlos gestrichen. Ihre Marken-Werte
+(`massiq`/`gehriq`/`keiliq`) stecken jetzt als Serie in der ID; `korpusbau` und
+`rahmenbau` entfallen. Aus einem Produkt-Repo war die Achse ohnehin nie
+schreibbar, weil das Schema keine unbekannten Achsen zulässt.
+
+`vocabulary/typen.toml` heißt jetzt `types.toml`. Betrifft nur, wer die Datei
+direkt referenziert – der `type`-Wert in der `heimeliq.toml` bleibt derselbe.
+
+### 5. `okh.toml`
+
+`repo` auf das neue Namensschema setzen. Keine weiteren Pflichtänderungen.
+
+### 6. Instructions-Repo
+
+Das zugehörige Produkt-Verzeichnis heißt jetzt `products/<series>-<type>/`, die Serie
+liegt unter `series/<id>/`. `heimeliq-instruction-version` zeigt nach dem nächsten
+Release auf einen Tag im neuen Namensschema (`gehriq-sideboard-v1.0.0`).
+
+---
+
 ## 0.5.0 → 0.5.1
 
 This is a PATCH release. No structural, schema, or directory changes are required.
@@ -41,7 +122,7 @@ Zwei Breaking Changes: das Namensschema (`series`/`forest` → `type`/`theme`/`f
 | --- | --- |
 | `series = "…"` | entfällt ersatzlos |
 | `[forest]` inkl. `[[forest.links]]` | entfällt ersatzlos |
-| `type = "…"` | bleibt, ist jetzt Teil der ID; Wert ist ein Slug aus `vocabulary/typen.toml` |
+| `type = "…"` | bleibt, ist jetzt Teil der ID; Wert ist ein Slug aus `vocabulary/typen.toml` (heißt ab 0.6.0 `types.toml`) |
 | – | `theme = "…"` neu (Pflicht); muss in der `themen`-Liste des `type` stehen |
 | – | `[family]` neu (Pflicht): `id` (lowercase, ASCII), `label` (Anzeigeform) |
 | `tags = ["a", "b"]` | `[tags]` mit sieben Achsen: `joint`, `species`, `material`, `tooling`, `effort`, `property`, `status`. Alte Werte auf die passende Achse verteilen, Rest verwerfen. |

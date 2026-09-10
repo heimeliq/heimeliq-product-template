@@ -6,6 +6,79 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
+## [0.6.0] – 2026-09-10 – Series naming and free variants
+
+The `family` becomes a **series** and carries the brand vocabulary (`gehriq`,
+`keiliq`, `workaholiq`, `uhriq`). Variants may now differ in inner layout and
+part selection, and the rule separating a variant from a separate product moves
+from the parts list to the parameter key set.
+
+**BREAKING:**
+
+- `[family]` is renamed to `[series]`. Same fields (`id`, `label`), new meaning:
+  a series is a product line from the brand vocabulary, not a first name. What a
+  series means – a construction type like `gehriq` or a domain like `uhriq` – is
+  decided per series and documented in its `SERIES.md` in the instructions repo.
+- Repo and `slug` change from `<family>-<type>` to `<series>-<type>`. An optional
+  third segment is now allowed (regex `^[a-z]+-[a-z]+(-[a-z0-9-]+)?$`), used only
+  when two distinct constructions of the same series would share a type. It is
+  freely named and is not a running number.
+- `[[variants.option]]` gains a required `parts` array listing the fully
+  qualified part IDs the variant contains. An assembly counts as included as
+  soon as one of its parts is listed.
+- `[[variants.option]].id` no longer has to start with a letter (regex
+  `^[a-z0-9][a-z0-9-]*$`), so `1200x800` and `3x4x3` are valid names. Naming is
+  entirely up to the author; the only hard rule is uniqueness within the product.
+- The rule "identical parts list = variant" is gone. A variant is now defined by
+  an **identical `parameter` key set** across all options – only the values may
+  differ. A quantity is a number like any other (`FaecherMitte = 4`), so a wider
+  cabinet with one more divider stays a variant.
+- The tag axes in `heimeliq.toml` and `vocabulary/tags.toml` (instructions repo)
+  now carry the same English IDs. Previously only `material` and `status`
+  matched; `verbindung`/`holzart`/`werkzeug`/`aufwand`/`eigenschaft` are now
+  `joint`/`species`/`tooling`/`effort`/`property`, and the translation no longer
+  has to be carried in someone's head.
+- The `bauart` axis is deleted, along with its values `korpusbau` and
+  `rahmenbau`. Its brand values moved into the ID as the series; the schema's
+  `additionalProperties: false` made the axis unwritable from a product repo
+  anyway.
+- `vocabulary/typen.toml` is renamed to `types.toml` and its keys are English:
+  `[[thema]]`/`[[typ]]` become `[[theme]]`/`[[type]]`, `reihenfolge`/`themen`/
+  `gattung` become `order`/`themes`/`category`. The vocabulary *values* stay
+  German slugs – a `type` slug is the second segment of the product ID.
+
+**Added:**
+
+- `[[assemblies]].bauform` (optional): names a shared parametric source. Three
+  drawers of different widths are `A002`, `A003`, `A004` with
+  `bauform = "schublade"` – flat, stable IDs and one description in the build guide.
+- `validate.yml` checks variant option IDs for uniqueness, enforces the identical
+  parameter key set, and resolves every `parts` entry against `okh.toml [[part]]`
+  and `heimeliq.toml [[external_parts]]`.
+
+**Fixed:**
+
+- Two open points carried since 0.5.0 are closed: the instructions vocabulary no
+  longer uses German keys, and the template's own `heimeliq.toml` no longer fails
+  its own schema check.
+- Both schema checks in `validate.yml` now run only in product repos. The repo-kind
+  detection moved ahead of them. The template itself is full of `FIXME` placeholders
+  and zero values and can never validate against either schema, so the workflow was
+  failing on the template repo by construction (`type = "FIXME"` against `^[a-z]+$`,
+  and `mass = 0` against the OKH schema's exclusive minimum). The variant checks
+  still run everywhere - the template's placeholders are internally consistent.
+
+**Removed:**
+
+- The schema's legacy `"series": false` guard from 0.5.0, replaced by a `"family": false`
+  guard so the old field name is now rejected.
+- All axis counts from documentation and comments. The number of axes is not a
+  fact worth stating in five places: `tags.toml` can gain an axis without any
+  other file having to agree on a count. Only `heimeliq.schema.json` must follow,
+  and both files now say so.
+
+**Migration:** see `MIGRATIONS.md` for the steps 0.5.1 → 0.6.0.
+
 ## [0.5.1] – 2026-09-09 – Terminology: "Möbel" → "Produkt"
 
 PATCH release. Documentation and code comments now consistently say *Produkt*
