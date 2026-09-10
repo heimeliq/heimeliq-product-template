@@ -24,7 +24,25 @@ jobs:
           pip install --upgrade pip
           pip install tomli jsonschema requests
 
+      - name: Determine repo kind (template vs. product)
+        id: kind
+        run: |
+          # Wenn LICENSE.example UND README.example.md noch existieren, ist dies das
+          # Template-Repo selbst. Wenn beide fehlen und stattdessen LICENSE/README.md
+          # die Produkt-Variante sind, ist es ein Produkt-Repo.
+          if [ -f "LICENSE.example" ] && [ -f "README.example.md" ]; then
+            echo "kind=template" >> $GITHUB_OUTPUT
+            echo "Erkannt als Template-Repo."
+          else
+            echo "kind=product" >> $GITHUB_OUTPUT
+            echo "Erkannt als Produkt-Repo."
+          fi
+
+      # Beide Schema-Checks laufen nur im Produkt-Repo: die Vorlage selbst ist
+      # voller FIXME-Platzhalter und Null-Werte und kann per Definition nicht
+      # gegen die Schemata validieren.
       - name: Validate okh.toml against OKH schema
+        if: steps.kind.outputs.kind == 'product'
         run: |
           python <<'PY'
           import tomli, json, sys, urllib.request, jsonschema
@@ -41,6 +59,7 @@ jobs:
           PY
 
       - name: Validate heimeliq.toml against local schema
+        if: steps.kind.outputs.kind == 'product'
         run: |
           python <<'PY'
           import tomli, json, sys, jsonschema
@@ -56,38 +75,82 @@ jobs:
               sys.exit(1)
           PY
 
-      # TODO(offener Punkt 0.5.x): type und theme gegen vocabulary/typen.toml im
+      # TODO(offener Punkt 0.5.x): type und theme gegen vocabulary/types.toml im
       # Instructions-Repo pruefen (theme muss in der themen-Liste des gewaehlten
       # type stehen). Braucht Lesezugriff auf das Instructions-Repo; bis dahin
       # nicht umgesetzt.
 
-      - name: Validate variants.reference points to an existing option
+      - name: Validate variants
         run: |
           python <<'PY'
           import tomli, sys
           d = tomli.load(open("heimeliq.toml", "rb"))
           v = d.get("variants", {})
+          options = v.get("option", [])
+          ids = [o.get("id") for o in options]
+          fail = False
+
+          # 1. Options-IDs sind innerhalb des Produkts eindeutig.
+          dupes = sorted({i for i in ids if ids.count(i) > 1})
+          if dupes:
+              print(f"variants: FAIL\nMehrfach vergebene Options-IDs: {dupes}")
+              fail = True
+
+          # 2. reference zeigt auf eine existierende Option.
           ref = v.get("reference")
-          ids = [o.get("id") for o in v.get("option", [])]
           if ref not in ids:
               print(f"variants: FAIL\nreference={ref!r} ist keine der Options-IDs {ids}")
-              sys.exit(1)
-          print(f"variants.reference={ref!r}: OK")
-          PY
+              fail = True
 
-      - name: Determine repo kind (template vs. product)
-        id: kind
-        run: |
-          # Wenn LICENSE.example UND README.example.md noch existieren, ist dies das
-          # Template-Repo selbst. Wenn beide fehlen und stattdessen LICENSE/README.md
-          # die Produkt-Variante sind, ist es ein Produkt-Repo.
-          if [ -f "LICENSE.example" ] && [ -f "README.example.md" ]; then
-            echo "kind=template" >> $GITHUB_OUTPUT
-            echo "Erkannt als Template-Repo."
-          else
-            echo "kind=product" >> $GITHUB_OUTPUT
-            echo "Erkannt als Produkt-Repo."
-          fi
+          # 3. Die Sperre: alle Optionen haben denselben Parameter-Schluesselsatz.
+          #    Nur die Werte duerfen sich unterscheiden. Kommt ein Schluessel dazu
+          #    oder faellt einer weg, ist es ein eigenes Produkt und keine Variante.
+          if options:
+              base_id = ids[0]
+              base = set(options[0].get("parameter", {}))
+              for o in options[1:]:
+                  keys = set(o.get("parameter", {}))
+                  if keys != base:
+                      extra = sorted(keys - base)
+                      missing = sorted(base - keys)
+                      print(
+                          f"variants: FAIL\nOption {o.get('id')!r} hat einen anderen "
+                          f"Parameter-Schluesselsatz als {base_id!r}."
+                      )
+                      if extra:
+                          print(f"  zusaetzlich: {extra}")
+                      if missing:
+                          print(f"  fehlt:       {missing}")
+                      print(
+                          "  Bei einer Variante duerfen sich nur die Zahlen unterscheiden. "
+                          "Ein zusaetzlicher Parameter bedeutet ein eigenes Produkt."
+                      )
+                      fail = True
+
+          # 4. parts verweist nur auf deklarierte Bauteil-IDs.
+          declared = {
+              e.get("heimeliq-part-id") for e in d.get("external_parts", [])
+          }
+          try:
+              okh = tomli.load(open("okh.toml", "rb"))
+          except FileNotFoundError:
+              okh = {}
+          declared |= {p.get("heimeliq-part-id") for p in okh.get("part", [])}
+          declared.discard(None)
+          for o in options:
+              unknown = sorted(set(o.get("parts", [])) - declared)
+              if unknown:
+                  print(
+                      f"variants: FAIL\nOption {o.get('id')!r} nennt Bauteile, die weder in "
+                      f"okh.toml [[part]] noch in heimeliq.toml [[external_parts]] deklariert "
+                      f"sind: {unknown}"
+                  )
+                  fail = True
+
+          if fail:
+              sys.exit(1)
+          print(f"variants: OK ({len(options)} Option(en), reference={ref!r})")
+          PY
 
       - name: Produkt-Repo – Example files must be renamed
         if: steps.kind.outputs.kind == 'product'
