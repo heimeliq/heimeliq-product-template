@@ -24,7 +24,7 @@ okhv = "2.4"
 
 # --- Identität ---
 name = "FIXME Produktname"
-repo = "https://github.com/heimeliq/FIXME-<family>-<type>"
+repo = "https://github.com/heimeliq/FIXME-<series>-<type>"
 
 # --- Lizenz ---
 license = "CERN-OHL-S-2.0"

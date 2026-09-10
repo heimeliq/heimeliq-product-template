@@ -1,6 +1,6 @@
 # heimeliq-Erweiterungen
 # Diese Datei ergänzt das OKH-Manifest um heimeliq-spezifische Felder, die
-# der allgemeine OKH-Standard nicht abbildet (Typ, Thema, Familien-Zugehörigkeit,
+# der allgemeine OKH-Standard nicht abbildet (Typ, Thema, Serien-Zugehörigkeit,
 # Baugruppen, externe Drittteile, Varianten, Versionsbezüge etc.).
 #
 # Gegen heimeliq.schema.json validierbar.
@@ -16,7 +16,7 @@
 
 # Version dieser Vorlage, auf der das Produkt-Repo basiert.
 # Wird bei jedem Template-Upgrade aktualisiert (siehe MIGRATIONS.md).
-heimeliq-template-version = "0.5.1"
+heimeliq-template-version = "0.6.0"
 
 # Version dieses Produkts (SemVer).
 # Erhöhen bei: PATCH = Doku-Fixes, MINOR = neue Optionen, MAJOR = Konstruktionsänderung.
@@ -26,42 +26,48 @@ version = "0.1.0"
 # produziert wurde. Wird in Phase 2 vom Bot gesetzt.
 heimeliq-instruction-version = ""
 
-# Slug für URLs auf der Website.
-# Schema: <family>-<type>.
-slug = "FIXME"             # z. B. "wieke-sideboard"
+# Slug für URLs auf der Website; zugleich der Repo-Name.
+# Schema: <series>-<type>[-<zusatz>].
+# Das dritte Segment ist optional und frei benannt. Es wird nur gesetzt, wenn
+# zwei eigenständige Konstruktionen derselben Serie denselben Typ hätten –
+# keine Laufnummer, und im Regelfall bleibt es weg.
+slug = "FIXME"             # z. B. "gehriq-sideboard"
 
-# Produkt-Typ. Pflicht. Bildet zusammen mit der Familie die Repo-ID und den Slug.
-# Der Wert ist ein Slug aus dem zentralen Vokabular vocabulary/typen.toml im
+# Produkt-Typ. Pflicht. Bildet zusammen mit der Serie die Repo-ID und den Slug.
+# Der Wert ist ein Slug aus dem zentralen Vokabular vocabulary/types.toml im
 # Instructions-Repo – hier nur referenziert, nicht dupliziert.
 type = "FIXME"                         # z. B. "sideboard", "tablett", "werkbank"
 
 # Primäres Thema des Produkts. Pflicht.
-# Muss in der themen-Liste des gewählten type stehen (vocabulary/typen.toml).
+# Muss in der themes-Liste des gewählten type stehen (vocabulary/types.toml).
 theme = "FIXME"                        # z. B. "kueche", "bad", "wohnen", "buero", "werkstatt"
 
 # ============================================================================
 # SECTIONS
 # ============================================================================
 
-# --- Familie ---
-# Die Familie trägt einen Vornamen und bezeichnet eine Formensprache: alle
-# Produkte derselben Familie teilen Fasen, Radien, Verbindungsprinzip.
-# Die konkreten Werte liegen zentral in families/<id>/
-# im Instructions-Repo, nicht in diesem Repo. Der Familienname ist zugleich
-# der Produktname.
+# --- Serie ---
+# Die Serie ist eine Produktlinie aus dem Markenvokabular (gehriq, keiliq,
+# workaholiq, uhriq …) und bildet das erste Segment der Repo-ID. Was eine Serie
+# bedeutet, entscheidet die Serie selbst: mal eine Bauart (gehriq = Gehrung),
+# mal eine Domäne (uhriq). Verbindlich beschrieben ist das in der SERIES.md der
+# Serie; die konstruktiven Werte liegen zentral in series/<id>/ im
+# Instructions-Repo, nicht in diesem Repo.
 
-[family]
-id = "FIXME"                           # lowercase, ASCII, z. B. "wieke"
-label = "FIXME"                        # Anzeigeform mit Großschreibung, z. B. "Wieke"
+[series]
+id = "FIXME"                           # lowercase, ASCII, z. B. "gehriq"
+label = "FIXME"                        # Anzeigeform mit Großschreibung, z. B. "Gehriq"
 
 # --- Tags ---
-# Sieben geschlossene Achsen: welche Achsen es gibt, ist fix; welche Werte je
-# Achse zulässig sind, ist offen (Slugs, lowercase, ASCII). Leere Arrays sind
-# zulässig. Die Achse "status" trägt den Veröffentlichungsstatus – der Wert
-# "published" schaltet in validate.yml die Vollständigkeits-Checks scharf.
+# Die Achsen und ihre Werte stehen zentral in vocabulary/tags.toml im
+# Instructions-Repo; die Schlüssel hier sind mit den dortigen Achsen-IDs
+# identisch. Welche Werte je Achse zulässig sind, ist offen (Slugs, lowercase,
+# ASCII). Leere Arrays sind zulässig. Die Achse "status" trägt den
+# Veröffentlichungsstatus – der Wert "published" schaltet in validate.yml die
+# Vollständigkeits-Checks scharf.
 #
-# Marken-Vokabular wie massiq/gehriq/keiliq ist bewusst KEINE Achse: es wäre
-# redundant zu "joint" bzw. "material" und bleibt der Website vorbehalten.
+# Marken-Vokabular wie massiq/gehriq/keiliq ist bewusst KEINE Achse: es steht
+# als Serie im ersten Segment der Repo-ID und ist von dort ableitbar.
 
 [tags]
 joint = []                             # Verbindungsart, z. B. "gehrung", "duebel"
@@ -75,10 +81,24 @@ status = []                            # "draft" | "published" | "archived"
 # ============================================================================
 # VARIANTEN
 # ============================================================================
-# Ein Produkt kann in mehreren Größen gebaut werden – gleiche Bauweise,
-# identische Teileliste, nur andere Zahlen. Das sind Varianten. Sie bekommen
-# kein eigenes Repo, sondern sind Daten hier. Sobald ein Teil dazukommt,
-# wegfällt oder sich eine Verbindungsart ändert, ist es ein eigenes Produkt.
+# Ein Produkt kann in mehreren Größen und Innenaufteilungen gebaut werden.
+# Das sind Varianten. Sie bekommen kein eigenes Repo, sondern sind Daten hier.
+#
+# Eine PRODUKTVARIANTE ist frei: sie darf sich in Maßen, Innenaufteilung und
+# Bauteilauswahl unterscheiden. Ihr Name ist frei gewählt – Maßangabe
+# ("1200x800"), Aufteilungsraster ("3x4x3") oder Wort ("klein") sind
+# gleichermaßen zulässig. Einzige harte Regel: innerhalb eines Produkts darf
+# kein Name zweimal vorkommen (geprüft in validate.yml).
+#
+# Eine BAUTEILVARIANTE hat keine eigene ID. Dieselbe Bauteil-ID bezeichnet über
+# alle Produktvarianten hinweg dieselbe Bauform; nur ihre Zahlen (Maße, Anzahl)
+# unterscheiden sich. Die Produktvariante darf frei sein, weil sie Bauteile
+# AUSWÄHLT, statt sie zu verändern.
+#
+# Die Sperre dagegen, dass eine "Variante" in Wahrheit eine andere Konstruktion
+# ist: alle Optionen haben denselben Satz von `parameter`-Schlüsseln. Kommt ein
+# Schlüssel dazu oder fällt einer weg, ist es ein eigenes Produkt. Nur die
+# Werte dürfen sich unterscheiden.
 #
 # `reference` verweist auf die `id` einer Option und bestimmt, welche Variante
 # im Repo ausgerechnet und committet vorliegt (docs/de/build-guide.md,
@@ -87,7 +107,15 @@ status = []                            # "draft" | "published" | "archived"
 #
 # Die Schlüssel in `parameter` sind IDENTISCH mit den Alias-Namen der Zellen
 # im FreeCAD-Spreadsheet. Das ist die Kopplung zwischen CAD und Doku: derselbe
-# Name adressiert dieselbe Größe in beiden Welten. Werte sind Zahlen in mm.
+# Name adressiert dieselbe Größe in beiden Welten. Hier stehen nur die freien
+# EINGANGSWERTE – Bauteilmaße und Stückzahlen leitet der Generator daraus ab
+# und werden nicht doppelt gepflegt. Eine Anzahl ist dabei eine Zahl wie jede
+# andere: `FaecherMitte = 4` ist ein gültiger Parameter, und damit ändert sich
+# die Zahl der Fachböden zwischen Varianten, ohne die Sperre zu verletzen.
+#
+# `parts` listet die Bauteile, die diese Variante enthält – voll qualifizierte
+# IDs aus okh.toml [[part]] und [[external_parts]] weiter unten. Eine Baugruppe
+# gilt als enthalten, sobald eines ihrer Bauteile gelistet ist.
 #
 # Ein Produkt ohne Größenauswahl hat genau eine Option, die zugleich
 # `reference` ist (n = 1). Das ist kein Sonderfall und braucht keine eigene
@@ -97,9 +125,10 @@ status = []                            # "draft" | "published" | "archived"
 reference = "FIXME"                    # id einer der folgenden Optionen
 
 [[variants.option]]
-id = "FIXME"                           # sprechender Kurzname, lowercase, ohne Umlaute; z. B. "klein"
-label = "FIXME"                        # Maßangabe, z. B. "40 × 30 cm"
-parameter = { }                        # Alias-Name = Zahl (mm), z. B. { length = 400, width = 300 }
+id = "FIXME"                           # frei gewählt, lowercase, ohne Umlaute; z. B. "klein", "1200x800", "3x4x3"
+label = "FIXME"                        # Anzeigeform, z. B. "40 × 30 cm"
+parameter = { }                        # Alias-Name = Zahl, z. B. { length = 400, width = 300, FaecherMitte = 3 }
+parts = ["A001.S001"]                  # FIXME: alle Bauteil-IDs dieser Variante
 
 # Weitere Optionen bei Bedarf ergänzen. Bei einem Produkt ohne Größenauswahl
 # bleibt es bei dieser einen Option, und `reference` zeigt auf ihre `id`.
@@ -112,6 +141,12 @@ parameter = { }                        # Alias-Name = Zahl (mm), z. B. { length 
 # und referenzieren ihre Eltern-Baugruppe über `parent`.
 # `optional = true` markiert eine Baugruppe als Erweiterung (= später im Shop
 # als optionale Variante mit Aufpreis konfigurierbar).
+#
+# `bauform` ist optional und benennt eine geteilte parametrische Quelle.
+# Baugruppen mit derselben `bauform` sind dasselbe Ding in anderen Größen –
+# drei verschieden breite Schubladen sind A002, A003, A004 mit
+# `bauform = "schublade"`. Die IDs bleiben damit flach und stabil, und die
+# Bauanleitung beschreibt die Schublade einmal.
 #
 # Jede Baugruppe entspricht einer eigenen FreeCAD-Datei:
 #   cad/source/A001-<Name>.FCStd
@@ -131,6 +166,7 @@ optional = false
 heimeliq-assembly-id = "A002"
 name = "FIXME Sub-Baugruppe (z. B. Schublade)"
 description = "FIXME kurze Beschreibung der Baugruppe"
+bauform = "FIXME"                      # optional, z. B. "schublade"; bei mehreren Größen derselben Bauform überall derselbe Wert
 source = "cad/source/A002-FIXME-name.FCStd"
 parent = "A001"
 optional = true

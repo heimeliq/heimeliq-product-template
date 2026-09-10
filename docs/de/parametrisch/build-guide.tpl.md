@@ -6,7 +6,9 @@
   - Platzhalter ausschließlich als {{ name }}. Keine Logik – keine Schleifen,
     keine Bedingungen, keine Rechenausdrücke.
   - Zuschnittmaße und daraus abgeleitete Werte werden nicht hier gerechnet,
-    sondern als fertiger benannter Wert eingesetzt.
+    sondern als fertiger benannter Wert eingesetzt. Dasselbe gilt für
+    Stückzahlen: in heimeliq.toml stehen nur die freien Eingangswerte, alles
+    Abgeleitete rechnet der Generator.
   - {{ … }} füllt der Generator aus den Variantenparametern. FIXME füllt ein
     Mensch (Prosa, Werkzeugliste, Zeitangaben, Beschreibung der Schritte).
 -->

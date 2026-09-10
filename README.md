@@ -34,12 +34,12 @@ Konkret heißt das im Repo:
 
 heimeliq baut Holz-Produkte oder -Accessoires aus regionalen Naturmaterialien – Massivholz, Stahl, Sperrholz – und veröffentlicht jedes Stück vollständig als Open Source: 3D-Modelle, Stücklisten, Bauanleitungen. Diese Vorlage ist Teil der digitalen Infrastruktur dahinter.
 
-Jedes Produkt gehört zu einer **Familie** (eine Formensprache, die einen Vornamen trägt) und hat einen **Typ** (was es ist – `sideboard`, `tablett`, `werkbank`). Familie und Typ bilden in dieser Reihenfolge die Repo-ID. Details im Abschnitt [Familien-Konzept](#familien-konzept).
+Jedes Produkt gehört zu einer **Serie** (einer Produktlinie aus dem Markenvokabular – `gehriq`, `keiliq`, `workaholiq`, `uhriq`) und hat einen **Typ** (was es ist – `sideboard`, `tablett`, `werkbank`). Serie und Typ bilden in dieser Reihenfolge die Repo-ID. Details im Abschnitt [Serien-Konzept](#serien-konzept).
 
 ## Ein neues Produkt-Repo aus dieser Vorlage erzeugen
 
 1. Auf GitHub den Knopf **„Use this template"** → **„Create a new repository"** klicken.
-2. Repo-Name nach Schema: `<family>-<type>`, zum Beispiel `wieke-sideboard`.
+2. Repo-Name nach Schema: `<series>-<type>`, zum Beispiel `gehriq-sideboard`.
 3. Repo lokal klonen.
 4. **Lizenz umstellen**: `LICENSE` löschen, `LICENSE.example` zu `LICENSE` umbenennen.
 5. **README umstellen**: `README.md` löschen, `README.example.md` zu `README.md` umbenennen.
@@ -58,7 +58,7 @@ Alle Stellen, die noch ausgefüllt werden müssen, sind mit `FIXME` markiert. Di
 Mindestens zu ersetzen:
 
 - In `okh.toml`: `name`, `repo`, `function`, `licensor`, `image`-Pfade.
-- In `heimeliq.toml`: `type`, `theme`, `slug`, `[family]`, `[variants]`.
+- In `heimeliq.toml`: `type`, `theme`, `slug`, `[series]`, `[variants]`.
 - In `LICENSE` (nach Umbenennung aus `LICENSE.example`): Copyright-Zeile.
 - In `README.md` (nach Umbenennung aus `README.example.md`): alle FIXMEs.
 - `media/hero.jpg.placeholder` → eine echte `media/hero.jpg` legen.
@@ -116,7 +116,7 @@ Faustregel: **Außenwirkungs-Bilder zentral in `media/`, Doku-Bilder lokal neben
 
 | Ebene | Schema | Beispiel |
 | --- | --- | --- |
-| Produkt-Repo | `<family>-<type>` | `wieke-sideboard` |
+| Produkt-Repo | `<series>-<type>[-<zusatz>]` | `gehriq-sideboard` |
 | Hauptbaugruppe | `A001` | `A001` |
 | Sub-Baugruppe | `A002`, `A003`, … | `A002` (z. B. Schublade) |
 | Eigenes Bauteil (Self) | `<Baugruppe>.S###` | `A001.S001`, `A002.S001` |
@@ -125,23 +125,42 @@ Faustregel: **Außenwirkungs-Bilder zentral in `media/`, Doku-Bilder lokal neben
 
 Bauteil-IDs sind innerhalb des jeweiligen Produkt-Repos eindeutig und immer voll qualifiziert mit Assembly-Präfix. Außerhalb adressiert man sie als `<repo>/<part-id>`.
 
-Die ID besteht aus **Familie** und **Typ**. Die Familie (`family.id`, z. B. `wieke`) sagt, welcher Formensprache es folgt; der Typ (`type`, z. B. `sideboard`, `werkbank`) sagt, was das Produkt ist. Beide Segmente sind lowercase und ASCII. Zusätzliche `[tags]` bleiben Metadaten für Filter und Suche und sind **kein** Teil der ID.
+Eine **Bauteil-ID bezeichnet eine Bauform, keine Instanz.** Dieselbe ID bedeutet in jeder Variante dasselbe Bauteil; was sich zwischen Varianten unterscheidet, sind nur ihre Zahlen – Maße und Anzahl. Kommen mehrere Größen desselben Bauteils *gleichzeitig* in einem Produkt vor (drei verschieden breite Schubladen), sind das eigene IDs; dass sie nach demselben Bauplan entstehen, sagt das Feld `bauform`.
 
-## Familien-Konzept
+Die ID besteht aus **Serie** und **Typ**. Die Serie (`series.id`, z. B. `gehriq`) sagt, zu welcher Produktlinie es gehört; der Typ (`type`, z. B. `sideboard`, `werkbank`) sagt, was das Produkt ist. Beide Segmente sind lowercase und ASCII. Zusätzliche `[tags]` bleiben Metadaten für Filter und Suche und sind **kein** Teil der ID.
 
-Jedes Produkt gehört zu genau einer **Familie**. Eine Familie trägt einen Vornamen und bezeichnet eine Formensprache: alle Produkte derselben Familie teilen Fasen, Radien und Verbindungsprinzip. Der Familienname ist zugleich der Produktname (`wieke-sideboard` → „Wieke").
+Ein **drittes Segment** ist erlaubt, aber die Ausnahme: es wird nur gesetzt, wenn zwei eigenständige Konstruktionen derselben Serie denselben Typ hätten (`gehriq-sideboard-vinyl`). Es ist frei benannt und **keine Laufnummer** – im Regelfall bleibt es weg. Namen werden nach dem Prinzip „wer zuerst kommt" vergeben; Konflikte klärt der Pull Request.
 
-Die konstruktiven Werte einer Familie liegen zentral in `families/<id>/` im Instructions-Repo, **nicht** im Produkt-Repo. Das Produkt-Repo nennt in `heimeliq.toml` nur `family.id` (lowercase, ASCII) und `family.label` (Anzeigeform).
+## Serien-Konzept
 
-Der **Typ** kommt aus dem zentralen Vokabular `vocabulary/typen.toml` im Instructions-Repo. Jeder Typ ist genau einem primären **Thema** zugeordnet (`theme`, z. B. `kueche`, `bad`, `wohnen`, `buero`, `werkstatt`); der in `heimeliq.toml` gesetzte `theme`-Wert muss in der `themen`-Liste des gewählten Typs stehen. Auch dieses Vokabular wird nicht ins Produkt-Repo kopiert, sondern nur referenziert.
+Jedes Produkt gehört zu genau einer **Serie**. Eine Serie ist eine Produktlinie aus dem Markenvokabular – `gehriq`, `keiliq`, `workaholiq`, `uhriq` – und bezeichnet eine Gruppe von Produkten, die in Optik und Bauweise zusammenpassen.
 
-Marken-Vokabular wie massiq, gehriq oder keiliq beschreibt Bauart und Formensprache auf der Website, ist aber **kein** Feld in `heimeliq.toml` – es wäre redundant zu den Tag-Achsen `joint` und `material`.
+Was eine Serie im Einzelnen bedeutet, entscheidet die Serie selbst: mal eine Bauart (`gehriq` = Gehrungs-Ecken), mal eine Domäne (`uhriq`). Es gibt bewusst **kein** übergreifendes Kriterium, dem alle Serien folgen müssen. Verbindlich beschrieben ist eine Serie in ihrer `SERIES.md` im Instructions-Repo.
+
+Die konstruktiven Werte einer Serie liegen zentral in `series/<id>/` im Instructions-Repo, **nicht** im Produkt-Repo. Das Produkt-Repo nennt in `heimeliq.toml` nur `series.id` (lowercase, ASCII) und `series.label` (Anzeigeform).
+
+Der **Typ** kommt aus dem zentralen Vokabular `vocabulary/types.toml` im Instructions-Repo. Jeder Typ ist genau einem primären **Thema** zugeordnet (`theme`, z. B. `kueche`, `bad`, `wohnen`, `buero`, `werkstatt`); der in `heimeliq.toml` gesetzte `theme`-Wert muss in der `themes`-Liste des gewählten Typs stehen. Auch dieses Vokabular wird nicht ins Produkt-Repo kopiert, sondern nur referenziert.
+
+Das Markenvokabular ist damit **die ID** und keine Tag-Achse mehr: es aus dem ersten Segment abzulesen ist eindeutiger, als es zusätzlich zu pflegen.
 
 ## Varianten
 
-Ein Produkt kann in mehreren Größen oder anderen Holzarten gebaut werden – bei identischer Bauweise und **identischer Teileliste**. Das sind Varianten. Sie bekommen **kein eigenes Repo**, sondern sind Daten in `heimeliq.toml`.
+Ein Produkt kann in mehreren Größen, Innenaufteilungen oder Holzarten gebaut werden. Das sind Varianten. Sie bekommen **kein eigenes Repo**, sondern sind Daten in `heimeliq.toml`.
 
-Abgrenzung: gleiche Teileliste, nur andere Zahlen = Variante. Sobald ein Teil dazukommt, wegfällt oder sich eine Verbindungsart ändert = eigenes Produkt.
+Varianten gibt es auf zwei Ebenen, und die Regeln sind bewusst verschieden streng:
+
+| Ebene | Was darf sich unterscheiden | Wie benannt |
+| --- | --- | --- |
+| **Produktvariante** | Maße, Innenaufteilung, Bauteilauswahl | frei gewählter Name, eindeutig innerhalb des Produkts |
+| **Bauteilvariante** | **nur die Zahlen** (Maße, Anzahl) | keine eigene ID – dieselbe Bauteil-ID in mehreren Produktvarianten |
+
+Die Produktvariante darf frei sein, weil sie Bauteile **auswählt**, statt sie zu verändern. Ihre `parts`-Liste sagt, welche Bauteile sie enthält. Der Name ist dir überlassen: `1200x800` (Außenmaße), `3x4x3` (Aufteilungsraster – drei Fächer links, vier in der Mitte, drei rechts) oder `klein` sind gleichermaßen zulässig. Einzige harte Regel: innerhalb eines Produkts darf kein Name zweimal vorkommen.
+
+**Die Abgrenzung zum eigenen Produkt** liegt nicht mehr bei der Teileliste, sondern beim Parameter-Schlüsselsatz:
+
+> Alle Optionen eines Produkts haben **denselben Satz von `parameter`-Schlüsseln**. Nur die Werte unterscheiden sich. Kommt ein Schlüssel dazu oder fällt einer weg, ist es ein eigenes Produkt.
+
+`validate.yml` prüft das. Eine **Anzahl ist dabei eine Zahl wie jede andere**: `FaecherMitte = 4` ist ein gültiger Parameter. Ein breiteres Sideboard mit einer Zwischenwand mehr bleibt damit eine Variante – die Teileliste wird länger, der Schlüsselsatz nicht.
 
 Daraus folgt eine dreistufige Dokumentation:
 
@@ -151,7 +170,7 @@ Daraus folgt eine dreistufige Dokumentation:
 
 Ein Produkt ohne Größenauswahl hat genau eine `[[variants.option]]`, die zugleich `reference` ist (n = 1). Kein Sonderfall.
 
-Die Schlüssel in `[[variants.option]].parameter` sind **identisch mit den Alias-Namen der Zellen im FreeCAD-Spreadsheet**. Derselbe Name adressiert dieselbe Größe in CAD und Doku.
+Die Schlüssel in `[[variants.option]].parameter` sind **identisch mit den Alias-Namen der Zellen im FreeCAD-Spreadsheet**. Derselbe Name adressiert dieselbe Größe in CAD und Doku. Dort stehen nur die freien **Eingangswerte** – Bauteilmaße und Stückzahlen leitet der Generator daraus ab und werden nicht doppelt gepflegt.
 
 Einen Generator gibt es noch nicht. Bis dahin werden die Referenzvarianten-Dateien von Hand gepflegt; ihr Kopfhinweis („nicht von Hand ändern") gilt für die Zeit danach.
 
@@ -163,6 +182,7 @@ Jedes heimeliq-Produkt ist als Hierarchie von Baugruppen modelliert:
 - Sub-Baugruppen (Schubladen, Türen, Erweiterungen) bekommen `A002`, `A003`, … und referenzieren ihre Eltern-Baugruppe über das Feld `parent`.
 - Jedes Bauteil gehört zu genau einer Baugruppe und trägt deren Präfix in der ID (`A001.S001`, `A002.E001` usw.).
 - `optional = true` markiert eine Baugruppe als Erweiterung. Solche Baugruppen werden später im Shop zu konfigurierbaren Varianten mit Aufpreis.
+- `bauform` ist optional und benennt eine geteilte parametrische Quelle. Baugruppen mit derselben `bauform` sind dasselbe Ding in anderen Größen: drei verschieden breite Schubladen sind `A002`, `A003`, `A004` mit `bauform = "schublade"`. Die IDs bleiben damit flach und stabil, und die Bauanleitung beschreibt die Schublade einmal.
 
 **Konvention für FreeCAD-Dateien**: Jede Baugruppe ist eine eigene `.FCStd`-Datei, benannt nach Schema `A001-<Name>.FCStd`, `A002-<Name>.FCStd`. Beispiel:
 

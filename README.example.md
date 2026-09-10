@@ -3,7 +3,7 @@
 > FIXME ein- bis zweisätzige Beschreibung – was ist es, was macht es besonders.
 
 [![Lizenz: CERN-OHL-S-2.0](https://img.shields.io/badge/Lizenz-CERN--OHL--S--2.0-blue)](LICENSE)
-[![heimeliq](https://img.shields.io/badge/heimeliq-FIXME--familie-green)](https://heimeliq.de/produkte/FIXME-familie)
+[![heimeliq](https://img.shields.io/badge/heimeliq-FIXME--serie-green)](https://heimeliq.de/produkte/FIXME-serie)
 [![Status](https://img.shields.io/badge/Status-FIXME--status-orange)](#)
 
 ![Hauptbild](media/hero.jpg)
@@ -12,25 +12,25 @@
 
 ## Überblick
 
-FIXME 2–4 Sätze: Welcher Typ, welche Familie? Welche Konstruktion? Welches Material? Für wen ist es gedacht?
+FIXME 2–4 Sätze: Welcher Typ, welche Serie? Welche Konstruktion? Welches Material? Für wen ist es gedacht?
 
 Vollständige Hintergrundgeschichte und Materialherkunft: siehe [docs/de/story.md](docs/de/story.md).
 
 ---
 
-## Typ und Familie
+## Typ und Serie
 
-Dieses Produkt ist ein **FIXME Typ** und gehört zur Familie **FIXME Familie**.
+Dieses Produkt ist ein **FIXME Typ** und gehört zur Serie **FIXME Serie**.
 
-FIXME 2–4 Sätze zur Familie: welche Formensprache, welches Verbindungsprinzip, was die Produkte dieser Familie verbindet.
+FIXME 2–4 Sätze zur Serie: welche Formensprache, welches Verbindungsprinzip, was die Produkte dieser Serie verbindet.
 
-Maschinenlesbar in [heimeliq.toml](heimeliq.toml) unter `type`, `theme` und `[family]`. Die konstruktiven Werte der Familie liegen zentral im Instructions-Repo unter `families/FIXME-familie/`.
+Maschinenlesbar in [heimeliq.toml](heimeliq.toml) unter `type`, `theme` und `[series]`. Die konstruktiven Werte der Serie liegen zentral im Instructions-Repo unter `series/FIXME-serie/`.
 
 ---
 
 ## Gesamtmaße
 
-*Maße der Referenzvariante (`[variants]` → `reference` in [heimeliq.toml](heimeliq.toml)). Baut das Produkt in mehreren Größen, sind die weiteren Varianten dort unter `[[variants.option]]` gelistet.*
+*Maße der Referenzvariante (`[variants]` → `reference` in [heimeliq.toml](heimeliq.toml)). Baut das Produkt in mehreren Größen oder Innenaufteilungen, sind die weiteren Varianten dort unter `[[variants.option]]` gelistet.*
 
 | Eigenschaft | Maß |
 | --- | --- |
@@ -169,6 +169,6 @@ Dieses Produkt und seine Dokumentation stehen unter [CERN-OHL-S-2.0](LICENSE).
 ## Verwandte Links
 
 - heimeliq-Webseite: <https://heimeliq.de>
-- Familie FIXME-familie: <https://heimeliq.de/produkte/FIXME-familie>
+- Serie FIXME-serie: <https://heimeliq.de/produkte/FIXME-serie>
 - Open Know-How Standard: <https://github.com/iop-alliance/OpenKnowHow>
 - CERN Open Hardware Licence: <https://ohwr.org/cern_ohl_s_v2.txt>

@@ -7,7 +7,9 @@
     keine Bedingungen, keine Rechenausdrücke.
   - Abgeleitete Maße (Zuschnittlängen, Mindestbrettlänge) werden nicht hier
     gerechnet, sondern als fertiger benannter Wert eingesetzt. Wie der Wert
-    entsteht, ist Sache des Generators.
+    entsteht, ist Sache des Generators. Dasselbe gilt für Stückzahlen: in
+    heimeliq.toml stehen nur die freien Eingangswerte, alles Abgeleitete
+    rechnet der Generator.
   - {{ … }} füllt der Generator aus den Variantenparametern und daraus
     abgeleiteten Werten. FIXME füllt ein Mensch (Prosa, Materialangaben).
 -->
