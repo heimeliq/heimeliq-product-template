@@ -61,18 +61,17 @@ Für diese Variante:
 | **L_min (Faserrichtung)** | **{{ board_length_min }} mm** |
 | **B_min (Brettbreite)** | **{{ board_width_min }} mm** |
 
-### Plattengrößen-Vergleich und Verschnitt
+### Welche Platte es wird
 
-Gängige Leimholz-/Massivholzplatten gegen den Bedarf prüfen (Maße und
-Verfügbarkeit sind anbieterabhängig – vor dem Kauf bestätigen). „Reicht?"
-heißt: Plattenlänge ≥ L_min **und** Plattenbreite ≥ B_min.
+Steht hier bewusst nicht. Welche Formate lieferbar sind und was sie kosten,
+ändert sich laufend und ist vom Anbieter abhängig — eine Tabelle mit
+angenommenen Maßen wäre falsch, sobald sie geschrieben ist.
 
-| Plattenmaß (L × B, mm) | Stärke (mm) | Reicht? | Verschnitt Länge (mm) | Bemerkung |
-| --- | --- | --- | --- | --- |
-| 2000 × {{ plate_a_width }} | {{ plate_a_thickness }} | {{ plate_a_fits }} | {{ plate_a_waste_length }} | FIXME |
-| 2600 × {{ plate_b_width }} | {{ plate_b_thickness }} | {{ plate_b_fits }} | {{ plate_b_waste_length }} | FIXME |
-| 3000 × {{ plate_c_width }} | {{ plate_c_thickness }} | {{ plate_c_fits }} | {{ plate_c_waste_length }} | FIXME |
+`L_min` und `B_min` oben sind die Bedingung: die Platte muss in Faserrichtung
+mindestens `L_min` lang und quer dazu mindestens `B_min` breit sein. Womit sie
+erfüllt wird, entscheidet der Zuschnitt anhand der Angebote, die zum Zeitpunkt
+des Einkaufs gelten.
 
-FIXME: gewählte Platte(n) und kalkulierten Gesamt-Verschnitt eintragen.
-Reicht keine Standardlänge, zwei Bretter mit bewusst gesetztem
-Maserungs-Übergang einplanen.
+Reicht keine angebotene Länge, werden zwei Bretter mit **bewusst gesetztem**
+Maserungs-Übergang eingeplant — die Fuge liegt dann dort, wo sie gestalterisch
+verantwortbar ist, nicht dort, wo das Material zufällig endet.

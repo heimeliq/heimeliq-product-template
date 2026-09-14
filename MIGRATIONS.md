@@ -15,6 +15,32 @@ Bestehende Repos werden nicht automatisch migriert – Stabilität geht vor.
 
 ---
 
+## 0.6.0 → 0.7.0
+
+Kein Breaking Change. Nur die Stückliste ändert sich, und zwar in Richtung weniger
+Arbeit: Der Abschnitt *Plattengrößen-Vergleich und Verschnitt* entfällt.
+
+Er verglich drei Plattenlängen (2000, 2600, 3000 mm) gegen den Bedarf. Die Zahlen
+standen für kein Angebot, und die Plattenbreite blieb ein Platzhalter — die Tabelle
+konnte also für keine reale Platte stimmen. Welche Platte es wird, entscheidet sich
+beim Einkauf anhand der Angebote, die dann gelten.
+
+### Was zu tun ist
+
+In `docs/de/bom.md` den Abschnitt *Plattengrößen-Vergleich und Verschnitt* durch
+*Welche Platte es wird* aus der aktuellen Vorlage ersetzen. Dasselbe in
+`docs/de/parametrisch/bom.tpl.md`. Das entfernt sechs FIXME.
+
+`L_min` und `B_min` bleiben unverändert — sie folgen aus dem Produkt, nicht aus
+dem Angebot.
+
+Danach `heimeliq-template-version = "0.7.0"` setzen.
+
+Wer die alte Tabelle bereits mit echten Zahlen gefüllt hat, darf sie behalten;
+dann nur die Versionsnummer ziehen.
+
+---
+
 ## 0.5.1 → 0.6.0
 
 Breaking Change am Namensschema und am Varianten-Modell. Die Familie wird zur **Serie**
