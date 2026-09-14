@@ -6,6 +6,26 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
+## [0.7.0] – 2026-09-14 – Plate choice leaves the BOM template
+
+`docs/de/bom.md` compared three plate lengths — 2000, 2600 and 3000 mm — against
+the requirement. The numbers were invented: no supplier was behind them, and the
+plate width was left as a placeholder, so the table could not be true for any
+real offer. It has been removed.
+
+**Changed:**
+
+- `docs/de/bom.md` and `docs/de/parametrisch/bom.tpl.md`: the section
+  *Plattengrößen-Vergleich und Verschnitt* is replaced by *Welche Platte es
+  wird*, which states the requirement (`L_min`, `B_min`) and leaves the choice
+  to the moment of purchase. Twelve `{{ plate_* }}` placeholders and four FIXME
+  are gone from the template; the shipped `bom.md` loses sixteen FIXME.
+- `L_min` and `B_min` stay where they are. They follow from the product, not
+  from the supplier.
+
+Nothing else changes. A product repo on 0.6.0 keeps working; adopting this is
+optional and described in `MIGRATIONS.md`.
+
 ## [0.6.0] – 2026-09-10 – Series naming and free variants
 
 The `family` becomes a **series** and carries the brand vocabulary (`gehriq`,
