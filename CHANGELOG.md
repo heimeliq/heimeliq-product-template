@@ -6,6 +6,42 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
+## [0.8.0] – 2026-09-17 – What an assembly is, and what a variant is not
+
+The A-number carried three meanings at once. This release keeps one: an
+assembly is a rigid, permanently joined unit. Nothing else.
+
+**Changed:**
+
+- `README.md`, *Baugruppen-Konzept*: `A001` is no longer called "the whole
+  product". It is the first rigid unit; the product is the repository and has no
+  A-number. In a box with a hinged lid, `A001` is the corpus, `A002` the lid, and
+  the product is both. Same correction in the comments of `heimeliq.toml`.
+- A variant is never an assembly. A sideboard at 1200 and one at 1600 are the
+  same construction with different numbers; they share assemblies, parts and
+  build guide. Variants belong under `[variants]`, not `[[assemblies]]`.
+- `bauform` keeps its meaning but is no longer worded as a variant mechanism: it
+  covers several sizes of one design **within one product**, such as three
+  differently wide drawers in one sideboard.
+- Mounting hardware belongs to the part that is mounted — the door brings its
+  hinges, the drawer its slides, the lid its dowels. That way the count follows
+  the part instead of being kept by hand.
+
+**Added:**
+
+- `[[variants.option]].bestueckung`, optional. Dimensions are scalars and live in
+  `parameter`, where the key set is locked across options. Fittings are a
+  structure — which raster positions carry a shelf, which bay gets a door — and
+  that cannot be a locked key set. Its shape is free per product; `validate.yml`
+  checks `parameter` only, so the lock still catches a different construction
+  passing itself off as a variant.
+- `quantity` on `okh.toml [[part]]`. A part is a kind with a count, not a row of
+  near-identical entries: five shelves are one entry with `quantity = 5`.
+  Omitting it means 1. Parts that genuinely differ stay separate — a left and a
+  right side panel are two kinds even though they mirror.
+
+Nothing breaks. A repo on 0.7.0 keeps validating; both additions are optional.
+
 ## [0.7.0] – 2026-09-14 – Plate choice leaves the BOM template
 
 `docs/de/bom.md` compared three plate lengths — 2000, 2600 and 3000 mm — against

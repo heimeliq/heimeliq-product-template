@@ -114,6 +114,10 @@
                 "minItems": 1,
                 "uniqueItems": true,
                 "items": { "type": "string", "pattern": "^A[0-9]{3}\\.[SE][0-9]{3}$" }
+              },
+              "bestueckung": {
+                "description": "Optional. Bestueckung dieser Variante: welche Rasterpositionen einen Boden tragen, welches Fach eine Tuer bekommt, welches eine Schublade. Anders als 'parameter' ist die Form je Produkt frei und unterliegt der Schluesselsatz-Sperre in validate.yml nicht - Masse sind Skalare, Bestueckung ist eine Struktur. Siehe instructions/reference/produkt-modell.md.",
+                "type": "object"
               }
             }
           }

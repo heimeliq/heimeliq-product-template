@@ -96,12 +96,20 @@ depicts = "FIXME: kurze Beschreibung des Hauptbildes"
 #
 # `outer-dimensions` je Bauteil bezieht sich – wie die Produkt-Außenmaße oben –
 # ausschließlich auf die Referenzvariante.
+#
+# Ein Bauteil ist eine ART mit Stückzahl, keine Reihe gleichartiger Einträge.
+# Fünf Innenböden sind EIN [[part]] mit `quantity = 5`, nicht fünf Einträge –
+# sonst wächst die Liste mit der Bestückung und dieselbe ID bedeutet in zwei
+# Varianten nicht mehr dasselbe. `quantity` weglassen heißt 1.
+# Bauteile, die sich unterscheiden, bleiben getrennt: Seitenwand links und
+# rechts sind zwei Arten, auch wenn sie sich spiegeln.
 
 [[part]]
 name = "FIXME Bauteilname (z. B. Korpus-Seitenwand links)"
 source = "cad/source/A001-FIXME-name.FCStd"
 export = ["cad/exports/A001/FIXME-bauteil-01.step", "cad/exports/A001/FIXME-bauteil-01.stl"]
 mass = 0
+quantity = 1
 heimeliq-part-id = "A001.S001"
 heimeliq-assembly = "A001"
 tsdc = ["MEC"]

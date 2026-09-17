@@ -15,6 +15,39 @@ Bestehende Repos werden nicht automatisch migriert – Stabilität geht vor.
 
 ---
 
+## 0.7.0 → 0.8.0
+
+Kein Breaking Change. Zwei optionale Felder kommen dazu, und einige Texte werden
+richtiggestellt.
+
+### Was zu tun ist
+
+Nichts zwingend. Wer mitziehen will:
+
+1. In der `heimeliq.toml` die Kommentare über `[[assemblies]]` gegen die
+   aktuelle Fassung tauschen. Die alte behauptet, `A001` sei das ganze Produkt —
+   das stimmt nicht: `A001` ist die erste starre Baugruppe, das Produkt ist das
+   Repo und hat keine A-Nummer.
+2. Prüfen, ob Beschläge an der richtigen Baugruppe hängen. Was ein angebautes
+   Teil hält — Scharniere, Schienen, Drehpunkte — gehört zu diesem Teil, nicht
+   zum Korpus.
+3. Wo mehrere gleiche Bauteile einzeln aufgezählt sind, zu einem `[[part]]` mit
+   `quantity` zusammenfassen.
+4. `heimeliq-template-version = "0.8.0"` setzen.
+
+### Was neu möglich ist
+
+`[[variants.option]].bestueckung` nimmt auf, was kein Skalar ist: welche
+Rasterpositionen einen Boden tragen, welches Fach eine Tür bekommt. Die Form ist
+je Produkt frei. Die Sperre in `validate.yml` bleibt auf `parameter` beschränkt
+und greift unverändert.
+
+Die Begriffe — Serie, Produkt, Ausführung, Referenzausführung, Baugruppe,
+Bauteil — stehen in der README des instructions-Repos, die Regeln in
+`instructions/reference/produkt-modell.md`.
+
+---
+
 ## 0.6.0 → 0.7.0
 
 Kein Breaking Change. Nur die Stückliste ändert sich, und zwar in Richtung weniger
