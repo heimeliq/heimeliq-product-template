@@ -178,11 +178,16 @@ Einen Generator gibt es noch nicht. Bis dahin werden die Referenzvarianten-Datei
 
 Jedes heimeliq-Produkt ist als Hierarchie von Baugruppen modelliert:
 
-- **`A001`** ist konventionell die **Hauptbaugruppe** = das ganze Produkt.
-- Sub-Baugruppen (Schubladen, Türen, Erweiterungen) bekommen `A002`, `A003`, … und referenzieren ihre Eltern-Baugruppe über das Feld `parent`.
+- Eine **Baugruppe** ist eine starre, fest gefügte Einheit — was sich nicht zerlegen lässt, ohne Leim zu brechen. Korpus, Tür, Schublade, Deckel.
+- **`A001`** ist die erste davon, nicht „das Produkt". Das Produkt ist das Repo und hat keine A-Nummer: Bei einer Box mit Klappdeckel ist `A001` der Korpus, `A002` der Deckel, und das Produkt ist beides zusammen.
+- Vergeben wird in Entstehungsreihenfolge, nie umnummeriert. Sub-Baugruppen referenzieren ihre Eltern-Baugruppe über das Feld `parent`.
+- **Eine Variante ist nie eine Baugruppe.** Ein Sideboard in 1200 und eines in 1600 sind dieselbe Konstruktion mit anderen Zahlen — sie teilen Baugruppen, Bauteile und Bauanleitung. Varianten stehen unter `[variants]`, nicht unter `[[assemblies]]`.
 - Jedes Bauteil gehört zu genau einer Baugruppe und trägt deren Präfix in der ID (`A001.S001`, `A002.E001` usw.).
+- **Beschläge gehören dem angebauten Teil**: Die Tür bringt ihre Scharniere mit, die Schublade ihre Schienen, der Deckel seine Dübel. So folgt die Stückzahl dem Bauteil, statt von Hand mitgezählt zu werden.
 - `optional = true` markiert eine Baugruppe als Erweiterung. Solche Baugruppen werden später im Shop zu konfigurierbaren Varianten mit Aufpreis.
-- `bauform` ist optional und benennt eine geteilte parametrische Quelle. Baugruppen mit derselben `bauform` sind dasselbe Ding in anderen Größen: drei verschieden breite Schubladen sind `A002`, `A003`, `A004` mit `bauform = "schublade"`. Die IDs bleiben damit flach und stabil, und die Bauanleitung beschreibt die Schublade einmal.
+- `bauform` ist optional und benennt eine geteilte parametrische Quelle. Baugruppen mit derselben `bauform` sind dasselbe Ding in anderen Größen **innerhalb eines Produkts**: Enthält ein Sideboard drei verschieden breite Schubladen, sind das `A002`, `A003`, `A004` mit `bauform = "schublade"`, und die Bauanleitung beschreibt die Schublade einmal. Das ist kein Varianten-Mechanismus.
+
+Ausführlich in `instructions/reference/produkt-modell.md`.
 
 **Konvention für FreeCAD-Dateien**: Jede Baugruppe ist eine eigene `.FCStd`-Datei, benannt nach Schema `A001-<Name>.FCStd`, `A002-<Name>.FCStd`. Beispiel:
 
