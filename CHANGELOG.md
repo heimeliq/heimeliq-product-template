@@ -6,6 +6,34 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
+## [0.9.1] – 2026-09-22 – Nothing points at a document the reader cannot open
+
+The bill of materials told the builder to look up which parts have to come from
+one board "in der `INSTRUCTIONS.md`". That file lives in the private
+instructions repo. For anyone reading a published product repo the sentence is
+a dead end — and the answer already stood two paragraphs further down, in the
+*Betroffene Teile* row of the table.
+
+**Changed:**
+
+- `docs/de/bom.md` and `docs/de/parametrisch/bom.tpl.md` name that table row
+  instead of the private file, and the allowance footnote no longer cites
+  `instructions/helpers/zuschnitt.py` for its 4 mm per cut.
+- `README.md`, `heimeliq.toml` and `heimeliq.schema.json` drop their "siehe
+  `instructions/reference/produkt-modell.md`" pointers. Each states the rule
+  itself; the pointer added nothing a reader could follow.
+- Without that pointer, `README.md` and `heimeliq.toml` are where a reader
+  learns what an assembly is — so both now carry the current criterion (moves
+  as a unit against the others, or is mounted separately) instead of the
+  superseded one (glued solid). A hinged lid is a single board and still an
+  assembly of its own.
+
+What stays are the statements that the series values, the type list and the tag
+axes live centrally in the instructions repo. Those say where the truth is kept;
+they do not send anyone to open a file.
+
+Nothing breaks. Adopting this is described in `MIGRATIONS.md`.
+
 ## [0.9.0] – 2026-09-22 – L_min is a rule, not one product's arithmetic
 
 `docs/de/bom.md` carried a single formula for the minimum board length:

@@ -15,6 +15,42 @@ Bestehende Repos werden nicht automatisch migriert – Stabilität geht vor.
 
 ---
 
+## 0.9.0 → 0.9.1
+
+Kein Breaking Change. Verweise auf Dateien, die es nur im privaten
+Instructions-Repo gibt, verschwinden aus den öffentlichen Dokumenten.
+
+### Warum
+
+`docs/de/bom.md` schickte den Leser für die Frage, welche Teile aus einem Brett
+kommen müssen, in die `INSTRUCTIONS.md`. Die liegt im privaten Repo; wer das
+Produkt-Repo öffnet, kommt dort nie an. Die Antwort stand ohnehin in derselben
+Datei, in der Tabellenzeile *Betroffene Teile*.
+
+### Was zu tun ist
+
+1. Im Abschnitt *Mindestkantenlänge* von `docs/de/bom.md` und
+   `docs/de/parametrisch/bom.tpl.md` den Verweis auf die `INSTRUCTIONS.md`
+   durch den Verweis auf die Tabellenzeile *Betroffene Teile* ersetzen. Im
+   Fußnotensatz zu Sägezugabe und Besäumung den Pfad
+   `instructions/helpers/zuschnitt.py` streichen — die 4 mm bleiben.
+2. In `README.md`, `heimeliq.toml` und `heimeliq.schema.json` die Zeiger auf
+   `instructions/reference/produkt-modell.md` streichen.
+3. Damit fällt die Stelle weg, die das Baugruppen-Kriterium richtiggestellt
+   hätte. Deshalb in `README.md` und in den Kommentaren über `[[assemblies]]`
+   das alte Kriterium („starre, fest gefügte Einheit — was sich nicht zerlegen
+   lässt, ohne Leim zu brechen") durch das geltende ersetzen: Eine Baugruppe
+   ist, was sich als Einheit gegenüber den anderen bewegt oder getrennt
+   montiert wird. Ein Klappdeckel ist ein einzelnes Brett und trotzdem eine
+   eigene Baugruppe; ein fest verschraubter Innenboden ist keine.
+4. `heimeliq-template-version = "0.9.1"` setzen.
+
+Nicht gestrichen werden Sätze, die sagen, dass Serienwerte, Typenliste und
+Tag-Achsen zentral im Instructions-Repo liegen. Sie benennen den Ort der
+Wahrheit, sie fordern niemanden auf, dort eine Datei zu öffnen.
+
+---
+
 ## 0.8.0 → 0.9.0
 
 Kein Breaking Change. Eine Rechnung in der Stückliste wird von einem Einzelfall

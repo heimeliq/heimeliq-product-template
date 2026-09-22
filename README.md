@@ -178,7 +178,7 @@ Einen Generator gibt es noch nicht. Bis dahin werden die Referenzvarianten-Datei
 
 Jedes heimeliq-Produkt ist als Hierarchie von Baugruppen modelliert:
 
-- Eine **Baugruppe** ist eine starre, fest gefügte Einheit — was sich nicht zerlegen lässt, ohne Leim zu brechen. Korpus, Tür, Schublade, Deckel.
+- Eine **Baugruppe** ist, was sich als Einheit gegenüber den anderen bewegt oder getrennt montiert wird — Korpus, Tür, Schublade, Deckel. Nicht „was verleimt ist": Ein Klappdeckel ist ein einzelnes Brett und trotzdem eine eigene Baugruppe, weil er sich bewegt; ein fest verschraubter Innenboden ist keine, sondern ein Bauteil des Korpus.
 - **`A001`** ist die erste davon, nicht „das Produkt". Das Produkt ist das Repo und hat keine A-Nummer: Bei einer Box mit Klappdeckel ist `A001` der Korpus, `A002` der Deckel, und das Produkt ist beides zusammen.
 - Vergeben wird in Entstehungsreihenfolge, nie umnummeriert. Sub-Baugruppen referenzieren ihre Eltern-Baugruppe über das Feld `parent`.
 - **Eine Variante ist nie eine Baugruppe.** Ein Sideboard in 1200 und eines in 1600 sind dieselbe Konstruktion mit anderen Zahlen — sie teilen Baugruppen, Bauteile und Bauanleitung. Varianten stehen unter `[variants]`, nicht unter `[[assemblies]]`.
@@ -186,8 +186,6 @@ Jedes heimeliq-Produkt ist als Hierarchie von Baugruppen modelliert:
 - **Beschläge gehören dem angebauten Teil**: Die Tür bringt ihre Scharniere mit, die Schublade ihre Schienen, der Deckel seine Dübel. So folgt die Stückzahl dem Bauteil, statt von Hand mitgezählt zu werden.
 - `optional = true` markiert eine Baugruppe als Erweiterung. Solche Baugruppen werden später im Shop zu konfigurierbaren Varianten mit Aufpreis.
 - `bauform` ist optional und benennt eine geteilte parametrische Quelle. Baugruppen mit derselben `bauform` sind dasselbe Ding in anderen Größen **innerhalb eines Produkts**: Enthält ein Sideboard drei verschieden breite Schubladen, sind das `A002`, `A003`, `A004` mit `bauform = "schublade"`, und die Bauanleitung beschreibt die Schublade einmal. Das ist kein Varianten-Mechanismus.
-
-Ausführlich in `instructions/reference/produkt-modell.md`.
 
 **Konvention für FreeCAD-Dateien**: Jede Baugruppe ist eine eigene `.FCStd`-Datei, benannt nach Schema `A001-<Name>.FCStd`, `A002-<Name>.FCStd`. Beispiel:
 
