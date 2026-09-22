@@ -15,6 +15,38 @@ Bestehende Repos werden nicht automatisch migriert – Stabilität geht vor.
 
 ---
 
+## 0.8.0 → 0.9.0
+
+Kein Breaking Change. Eine Rechnung in der Stückliste wird von einem Einzelfall
+zur Regel.
+
+### Warum
+
+`docs/de/bom.md` schrieb `L_min = 2 × Außenhöhe + Außenbreite + Sägezugabe`.
+Das ist die Summe für eine bestimmte Form und stimmte nicht einmal für die Box,
+neben der sie entstand: Deren vier Gehrungszargen ergeben 2 × 230 + 2 × 160 =
+780 mm, die Formel nur 530. Wer danach einkauft, hat 250 mm zu wenig Brett.
+
+### Was zu tun ist
+
+Im Abschnitt *Mindestkantenlänge* von `docs/de/bom.md` und
+`docs/de/parametrisch/bom.tpl.md` die Formel durch die Regel ersetzen: Das
+Brett muss so lang sein wie die unter *Durchgehende Maserung* benannten Teile
+hintereinander, plus Sägezugabe je Schnitt. Die konkrete Rechnung des Produkts
+gehört ausgeschrieben daneben.
+
+Die Tabelle darunter fragt nicht mehr nach Außenhöhe, Außenbreite und Tiefe,
+sondern nach den betroffenen Teilen, der Rechnung, den Zugaben und den beiden
+Ergebnissen. Wer sie schon gefüllt hat: Die Zahlen bleiben, nur die Zeilen
+ändern sich.
+
+**Bei der Gelegenheit prüfen, ob die eigene Rechnung stimmt** — sie stand in
+jedem Repo, das aus dieser Vorlage entstanden ist.
+
+Danach `heimeliq-template-version = "0.9.0"` setzen.
+
+---
+
 ## 0.7.0 → 0.8.0
 
 Kein Breaking Change. Zwei optionale Felder kommen dazu, und einige Texte werden

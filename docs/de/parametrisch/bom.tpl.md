@@ -41,25 +41,45 @@ Bretter direkt vergleichbar sind.*
 
 ### Mindestkantenlänge (in Faserrichtung)
 
-Das Brett muss in Faserrichtung mindestens so lang sein wie die abgewickelte
-Außenkante über diese drei Teile:
+Welche Teile aus **einem** Brett kommen müssen, steht in der `INSTRUCTIONS.md`
+unter *Durchgehende Maserung*. Das Brett muss in Faserrichtung mindestens so
+lang sein wie diese Teile hintereinander, plus Sägezugabe je Schnitt:
 
-> **L_min = 2 × Außenhöhe + Außenbreite + Sägezugabe**
+> **L_min = Summe der benannten Teile + Sägezugabe**
 
-- **Brettbreite (quer zur Faser)** muss mindestens der **Produkttiefe**
-  entsprechen.
+Welche Summe das ist, entscheidet das Produkt — die Rechnung gehört hier
+ausgeschrieben, nicht die allgemeine Formel. Zwei Beispiele:
+
+- *Betrifft: Zargen* an einem vierseitigen Gehrungsrahmen →
+  `2 × Außenbreite + 2 × Tiefe + Sägezugabe`
+  (Front und hinten sind so lang wie die Außenbreite, beide Seitenzargen so
+  lang wie die Tiefe — die Gehrung schneidet auf das Außenmaß.)
+- *Betrifft: Seiten und Front* an einer U-Form →
+  `2 × Außenhöhe + Außenbreite + Sägezugabe`
+
+Dazu gehört:
+
+- **Brettbreite (quer zur Faser)**: das größte Quermaß der benannten Teile,
+  zzgl. Besäumung.
 - **Aufrunden:** L_min und B_min für den Einkauf auf das nächste 100-mm-Maß.
+- **Was nicht dazugehört, ausdrücklich nennen.** Ein Boden oder eine Rückwand
+  ist eine eigene Platte und nicht Teil der durchgehenden Maserung.
 
 Für diese Variante:
 
 | Größe | Wert |
 | --- | --- |
-| Außenhöhe | {{ outer_height }} mm |
-| Außenbreite | {{ outer_width }} mm |
-| Tiefe | {{ outer_depth }} mm |
+| Betroffene Teile | {{ grain_parts }} |
+| Rechnung L_min | {{ grain_formula }} |
 | Sägezugabe (gesamt) | {{ saw_allowance }} mm |
+| Besäumung (Brettbreite) | {{ trim_allowance }} mm |
 | **L_min (Faserrichtung)** | **{{ board_length_min }} mm** |
 | **B_min (Brettbreite)** | **{{ board_width_min }} mm** |
+
+*Sägezugabe und Besäumung sind Richtwerte (4 mm je Schnitt, wie in
+`instructions/helpers/zuschnitt.py`) — mit der tatsächlichen Maschine prüfen.
+Die Rohwerte vor dem Aufrunden mit angeben, damit die Rechnung nachvollziehbar
+bleibt.*
 
 ### Welche Platte es wird
 
