@@ -16,7 +16,7 @@
 
 # Version dieser Vorlage, auf der das Produkt-Repo basiert.
 # Wird bei jedem Template-Upgrade aktualisiert (siehe MIGRATIONS.md).
-heimeliq-template-version = "0.9.0"
+heimeliq-template-version = "0.9.1"
 
 # Version dieses Produkts (SemVer).
 # Erhöhen bei: PATCH = Doku-Fixes, MINOR = neue Optionen, MAJOR = Konstruktionsänderung.
@@ -136,15 +136,17 @@ parts = ["A001.S001"]                  # FIXME: alle Bauteil-IDs dieser Variante
 # ============================================================================
 # BAUGRUPPEN
 # ============================================================================
-# Eine Baugruppe ist eine starre, fest gefügte Einheit — was sich nicht zerlegen
-# lässt, ohne Leim zu brechen. A001 ist die erste davon, NICHT "das Produkt":
+# Eine Baugruppe ist, was sich als Einheit gegenüber den anderen bewegt oder
+# getrennt montiert wird — Korpus, Tür, Schublade, Deckel. Nicht "was verleimt
+# ist": Ein Klappdeckel ist ein einzelnes Brett und trotzdem eine eigene
+# Baugruppe; ein fest verschraubter Innenboden ist keine, sondern ein Bauteil
+# des Korpus. A001 ist die erste davon, NICHT "das Produkt":
 # bei einer Box mit Klappdeckel ist A001 der Korpus, A002 der Deckel, und das
 # Produkt ist beides. Das Produkt selbst hat keine A-Nummer, es ist das Repo.
 # Sub-Baugruppen referenzieren ihre Eltern-Baugruppe über `parent`.
 #
 # Eine Variante ist NIE eine Baugruppe. Andere Maße bei gleicher Konstruktion
 # stehen unter [variants], nicht hier.
-# Siehe instructions/reference/produkt-modell.md.
 # `optional = true` markiert eine Baugruppe als Erweiterung (= später im Shop
 # als optionale Variante mit Aufpreis konfigurierbar).
 #

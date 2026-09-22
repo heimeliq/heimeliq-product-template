@@ -41,9 +41,10 @@ Bretter direkt vergleichbar sind.*
 
 ### Mindestkantenlänge (in Faserrichtung)
 
-Welche Teile aus **einem** Brett kommen müssen, steht in der `INSTRUCTIONS.md`
-unter *Durchgehende Maserung*. Das Brett muss in Faserrichtung mindestens so
-lang sein wie diese Teile hintereinander, plus Sägezugabe je Schnitt:
+Manche Teile müssen aus **einem** Brett kommen, damit die Maserung
+durchläuft. Welche das sind, steht unten in der Tabelle unter *Betroffene
+Teile*. Das Brett muss in Faserrichtung mindestens so lang sein wie diese
+Teile hintereinander, plus Sägezugabe je Schnitt:
 
 > **L_min = Summe der benannten Teile + Sägezugabe**
 
@@ -76,8 +77,8 @@ Für diese Variante:
 | **L_min (Faserrichtung)** | **{{ board_length_min }} mm** |
 | **B_min (Brettbreite)** | **{{ board_width_min }} mm** |
 
-*Sägezugabe und Besäumung sind Richtwerte (4 mm je Schnitt, wie in
-`instructions/helpers/zuschnitt.py`) — mit der tatsächlichen Maschine prüfen.
+*Sägezugabe und Besäumung sind Richtwerte (4 mm je Schnitt) — mit der
+tatsächlichen Maschine prüfen.
 Die Rohwerte vor dem Aufrunden mit angeben, damit die Rechnung nachvollziehbar
 bleibt.*
 
