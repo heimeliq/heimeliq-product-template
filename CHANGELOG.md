@@ -6,6 +6,36 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
+## [0.9.0] – 2026-09-22 – L_min is a rule, not one product's arithmetic
+
+`docs/de/bom.md` carried a single formula for the minimum board length:
+
+> L_min = 2 × Außenhöhe + Außenbreite + Sägezugabe
+
+That is the sum for one particular shape — three parts wrapping a U. It is not
+a rule, and it was wrong for the very product it shipped alongside. A box with
+a hinged lid has four mitred rails; its parts add up to 2 × 230 + 2 × 160 =
+780 mm, while the formula gives 2 × 150 + 230 = 530. Anyone buying to that
+number would be 250 mm short of board.
+
+**Changed:**
+
+- The section now states the rule — the board must be as long as the parts
+  named under *Durchgehende Maserung*, laid end to end, plus saw allowance per
+  cut — and gives two worked examples instead of one hidden assumption: the
+  four-sided mitred frame and the U-shape.
+- The table below it no longer presumes which dimensions enter the sum. It
+  asks for the affected parts, the arithmetic, the allowances and the two
+  results, so the calculation can be checked rather than trusted.
+- It now asks explicitly what does *not* belong to the run — a bottom panel or
+  a back is its own board.
+- Placeholders follow: `outer_height`, `outer_width` and `outer_depth` leave
+  this section; `grain_parts`, `grain_formula` and `trim_allowance` take their
+  place.
+
+Nothing breaks. A repo on 0.8.0 keeps validating; adopting this is described in
+`MIGRATIONS.md`.
+
 ## [0.8.0] – 2026-09-17 – What an assembly is, and what a variant is not
 
 The A-number carried three meanings at once. This release keeps one: an
