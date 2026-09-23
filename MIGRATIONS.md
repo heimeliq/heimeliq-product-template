@@ -15,6 +15,38 @@ Bestehende Repos werden nicht automatisch migriert – Stabilität geht vor.
 
 ---
 
+## 0.9.1 → 0.9.2
+
+Kein Breaking Change. Die `REUSE.toml` wird im Produkt-Repo angepasst — bisher
+verlangte das keine Anweisung, weshalb sie dort noch der Vorlagenstand ist.
+
+### Warum
+
+Zwei Angaben stimmen im Produkt-Repo nicht. Die Copyright-Zeile steht noch auf
+`FIXME-Jahr FIXME Vorname Nachname (FIXME-nickname) <FIXME@heimeliq.de>`. Und
+die Pfadlisten sind die der Vorlage: `README.md`, `LICENSE` und `CHANGELOG.md`
+des Produkts stehen dort unter MIT, obwohl es die Dateien des Möbels sind,
+während unter CERN-OHL-S-2.0 `README.example.md`, `LICENSE.example` und
+`changelog.md` stehen — Dateien, die es nach Phase 2 nicht mehr gibt.
+
+### Was zu tun ist
+
+1. Copyright-Zeile in beiden Blöcken setzen, Form `<Jahr> <Vorname Nachname>
+   <Kontakt>` — dieselbe Angabe wie `licensor` in der `okh.toml` und wie die
+   Copyright-Zeile im `LICENSE`. Kein Nickname.
+2. MIT-Block auf das eindampfen, was nichts über das Möbel aussagt:
+   `REUSE.toml`, `heimeliq.schema.json`, `.github/workflows/**`, `.gitignore`.
+3. CERN-OHL-S-2.0-Block: `README.md`, `LICENSE`, `CHANGELOG.md`, `okh.toml`,
+   `heimeliq.toml`, `docs/**`, `cad/**`, `media/**`, `**/.gitkeep`.
+   Die `.example`-Pfade, `changelog.md` und `MIGRATIONS.md` entfallen.
+4. **Gegenprobe, nicht Augenmaß:** Jede versionierte Datei wird von genau einem
+   der beiden Blöcke erfasst, keine von beiden. `.gitkeep` als nackter Name
+   trifft nichts, und `docs/**` deckt je nach Matcher keine Dateien ab, die mit
+   einem Punkt beginnen — deshalb der eigene Eintrag `**/.gitkeep`.
+5. `heimeliq-template-version = "0.9.2"` setzen.
+
+---
+
 ## 0.9.0 → 0.9.1
 
 Kein Breaking Change. Verweise auf Dateien, die es nur im privaten
