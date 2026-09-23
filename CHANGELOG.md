@@ -6,6 +6,33 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
+## [0.9.2] – 2026-09-23 – The licence file nobody was told to adapt
+
+No phase of the workflow mentions `REUSE.toml`, so every repo created from this
+template kept the template's own copy. Two things followed from that.
+
+**The copyright line** stayed on its placeholder, and the placeholder asked for
+a handle: `FIXME-Jahr FIXME Vorname Nachname (FIXME-nickname) <FIXME@…>`. No
+other file wants one — `okh.toml` and `LICENSE` both carry the licensor as
+`Name <contact>` — and the product repos that had been filled by hand each
+invented a different handle: `(bmen)`, `(heimeliq)`, and none at all. The
+placeholder now asks for the same form as the other two.
+
+**The path lists** are right for this repo and wrong for every product made
+from it. There, `README.example.md`, `LICENSE.example` and `changelog.md` no
+longer exist, and `README.md`, `LICENSE` and `CHANGELOG.md` are files of the
+furniture rather than of the template — so they belong under CERN-OHL-S-2.0,
+not MIT. The file now says so in a comment at its top, where whoever edits it
+will actually read it; the instructions repo gains the matching step 9 in
+phase 2.
+
+**Changed as well:** `.gitkeep` was listed as a bare name and matched nothing,
+leaving nine empty files covered by neither block. It is now `**/.gitkeep` in
+the CERN-OHL-S-2.0 block, which also makes the coverage independent of whether
+the matcher sees files beginning with a dot.
+
+Nothing breaks. Adopting this is described in `MIGRATIONS.md`.
+
 ## [0.9.1] – 2026-09-22 – Nothing points at a document the reader cannot open
 
 The bill of materials told the builder to look up which parts have to come from
