@@ -28,6 +28,20 @@ Bretter direkt vergleichbar sind.*
 | --- | --- | --- | --- | --- |
 | A001.E001 | FIXME | FIXME | FIXME | FIXME |
 
+## Masse
+
+| Größe | Wert |
+| --- | --- |
+| **Masse (gesamt)** | **FIXME g** |
+
+*Gerechnet, nicht gewogen: Volumen je Bauteil aus dem Modell
+(FreeCAD `Shape.Volume`) × Rohdichte des Materials, plus die Kleinteile.
+Aufgerundet. Dieselbe Zahl steht als `mass` in der `okh.toml` und in der
+Datentabelle der `README.md` — hier steht, wie sie zustande kam.*
+
+FIXME: Rechnung ausschreiben, z. B. „2,912 dm³ Eiche (Zargen und Boden) plus
+0,008 dm³ für 8 Runddübel, zusammen 2,920 dm³ × 700 kg/m³ = 2044 g".
+
 ## Hinweis zur Holzauswahl
 
 ### Mindestkantenlänge (in Faserrichtung)

@@ -6,6 +6,22 @@ Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **MINOR** (`0.x.0`): Neues optionales Feld oder Ordner. Bestehende Repos funktionieren weiter.
 - **PATCH** (`0.0.x`): Tippfehler, Klarstellungen, Bug-Fixes, kein strukturelles Update.
 
+## [0.9.3] – 2026-09-24 – A place for the mass, so the manifest can lose its prose
+
+`okh.toml` is read by machines, and half of it was prose addressed to the bot
+filling it in. Those comments are about to be stripped at the end of phase 4 —
+but one of them says something no other file does: how the product's mass was
+arrived at. `mass = 1430` with no calculation beside it is a number nobody can
+check.
+
+`docs/de/bom.md` gains a section **Masse**: the total, and the arithmetic behind
+it — volume per part from the model times the material's density, plus the small
+fittings, rounded up. It sits right after the parts tables, where the other
+numbers are, and it names the two other places the same figure appears
+(`okh.toml` and the README data table) so the three cannot drift apart unnoticed.
+
+Nothing breaks. Adopting this is described in `MIGRATIONS.md`.
+
 ## [0.9.2] – 2026-09-23 – The licence file nobody was told to adapt
 
 No phase of the workflow mentions `REUSE.toml`, so every repo created from this
