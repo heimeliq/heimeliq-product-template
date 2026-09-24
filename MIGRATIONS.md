@@ -15,6 +15,30 @@ Bestehende Repos werden nicht automatisch migriert – Stabilität geht vor.
 
 ---
 
+## 0.9.2 → 0.9.3
+
+Kein Breaking Change. Die `docs/de/bom.md` bekommt einen Abschnitt für die Masse.
+
+### Warum
+
+Die Gesamtmasse steht als `mass` in der `okh.toml` und als Zeile in der
+Datentabelle der `README.md`. Wie sie zustande kam, stand nur als Kommentar in
+der `okh.toml` — und die wird am Ende von Phase 4 von Kommentaren befreit
+(`instructions/helpers/okh-clean.py`). Ohne einen Ort für die Rechnung wäre die
+Zahl danach unbelegt.
+
+### Was zu tun ist
+
+1. In `docs/de/bom.md` (und, falls vorhanden,
+   `docs/de/parametrisch/bom.tpl.md`) nach den Bauteiltabellen den Abschnitt
+   *Masse* einfügen: Gesamtmasse als Tabellenzeile, darunter die Rechnung —
+   Volumen je Bauteil aus dem Modell × Rohdichte, plus Kleinteile, aufgerundet.
+2. Die Rechnung aus dem Kommentar der `okh.toml` dorthin übernehmen, **bevor**
+   `okh-clean.py` läuft.
+3. `heimeliq-template-version = "0.9.3"` setzen.
+
+---
+
 ## 0.9.1 → 0.9.2
 
 Kein Breaking Change. Die `REUSE.toml` wird im Produkt-Repo angepasst — bisher
